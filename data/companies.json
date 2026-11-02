@@ -1,0 +1,20 @@
+[
+ {"ticker":"RELIANCE","name":"Reliance Industries","sector":"Energy","bse":"500325"},
+ {"ticker":"TCS","name":"Tata Consultancy Services","sector":"Technology","bse":"532540"},
+ {"ticker":"INFY","name":"Infosys","sector":"Technology","bse":"500209"},
+ {"ticker":"HDFCBANK","name":"HDFC Bank","sector":"Banking","bse":"500180"},
+ {"ticker":"ICICIBANK","name":"ICICI Bank","sector":"Banking","bse":"532174"},
+ {"ticker":"ITC","name":"ITC","sector":"Consumer","bse":"500875"},
+ {"ticker":"HINDUNILVR","name":"Hindustan Unilever","sector":"Consumer","bse":"500696"},
+ {"ticker":"MARUTI","name":"Maruti Suzuki","sector":"Automobiles","bse":"532500"},
+ {"ticker":"M&M","name":"Mahindra & Mahindra","sector":"Automobiles","bse":"500520"},
+ {"ticker":"SUNPHARMA","name":"Sun Pharmaceutical","sector":"Healthcare","bse":"524715"},
+ {"ticker":"DRREDDY","name":"Dr. Reddy’s Laboratories","sector":"Healthcare","bse":"500124"},
+ {"ticker":"LT","name":"Larsen & Toubro","sector":"Industrials","bse":"500510"},
+ {"ticker":"BEL","name":"Bharat Electronics","sector":"Defence","bse":"500049"},
+ {"ticker":"HAL","name":"Hindustan Aeronautics","sector":"Defence","bse":"541154"},
+ {"ticker":"TITAN","name":"Titan Company","sector":"Consumer","bse":"500114"},
+ {"ticker":"DIXON","name":"Dixon Technologies","sector":"Electronics","bse":"540699"},
+ {"ticker":"CDSL","name":"Central Depository Services","sector":"Financial services","bse":"538434"},
+ {"ticker":"KPITTECH","name":"KPIT Technologies","sector":"Technology","bse":"542651"}
+]
