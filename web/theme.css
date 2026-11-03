@@ -153,3 +153,13 @@ html[data-theme=dark] :focus-visible{outline-color:#c194ff}html[data-theme=dark]
  .navigation .nav-item:active,.avatar-button:active{transform:translateY(0)}
 }
 @media(prefers-reduced-motion:reduce){body .sidebar,.main-shell .topbar,.navigation .nav-item,.avatar-button,.workspace-search{transition:none!important}.navigation .nav-item:hover,.avatar-button:hover{transform:none!important}}
+
+/* Desktop keeps only the floating navigation on scroll; phones retain their original header. */
+@media(min-width:721px){
+ html.is-scrolled .main-shell .topbar{opacity:0;visibility:hidden;pointer-events:none}
+}
+@media(max-width:720px){
+ html.is-scrolled .main-shell .topbar{top:0;margin-inline:0;width:100%;height:calc(64px + env(safe-area-inset-top));border:0;border-bottom:1px solid #dce3ed;border-radius:0;background:#131f35;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;transition:none!important}
+ html[data-theme=dark].is-scrolled .main-shell .topbar{background:#121117f5;border-bottom-color:#ffffff10;box-shadow:inset 0 1px #ffffff05}
+ .main-shell .topbar{transition:none!important}
+}
