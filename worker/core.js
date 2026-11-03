@@ -4,6 +4,11 @@ export function normaliseTicker(value) {
   return ticker;
 }
 
+export function researchIsCurrent(corpus,now=Date.now()){
+  const fetched=Date.parse(corpus?.fetchedAt),age=now-fetched;
+  return Number.isFinite(fetched)&&age>=0&&age<7*86400_000;
+}
+
 export function classify(item) {
   const text = (item.headline + ' ' + (item.description || '')).toLowerCase();
   if(/newspaper|newspaper publication|newspaper advertisement|publication.*(?:results|dividend)|trading window/.test(text))return {...item,category:/results/.test(text)?'results':'unclassified',priority:'routine'};

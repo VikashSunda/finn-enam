@@ -8,7 +8,7 @@ export function createAppServer(worker,env=process.env){
       const url=new URL(req.url,'https://finn-hosted.invalid');
       if(url.pathname==='/healthz'){
         res.writeHead(200,{'content-type':'application/json','cache-control':'no-store'});
-        res.end(req.method==='HEAD'?undefined:JSON.stringify({ok:true,service:'finn'}));return;
+        res.end(req.method==='HEAD'?undefined:JSON.stringify({ok:true,service:'finn',revision:env.RENDER_GIT_COMMIT||null}));return;
       }
       const bytes=[];let size=0;
       for await(const chunk of req){size+=chunk.length;if(size>16384){res.writeHead(413,{'content-type':'application/json'});res.end('{"error":"Request too large"}');return;}bytes.push(chunk);}

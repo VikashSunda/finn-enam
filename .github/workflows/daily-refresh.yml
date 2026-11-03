@@ -1,0 +1,47 @@
+name: Daily validated refresh
+on:
+  schedule:
+    # 22:47 IST, including special weekend sessions; timing may be delayed.
+    - cron: '17 17 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: finn-daily-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.repository == 'VikashSunda/finn-enam'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FINN_HOSTED_ORIGIN: https://finn-enam-yid1.onrender.com
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24.14.1'
+          cache: npm
+      - name: Check secure deployment configuration
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: node -e "if (!process.env.RENDER_DEPLOY_HOOK) { console.error('Configure the RENDER_DEPLOY_HOOK repository secret.'); process.exit(1); }"
+      - run: npm ci --include=dev
+      - run: npm run build
+      - run: npm test
+      - run: npm run validate
+      - name: Refresh and validate complete portfolio
+        run: node scripts/refresh-hosted-snapshot.mjs
+      - name: Preserve audited snapshot in Git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/snapshot.json reports/HOSTED_REFRESH.json
+          git diff --cached --quiet || git commit -m 'Refresh validated portfolio snapshot'
+          git push origin HEAD:main
+      - name: Deploy and verify exact revision
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: node scripts/deploy-from-hook.mjs

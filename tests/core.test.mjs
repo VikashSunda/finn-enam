@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normaliseTicker,classify,timestamp,summariseBars,makeAlerts,retrieve,quarterKey,discoverDocuments,safeSourceURL} from '../worker/core.js';
+import {normaliseTicker,classify,timestamp,summariseBars,makeAlerts,retrieve,quarterKey,discoverDocuments,safeSourceURL,researchIsCurrent} from '../worker/core.js';
+test('research snapshots expire after seven days and invalid/future dates never qualify as fresh',()=>{const now=Date.parse('2026-11-10T12:00:00Z');assert.equal(researchIsCurrent({fetchedAt:'2026-11-04T12:00:00Z'},now),true);for(const fetchedAt of ['2026-11-03T12:00:00Z','2026-11-11T12:00:00Z','invalid',undefined])assert.equal(researchIsCurrent({fetchedAt},now),false);});
 test('leadership retrieval prioritises primary professional background over pay-table mentions',()=>{const documents=[{id:'annual',type:'annual_report',label:'Company annual report',url:'https://example.com/report.pdf',pages:[{page:10,text:'Director profile. The appointed chief executive has professional experience in enterprise software and previously led international operations. Qualifications include a degree in engineering.'},{page:11,text:'Director attendance and remuneration. The chief executive sitting fees and shareholding pattern appear in this disclosure. This table reports attendance at leadership meetings.'}]}];const found=retrieve(documents,'','management');assert.equal(found[0].page,10);assert.match(found[0].text,/professional experience/);assert.equal(found[0].url,documents[0].url);});
 
 test('NSE symbols accept ampersands and reject URL/path injection',()=>{
