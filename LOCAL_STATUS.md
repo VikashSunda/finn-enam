@@ -2,6 +2,9 @@
 
 ## Later verification update
 
+- AI support hardening: required Gemini JSON Schema with per-source copied quotes; reject fabricated quotes, missing support and numeric literals absent from cited evidence. Limitation bodies/notes use fixed retrieved-scope language to prevent a classification bypass. Matched quotes expand in the research UI.
+- Build, artifact validation and all 32 tests pass. One live INFY cash fact passed schema/support checks and manual sampled review. A seven-case follow-up hit six Gemini 503 errors; its successful limitation exposed wording corrected afterward. The final live retry hit 503. Broader live content review remains incomplete; reports/AI_VERIFICATION.md records both failures and successes. No OpenAI key created, billing changed, repository pushed or site published.
+
 - Completed the registered 18-company source audit: all price/filing requests returned live-mode data without source errors, 20-session volume baselines and 30-session price histories. Latest completed price session was 2 November 2026. Validated and promoted the refresh (231 filings); preserved the previous snapshot in Git and ignored audit backup. Corpus unchanged.
 - Tested AXISBANK, ASIANPAINT and COFORGE outside the preloaded corpus: each returned attributed evidence. Link-only transcript notices were excluded; ASIANPAINT's oversized annual report was disclosed. Invalid synthetic ticker returned a controlled missing-discovery response. See reports/RELIABILITY.md and its dated JSON metadata.
 - Added explicit research-card failure reasons. Verified TCS's stored 403 reason appears alongside its unavailable annual-report source in the UI. Added missing-discovery and empty-price fallback regressions; all 24 tests, build and validation pass.

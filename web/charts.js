@@ -67,3 +67,21 @@
     });
   }).observe(area,{childList:true});
 })();
+
+(()=>{
+  const area=document.querySelector('#research-content');
+  new MutationObserver(()=>{
+    const analysis=state.research?.analysis;if(analysis?.mode!=='ai')return;
+    area.querySelectorAll('.claim').forEach((node,i)=>{
+      const claim=analysis.claims[i];if(!claim?.support?.length||node.querySelector('.claim-support'))return;
+      const details=document.createElement('details');details.className='claim-support';
+      const summary=document.createElement('summary');summary.textContent='Inspect matched source quotes';details.append(summary);
+      for(const item of claim.support){
+        const source=state.research.evidence.find(e=>e.id===item.sourceId);
+        const label=document.createElement('p');label.textContent=(source?.label||'Source')+' · PDF page '+source?.page;
+        const quote=document.createElement('blockquote');quote.textContent=item.quote;details.append(label,quote);
+      }
+      node.append(details);
+    });
+  }).observe(area,{childList:true});
+})();

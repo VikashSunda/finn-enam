@@ -30,7 +30,7 @@ Never commit keys. Hosted secrets belong in the hosting provider's runtime envir
 - **Portfolio:** 18 diversified mock holdings, add/remove NSE symbols, daily close, percentage move, previous-session volume comparison and recent price history.
 - **Alerts:** Configurable absolute price and relative-volume thresholds plus announcement-category preferences. Checked on refresh, not background phone notifications. Preferences remain in the browser.
 - **Research:** Four preloaded companies (INFY, TCS, RELIANCE, HDFCBANK); generic NSE ticker discovery and PDF extraction where accessible. Business, financials, cash quality, balance sheet, guidance and risk evidence search. Questions use the same primary corpus.
-- **Evidence:** Document links and PDF page numbers; facts/inferences separated in optional AI outputs. Unknown citation IDs are rejected.
+- **Evidence:** Document links and PDF page numbers; facts/inferences separated in optional AI outputs. Unknown citation IDs, unmatched supporting quotes and numbers absent from cited evidence are rejected. Matched quotes can be expanded in the research view.
 - **Source health:** Fresh fetch, snapshot, stale fallback and unavailable states; missing data is never replaced by generated numbers.
 
 ## Sources and provenance
@@ -68,7 +68,7 @@ Browser UI → Worker API → source adapters / cached corpus → evidence retri
 - No brokerage integration, real holdings, real-time prices, background push service, or unattended daily ingestion.
 - Online parsing is capped at 14 MB per document. Scanned/image PDFs may require OCR, which is not implemented.
 - Financial websites can block hosted requests even if local requests work. Missing annual reports and blocked transcripts are visible.
-- Research citations validate source identity, not whether every model inference is correct. Human review remains necessary.
+- Research checks validate source IDs, copied supporting quotes and numeric presence. These do not establish semantic correctness, metric/period alignment or every inference; human review remains necessary. Model-written limitation text is replaced by a fixed statement scoped to retrieved passages. See reports/AI_VERIFICATION.md for live outcomes and remaining limits.
 - A full four-quarter **guidance versus actuals** scorecard is deliberately not implemented. Guidance excerpts are labelled as management statements, not demonstrated delivery. This requires verified period/metric/currency/reporting-basis alignment.
 - No automatic Revenue/EBITDA/PBT/PAT table is claimed. These metrics require verified filing extraction; EBITDA should not be fabricated where unreported or unsuitable for a sector.
 - Public sharing for interviewers and a live LLM-provider check remain submission steps.

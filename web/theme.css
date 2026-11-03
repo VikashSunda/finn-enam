@@ -1,4 +1,5 @@
 /* Theme layer, loaded last. Both themes retain source and movement semantics. */
+html[data-theme=dark] .claim-support summary{color:#a7bfff}html[data-theme=dark] .claim-support p{color:#a8b5ca}html[data-theme=dark] .claim-support blockquote{background:#111b2c;color:#d1ddef;border-color:#6488cc}
 html[data-theme=dark] .document-row .document-health{background:#302a20;color:#efd3a2}
 .main-shell .topbar{position:sticky;top:68px;z-index:35}.top-actions{gap:12px}.theme-toggle{flex-shrink:0}.is-scrolled body .sidebar{box-shadow:0 6px 22px #080f2638;background:#101a2d}.is-scrolled .sidebar .brand{transform:scale(.95);transform-origin:left center}.is-scrolled .main-shell .topbar{box-shadow:0 3px 12px #1723370c;border-bottom-color:#c5d2e4}
 @media(prefers-reduced-motion:no-preference){body .sidebar,.main-shell .topbar{transition:background-color .2s,box-shadow .2s,border-color .2s}.sidebar .brand{transition:transform .2s ease-out}}
@@ -48,3 +49,6 @@ html[data-theme=dark].is-scrolled .main-shell .topbar{border-color:#42516c}
 html[data-theme=dark] :is(.filing-review>span,.research-invite .eyebrow,.footer-brand){color:#a8bde5}
 @media(max-width:720px){.main-shell .topbar{top:0;z-index:35}.top-actions{gap:8px}.theme-toggle,.topbar .icon-button{width:38px;height:38px}.is-scrolled .main-shell .topbar{box-shadow:0 6px 18px #080f2630}html[data-theme=dark] .main-shell .topbar{background:#131f35}.main-shell .topbar .market-pill{display:none}}
 @media(prefers-reduced-motion:reduce){.sidebar .brand{transform:none!important}body .sidebar,.main-shell .topbar,.sidebar .brand{transition:none!important}}
+
+html[data-theme=dark] :is(.research-tabs button,.citation-button){background:#263751;border-color:#42516c;color:#d1dfff}
+html[data-theme=dark] .research-tabs button.selected{background:#315cc6;border-color:#6488cc;color:#fff}

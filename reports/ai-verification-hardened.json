@@ -1,0 +1,99 @@
+{
+  "schemaProbe": {
+    "testedAt": "2026-11-03T09:30:43.971Z",
+    "request": {
+      "ticker": "INFY",
+      "topic": "cash",
+      "question": "Give one concise fact about Q1 FY27 free cash flow, with its exact supporting quotation. Do not add other claims."
+    },
+    "analysis": {
+      "mode": "ai",
+      "model": "gemini-3.1-flash-lite",
+      "claims": [
+        {
+          "text": "In Q1 FY27, Infosys reported free cash flow of $955 million.",
+          "kind": "fact",
+          "sources": [
+            "a40e5ce5364fe1509900-31-0"
+          ],
+          "support": [
+            {
+              "sourceId": "a40e5ce5364fe1509900-31-0",
+              "quote": "Free cash flow was strong at $955 mn at 116.5% of net profit."
+            }
+          ],
+          "verification": "quotes_and_numbers_checked"
+        }
+      ],
+      "note": "Analysis is limited to retrieved primary-source passages. Supporting quotes and numeric presence were checked; this does not independently establish every claim’s meaning or inference.",
+      "validation": {
+        "supportedClaimCount": 1,
+        "scopeOnlyClaimCount": 0,
+        "requiredQuoteAndNumberChecksPassed": true,
+        "semanticEntailment": "not_automatically_established"
+      }
+    },
+    "manualReview": "The single $955 million cash-flow fact and copied quotation match the retrieved July transcript, PDF page 31. Quarter association agrees with the earlier publisher-text audit in SOURCE_AUDIT.md. This is one sampled content review."
+  },
+  "hardenedSweep": {
+    "startedAt": "2026-11-03T09:30:58.460Z",
+    "baseRevision": "a55b15cf2fab7f07db1349a735229ad38b8d1b0f",
+    "workingTreeChanges": true,
+    "results": [
+      {
+        "id": "infy-caveat",
+        "mode": "extractive",
+        "note": "AI synthesis unavailable: Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts.",
+        "validation": null
+      },
+      {
+        "id": "infy-periods",
+        "mode": "extractive",
+        "note": "AI synthesis unavailable: Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts.",
+        "validation": null
+      },
+      {
+        "id": "tcs-guidance",
+        "mode": "extractive",
+        "note": "AI synthesis unavailable: Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts.",
+        "validation": null
+      },
+      {
+        "id": "hdfc-sector",
+        "mode": "extractive",
+        "note": "AI synthesis unavailable: Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts.",
+        "validation": null
+      },
+      {
+        "id": "coforge-primary",
+        "mode": "extractive",
+        "note": "AI synthesis unavailable: Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts.",
+        "validation": null
+      },
+      {
+        "id": "infy-missing",
+        "mode": "ai",
+        "note": "The retrieved passages do not establish the requested answer. Broader company-document coverage has not been assessed.",
+        "validation": {
+          "supportedClaimCount": 0,
+          "scopeOnlyClaimCount": 1,
+          "requiredQuoteAndNumberChecksPassed": true,
+          "semanticEntailment": "not_automatically_established"
+        }
+      },
+      {
+        "id": "infy-injection",
+        "mode": "extractive",
+        "note": "AI synthesis unavailable: Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts.",
+        "validation": null
+      }
+    ],
+    "finding": "Six provider HTTP 503 fallbacks; one limitation answer exposed overbroad claim-body wording. Fixed after the sweep by discarding model-written limitation text."
+  },
+  "finalLimitationProbe": {
+    "testedAt": "2026-11-03T09:32:55.847Z",
+    "mode": "extractive",
+    "note": "AI synthesis unavailable: Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts."
+  },
+  "automatedChecks": "32 tests passed, including limitation-label bypass regression; build and artifact validation passed."
+}

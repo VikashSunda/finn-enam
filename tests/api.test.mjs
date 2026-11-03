@@ -51,7 +51,9 @@ test('valid Gemini output retains claim kind and exact source attribution',async
     const prompt=JSON.parse(options.body).contents[0].parts[0].text;
     assert.equal(JSON.parse(options.body).generationConfig.thinkingConfig.thinkingLevel,'minimal');
     assert.ok(prompt.includes(id));
-    return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'Management reported the figure in the cited passage.',kind:'fact',sources:[id]}],note:'Period limited to the excerpt.'})}]}}]});
+    const required=JSON.parse(options.body).generationConfig.responseJsonSchema.properties.claims.items.required;
+    assert.ok(required.includes('support'),'Provider must require supporting quotes in its output contract');
+    return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'Management reported the figure in the cited passage.',kind:'fact',sources:[id],support:[{sourceId:id,quote:baseline.evidence[0].text.slice(0,150)}]}],note:'Period limited to the excerpt.'})}]}}]});
   });
   const result=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{GEMINI_API_KEY:'mock-only',GEMINI_MODEL:'gemini-3.1-flash-lite'})).json();
   assert.equal(result.analysis.mode,'ai');assert.equal(result.analysis.model,'gemini-3.1-flash-lite');
@@ -61,7 +63,7 @@ test('valid Gemini output retains claim kind and exact source attribution',async
 test('one invalid citation rejects the whole answer instead of silently omitting claims',async t=>{
   const payload={ticker:'INFY',topic:'cash',question:'citation rejection regression'};
   const baseline=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{})).json();
-  t.mock.method(globalThis,'fetch',async()=>Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'Supported excerpt.',kind:'fact',sources:[baseline.evidence[0].id]},{text:'Unsupported.',kind:'fact',sources:['invented-id']}]})}]}}]}));
+  t.mock.method(globalThis,'fetch',async()=>Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'Supported excerpt.',kind:'fact',sources:[baseline.evidence[0].id],support:[{sourceId:baseline.evidence[0].id,quote:baseline.evidence[0].text.slice(0,150)}]},{text:'Unsupported.',kind:'fact',sources:['invented-id']}]})}]}}]}));
   const result=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{GEMINI_API_KEY:'mock-only'})).json();
   assert.equal(result.analysis.mode,'extractive');assert.match(result.analysis.note,/evidence validation/);
 });
