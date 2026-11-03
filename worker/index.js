@@ -168,8 +168,6 @@ async function synthesise(evidence,question,topic,ticker,env,intent='topic') {
   const requestPrompt=prompt+groundingRules+quoteRules+numericRules+taskRules+growthRules+' If the requested answer is not established by the evidence, return only concise limitation claims. Do not pad the answer with nearby unrelated facts or extrapolate a speaker statement about one metric into a universal policy. Scope missing evidence to the retrieved excerpts, not every company document. Do not infer a corpus-wide latest reporting period from one excerpt.';
   const responseSchema=JSON.parse(JSON.stringify(answerSchema));
   responseSchema.properties.claims.maxItems=intent==='overview'?2:intent==='growth'?3:5;
-  const availableQuotes=[...new Set(quoteChoices.flatMap(e=>e.quotes))];
-  if(availableQuotes.length)responseSchema.properties.claims.items.properties.support.items.properties.quote.enum=availableQuotes;
   const constrainedPrompt=requestPrompt+' For support, choose a quote EXACTLY from the copyableQuotes for its associated sourceId below; do not rewrite it or assign it to a different source. '+JSON.stringify(quoteChoices.map(e=>({sourceId:e.id,copyableQuotes:e.quotes})));
   let text,attempts=[];
   if(provider==='gemini'){
