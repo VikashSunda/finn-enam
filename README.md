@@ -109,3 +109,7 @@ For unattended local checks while the app tab is closed, keep the FINN server ru
 ## Filing contents
 
 From a brief item, choose Inspect filing → Read & analyse filing. FINN reads the actual indexed PDF and shows page-attributed passages, or validated AI claims when a configured provider responds correctly. Category cues remain rules. Accepted factual AI summaries also appear in the brief during the current browser session. Parsing limits, selected-evidence coverage and provider failures remain visible; see reports/FILING_ANALYSIS.md.
+
+## Local desktop alert delivery
+
+Alerts contains an opt-in Windows desktop-delivery checkbox and Save desktop delivery settings action. The monitor must run with the local FINN server. The first scheduled check establishes a baseline without replaying historical alerts; subsequent new price/volume crossings and selected non-routine filings are grouped into a Windows notification every 15-minute check. Saved rules and watchlist changes sync while the local control is connected. Delivery is off by default. Windows notification settings may suppress display. This is local Windows delivery, not mobile web push, email, instant alerts, or a shutdown-resilient service.

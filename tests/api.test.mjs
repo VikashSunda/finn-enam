@@ -153,3 +153,6 @@ test('filing synthesis accepts copied support and rejects invented quotations',a
  assert.equal((await call('gemini-test-filing-valid')).analysis.mode,'ai');invalid=true;
  const rejected=await call('gemini-test-filing-invalid');assert.equal(rejected.analysis.mode,'extractive');assert.match(rejected.analysis.note,/does not match/);assert.ok(rejected.evidence.length);
 });
+
+test('desktop delivery control is not exposed by hosted origins',async()=>{const r=await worker.fetch(req('/api/alert-delivery'),{});assert.equal(r.status,404);});
+test('local desktop delivery changes reject cross-origin callers',async()=>{const r=await worker.fetch(new Request('http://localhost:3002/api/alert-delivery',{method:'POST',headers:{origin:'https://attacker.example','content-type':'application/json'},body:'{}'}),{});assert.equal(r.status,403);});

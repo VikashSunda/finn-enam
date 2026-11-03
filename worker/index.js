@@ -183,6 +183,13 @@ export default {
       if(url.pathname==='/theme.js')return new Response(themeClient,{headers:{'content-type':'text/javascript; charset=utf-8'}});
       if(url.pathname==='/app.js')return new Response(client,{headers:{'content-type':'text/javascript; charset=utf-8'}});
       if(url.pathname==='/charts.js')return new Response(charts,{headers:{'content-type':'text/javascript; charset=utf-8'}});
+      if(url.pathname==='/api/alert-delivery'){
+        if(!['localhost','127.0.0.1'].includes(url.hostname))return json({available:false,error:'Local monitor delivery is only available on this computer.'},404);
+        if(!['GET','POST'].includes(request.method))return json({error:'Method not allowed'},405);
+        if(request.method==='POST'&&(request.headers.get('origin')!==url.origin||!request.headers.get('content-type')?.includes('application/json')))return json({error:'Same-origin JSON request required'},403);
+        const raw=request.method==='POST'?await request.text():null;if(raw&&raw.length>5000)return json({error:'Too large'},413);
+        try{const result=await fetch('http://127.0.0.1:3003/config',{method:request.method,headers:{'content-type':'application/json','x-finn-local':'1'},...(raw?{body:raw}:{}),signal:AbortSignal.timeout(15000)});return json(await result.json(),result.status);}catch{return json({available:false,error:'Start the local portfolio monitor to enable desktop delivery.'},503);}
+      }
       if(url.pathname==='/api/status')return json({ok:true,companies,aiConfigured:!!(env.GEMINI_API_KEY||env.OPENAI_API_KEY),aiProvider:env.GEMINI_API_KEY?'gemini':env.OPENAI_API_KEY?'openai':null,aiModels:env.GEMINI_API_KEY?geminiModels(env):[],aiModel:env.GEMINI_API_KEY?(env.GEMINI_MODEL||'gemini-3.1-flash-lite'):env.OPENAI_API_KEY?(env.OPENAI_MODEL||'gpt-4.1-mini'):null,snapshotAt:snapshot.generatedAt,researchTickers:Object.entries(seedResearch).filter(([,v])=>v.documents?.some(d=>d.pages?.length)).map(([k])=>k),version:'0.1.0'});
       if(url.pathname==='/api/portfolio' && request.method==='GET'){
         const tickers=[...new Set((url.searchParams.get('tickers')||companies.map(c=>c.ticker).join(',')).split(',').map(normaliseTicker))];

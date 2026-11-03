@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validateConfig,deliveryEvents,pendingDelivery} from '../scripts/alert-delivery.mjs';
+const rules={enabled:true,priceThreshold:4,volumeThreshold:2,tickers:['INFY'],categories:['results']};
+const row={ticker:'INFY',price:{mode:'live',summary:{date:'2026-11-03',changePct:-5,volumeRatio:3}},filings:{mode:'live',items:[{id:'one',category:'results',priority:'high',date:'2026-11-03T10:00:00Z',headline:'Quarterly results'}]}};
+test('delivery follows configured watchlist, thresholds and filing categories',()=>{assert.equal(deliveryEvents([row],rules,Date.parse('2026-11-03T11:00:00Z')).length,3);assert.equal(deliveryEvents([row],{...rules,tickers:['TCS']}).length,0);});
+test('stale source data cannot generate new notifications',()=>{assert.equal(deliveryEvents([{...row,price:{...row.price,mode:'stale_snapshot'},filings:{...row.filings,mode:'stale_snapshot'}}],rules).length,0);});
+test('baseline suppresses historical alerts and repeated IDs are not resent',()=>{const events=[{id:'one'},{id:'two'}];assert.deepEqual(pendingDelivery(events,new Set(),false),[]);assert.deepEqual(pendingDelivery(events,new Set(['one']),true),[{id:'two'}]);});
+test('local delivery validates bounds and accepted categories',()=>{assert.equal(validateConfig(rules).enabled,true);assert.throws(()=>validateConfig({...rules,volumeThreshold:0}));assert.throws(()=>validateConfig({...rules,categories:['made-up']}));});
