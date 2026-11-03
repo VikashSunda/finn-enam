@@ -126,10 +126,9 @@ async function loadResearch(ticker,refresh=false) {
   try{
     return await cached('research:'+ticker,6*3600_000,async()=>{
       const url='https://www.screener.in/company/'+encodeURIComponent(ticker)+'/consolidated/';
-      let html;
-      try{html=await(await remote(url)).text();}
-      catch(error){if(/HTTP 404/.test(error.message))throw new Error('No company discovery page was returned. Check the NSE symbol; the source may also be unavailable.');throw error;}
-      let docs=discoverDocuments(html,ticker);
+      let docs=[],discoveryError=null;
+      try{docs=discoverDocuments(await(await remote(url)).text(),ticker);}
+      catch(error){discoveryError=/HTTP 404/.test(error.message)?'No company discovery page was returned. Check the NSE symbol; the source may also be unavailable.':'Company report-link discovery is unavailable: '+clean(error.message)+'.';}
       // Prefer NSE archive equivalents when BSE blocks document access.
       try{
         const anns=await(await remote('https://www.nseindia.com/api/corporate-announcements?index=equities&symbol='+encodeURIComponent(ticker),{},9000)).json();
@@ -138,13 +137,13 @@ async function loadResearch(ticker,refresh=false) {
           if(transcripts.length)docs=[...docs.filter(d=>d.type==='annual_report'),...transcripts];
         }
       }catch{}
-      if(!docs.length)throw new Error('No primary reports or transcripts found for this symbol.');
+      if(!docs.length)throw new Error(discoveryError||'No primary reports or transcripts found for this symbol.');
       const parsed=await pool(docs.slice(0,5),parseDocument,2);
       if(!parsed.some(d=>d.pages?.length)){
         if(seed?.documents?.some(d=>d.pages?.length))throw new Error('Fresh documents could not be parsed; showing the previous corpus.');
         return {ticker,documents:parsed,fetchedAt:new Date().toISOString(),mode:'unavailable',error:'Document links were found, but no readable text was available. Inspect the source links and document errors.'};
       }
-      return {ticker,documents:parsed,fetchedAt:new Date().toISOString(),mode:'live'};
+      return {ticker,documents:parsed,fetchedAt:new Date().toISOString(),mode:'live',error:discoveryError};
     });
   }catch(e){
     if(seed?.documents?.some(d=>d.pages?.length))return {...seed,mode:'stale_snapshot',error:clean(e.message)};

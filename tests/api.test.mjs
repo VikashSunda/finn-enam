@@ -99,6 +99,16 @@ test('missing company discovery pages return a useful error without invented res
   assert.match(result.error,/Check the NSE symbol/);assert.equal(result.evidence,undefined);
 });
 
+test('blocked discovery does not prevent independent NSE transcript research',async t=>{
+ t.mock.method(globalThis,'fetch',async url=>{
+  if(String(url).includes('screener.in'))throw new TypeError('fetch failed');
+  if(String(url).includes('www.nseindia.com'))return Response.json([{symbol:'FALLBACK123',attchmntText:'Earnings call transcript',sort_date:'2026-11-02 16:00:00',attchmntFile:'https://company.example/fallback123.pdf'}]);
+  assert.equal(String(url),'https://company.example/fallback123.pdf');return new Response(filingPDF(),{headers:{'content-type':'application/pdf'}});
+ });
+ const response=await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify({ticker:'FALLBACK123',topic:'financials',question:'acquisition'})}),{}),result=await response.json();
+ assert.equal(response.status,200);assert.equal(result.mode,'live');assert.equal(result.documents[0].type,'transcript');assert.equal(result.documents[0].parsedPages,1);assert.ok(result.evidence.length);assert.match(result.error,/report-link discovery is unavailable/);
+});
+
 test('empty fresh price responses retain the old usable snapshot rather than claiming live coverage',async t=>{
   t.mock.method(globalThis,'fetch',async()=>Response.json({chart:{result:[{timestamp:[],indicators:{quote:[{close:[],volume:[]}]}}]}}));
   const response=await worker.fetch(req('/api/portfolio?tickers=INFY&refresh=1'),{});
