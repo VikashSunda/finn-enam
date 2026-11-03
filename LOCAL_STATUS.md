@@ -2,6 +2,10 @@
 
 ## Later verification update
 
+- Added an interactive portfolio history chart using the same completed-session series as the watchlist. Company selection, daily price line, volume bars, source/mode/date labels and expandable exact-value table are available. It is not an intraday or portfolio-return chart.
+- Added brief view transitions, a price-line reveal and restrained button feedback only when reduced motion is not requested. No external chart dependency or fabricated data was added.
+- Browser checks switched RELIANCE to INFY and toggled volume/price; the volume view rendered 30 bars and the latest reported session value. All 20 tests passed; final build and artifact validation passed. Live AI synthesis is still a separate unresolved provider issue.
+
 - Implemented the briefing visual direction in `web/briefing.css`: navy/copper palette, horizontal desktop navigation, serif headline hierarchy, readable body/metadata sizes, simpler filing rows and stat strip, larger controls, visible keyboard focus and a single-column mobile settings form. Existing UI behavior is retained.
 - Inspected populated seven-day brief on desktop and mobile, mobile research navigation and settings. Mobile DOM measurements reported no page-width overflow. Preview screenshots are under ignored `.cache/qa/redesign-*.png`. Build, all 20 tests and artifact validation passed.
 - Read the existing Sites project through the connected service: active, owner access confirmed, saved version 1, access mode `custom`. No deployment, audience change, source push or secret transfer was performed. Reviewer access is still not established merely by this status.
