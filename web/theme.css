@@ -200,3 +200,12 @@ html[data-theme=dark] :is(.main-shell .topbar,.mobile-nav){background-image:line
 #refresh-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex:0 0 18px;line-height:0;transform-origin:center}
 #refresh-icon svg{display:block;width:18px;height:18px;flex-shrink:0}.page-heading #refresh .refresh-label{font-size:12px;line-height:1.2;white-space:nowrap}
 @media(max-width:720px){.page-heading #refresh{width:42px;height:42px;min-width:42px;min-height:42px;padding:0;gap:0;margin-top:0}.page-heading #refresh .refresh-label{display:none}}
+
+/* Floating mobile navigation with room around every edge. */
+@media(max-width:720px){
+ body .mobile-nav{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));width:auto;height:64px;padding:5px 6px;gap:3px;border:1px solid #ffffffa0;border-radius:19px;background:#f8f9fbe0;box-shadow:0 8px 30px #10142524,inset 0 1px #ffffffb0;backdrop-filter:blur(16px) saturate(135%);-webkit-backdrop-filter:blur(16px) saturate(135%)}
+ html[data-theme=dark] body .mobile-nav{background:linear-gradient(165deg,#ffffff05,transparent 60%),#201c29db;border-color:#ffffff20;box-shadow:0 8px 30px #0006,inset 0 1px #ffffff0c}
+ body .mobile-nav button{width:20%;min-width:0;min-height:50px;border-radius:13px;font-size:9px}
+ body main{padding-bottom:calc(105px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-transparency:reduce){body .mobile-nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:#f8f9fb}html[data-theme=dark] body .mobile-nav{background:#201c29}}
