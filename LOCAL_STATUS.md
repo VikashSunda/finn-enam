@@ -2,6 +2,8 @@
 
 ## Later verification update
 
+- First successful live model-backed response was observed during the INFY filing-to-research browser test: five claims (four facts and one inference), source/page buttons and coverage note rendered in AI mode. Earlier 503/timeouts are historical failures, not the latest universal state. Original-PDF claim support has not yet been independently verified.
+
 - Implemented compact filing cards with deterministic boilerplate removal/truncation, labelled category-based review cues, Inspect/Source actions and related-filing counts. Full original headline/description and source links remain in a desktop side drawer/mobile bottom sheet.
 - Added drawer-to-company-research action using the existing primary-document research endpoint. Verified INFY opens research, retains the ticker and focuses its input. This navigation test does not establish live model synthesis success.
 - Verified a RELIANCE original disclosure/source and related metadata in the desktop drawer, BEL wording in the mobile sheet, and Escape dismissal returning focus to the original trigger. All 20 tests, final build, artifact validation and browser-script syntax check pass. Screenshots are in ignored `.cache/qa/filing-*.png`.
