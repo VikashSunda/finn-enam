@@ -2,6 +2,10 @@
 
 ## Later verification update
 
+- The user restored a session-only Gemini key and started port 3001 with Gemini 3.1 Flash-Lite. Safe status confirmed provider/model without reading the credential.
+- Live outcome-pricing research preserved management's adoption caveat; live cash research kept Q1/Q2 FY27 separate. Sampled statements/figures were checked against publisher PDF text at the cited pages; see SOURCE_AUDIT.md.
+- The unsupported-future-profit test declined to invent a number but initially overgeneralised other claims/coverage. Tightened instructions and scoped limitation-only notes in server code. A final live retest returned one limitation and the scoped note. All 22 tests, build and artifact validation passed. This is sampled verification, not blanket factual correctness.
+
 - Resumed with a clean working tree. The authenticated port-3001 server was offline; the user confirmed closing the key-bearing PowerShell session. The prior keyless port-3002 preview remains available. No key was recovered, printed or persisted.
 - Audited publisher PDF text against the first INFY answer. Confirmed sampled one-based page mappings and found an overstrong outcome-pricing inference plus a need to distinguish historical-quarter figures from the latest report. See SOURCE_AUDIT.md for evidence and limits; the entire answer is not marked verified.
 - Fixed retrieval to retain complete text for short pages (up to 3,200 characters), so a selected analyst question does not omit management's later caveat on that page. Added a regression crossing the old chunk boundary. Strengthened both-provider instructions on caveats, periods, attributed estimates and incomplete evidence.

@@ -66,6 +66,16 @@ test('one invalid citation rejects the whole answer instead of silently omitting
   assert.equal(result.analysis.mode,'extractive');assert.match(result.analysis.note,/evidence validation/);
 });
 
+test('limitation-only answers cannot use the model note to overstate corpus coverage',async t=>{
+  const payload={ticker:'INFY',topic:'financials',question:'limitation coverage scope regression'};
+  const baseline=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{})).json();
+  const id=baseline.evidence[0].id;
+  t.mock.method(globalThis,'fetch',async()=>Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'Not established by these excerpts.',kind:'limitation',sources:[id]}],note:'All company documents end at FY2026.'})}]}}]}));
+  const result=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{GEMINI_API_KEY:'mock-only'})).json();
+  assert.equal(result.analysis.mode,'ai');assert.match(result.analysis.note,/retrieved passages/);
+  assert.ok(!result.analysis.note.includes('FY2026'));assert.match(result.analysis.note,/has not been assessed/);
+});
+
 test('unfamiliar ticker retains discovered document URLs when every download is blocked',async t=>{
   t.mock.method(globalThis,'fetch',async url=>{
     if(String(url).includes('screener.in'))return new Response('<h3>Annual reports</h3><ul><li><a href="https://company.example/annual.pdf">Annual Report 2026</a></li></ul>');

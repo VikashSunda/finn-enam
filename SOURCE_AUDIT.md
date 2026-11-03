@@ -1,5 +1,25 @@
 # INFY first-answer source audit
 
+## Live retest after restoring Gemini
+
+Gemini 3.1 Flash-Lite was confirmed configured on port 3001. The updated outcome-
+pricing answer explicitly retained increased interest versus limited adoption,
+citing July PDF pp.14–15. Those source passages support that distinction.
+
+A second answer kept Q1 and Q2 FY27 cash metrics separate: Q1 FCF USD955m and
+116.5% of profit (July PDF p.31); Q2 USD928m and 113% (October PDF pp.27–28).
+These values and one-based locations were checked against publisher PDF text.
+
+An unsupported FY2035-profit question produced no fabricated number. Its first
+response added overbroad coverage/policy claims, so it was a partial failure.
+After tighter prompting, the retest returned one limitation claim. Its note still
+generalised a historical reporting cutoff; limitation-only notes are now replaced
+with a fixed explanation scoped to retrieved passages. Regression coverage checks
+that safeguard. A final live retest returned one limitation claim and the fixed,
+retrieval-scoped note, with no invented FY2035 profit number.
+
+These are sampled outcomes, not proof that all future answers are supported.
+
 Checked 3 November 2026 against publisher-hosted PDFs through web PDF extraction.
 This is a manual, sampled content review, not automatic entailment verification.
 PDF positions below are one-based file pages; printed page labels can differ.
