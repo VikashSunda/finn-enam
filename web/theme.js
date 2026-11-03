@@ -42,20 +42,30 @@
  });
 })();
 
-/* Custom pointer is limited to precise mouse devices; native editing cursors remain. */
+/* Immediate dot, spring-following ring; no idle animation loop. */
 addEventListener('DOMContentLoaded',()=>{
- const precise=matchMedia('(hover: hover) and (pointer: fine)');
- const cursor=document.createElement('div');cursor.className='finn-cursor';cursor.setAttribute('aria-hidden','true');cursor.innerHTML='<span></span>';document.body.append(cursor);
- let shown=false;
- function hide(){cursor.classList.remove('visible');document.documentElement.classList.remove('custom-pointer');shown=false;}
+ const precise=matchMedia('(hover: hover) and (pointer: fine)'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const ring=document.createElement('div'),dot=document.createElement('div');
+ ring.className='finn-cursor';dot.className='finn-cursor-dot';
+ for(const node of [ring,dot]){node.setAttribute('aria-hidden','true');document.body.append(node);}
+ let shown=false,frame=0,x=0,y=0,rx=0,ry=0,last=0;
+ const place=(node,a,b)=>node.style.transform='translate3d('+a+'px,'+b+'px,0)';
+ function follow(time){
+  const dt=Math.min(40,time-(last||time-16));last=time;
+  const blend=1-Math.exp(-dt/65);rx+=(x-rx)*blend;ry+=(y-ry)*blend;
+  place(ring,rx,ry);
+  if(shown&&Math.hypot(x-rx,y-ry)>.1)frame=requestAnimationFrame(follow);else{frame=0;last=0;place(ring,x,y);}
+ }
+ function hide(){for(const node of [ring,dot])node.classList.remove('visible','pressed');document.documentElement.classList.remove('custom-pointer');shown=false;cancelAnimationFrame(frame);frame=0;last=0;}
  document.addEventListener('pointermove',event=>{
   if(!precise.matches||event.pointerType!=='mouse'||event.target.closest('input,textarea,select,[contenteditable=true],iframe,dialog')){hide();return;}
-  cursor.style.left=event.clientX+'px';cursor.style.top=event.clientY+'px';
-  if(!shown){cursor.classList.add('visible');document.documentElement.classList.add('custom-pointer');shown=true;}
-  cursor.classList.toggle('over-control',Boolean(event.target.closest('button,a,summary,[role=button]')));
+  x=event.clientX;y=event.clientY;place(dot,x,y);
+  if(!shown){rx=x;ry=y;place(ring,x,y);for(const node of [ring,dot])node.classList.add('visible');document.documentElement.classList.add('custom-pointer');shown=true;}
+  ring.classList.toggle('over-control',Boolean(event.target.closest('button,a,summary,[role=button]')));
+  if(reduced.matches){rx=x;ry=y;place(ring,x,y);}else if(!frame)frame=requestAnimationFrame(follow);
  });
- document.addEventListener('pointerdown',()=>cursor.classList.add('pressed'));
- document.addEventListener('pointerup',()=>cursor.classList.remove('pressed'));
- document.addEventListener('pointerout',event=>{if(!event.relatedTarget)hide();});
- addEventListener('blur',hide);document.addEventListener('visibilitychange',()=>{if(document.hidden)hide();});precise.addEventListener('change',hide);
+ document.addEventListener('pointerdown',event=>{if(shown&&event.pointerType==='mouse'){ring.classList.add('pressed');dot.classList.add('pressed');}});
+ document.addEventListener('pointerup',()=>{ring.classList.remove('pressed');dot.classList.remove('pressed');});
+ document.addEventListener('pointercancel',hide);document.addEventListener('pointerout',event=>{if(!event.relatedTarget)hide();});
+ addEventListener('blur',hide);document.addEventListener('visibilitychange',()=>{if(document.hidden)hide();});precise.addEventListener('change',hide);reduced.addEventListener('change',hide);
 });
