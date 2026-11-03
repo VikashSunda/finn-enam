@@ -2,6 +2,9 @@
 
 ## Later verification update
 
+- After the user's restart, two live requests returned Gemini 503 high-demand errors. `/api/status` independently confirmed `aiProvider: gemini`, `aiModel: gemini-3.1-flash-lite`, and configured credentials. No successful live synthesis or claim verification is claimed.
+- Added non-secret provider/model status and regression coverage proving credential values are absent. The running authenticated server loaded the new status fields after a build without another restart, verifying local reload behavior. All 20 tests and artifact validation pass.
+
 - A live request with explicitly selected Gemini 3.1 Flash-Lite also hit the inherited 25-second timeout. Increased the Gemini bound to 60 seconds and explicitly selected minimal thinking only for that supported model. Changed its default/example away from 2.5 Flash, which had rejected this new account. Live success is still pending.
 - Local development now checks the built Worker's modification time on requests and loads rebuilt versions without restarting the server. One restart is required to enable this loader in an already-running old server. This does not write or expose credentials.
 - Rebuilt and reran all 19 tests, artifact validation and development-script syntax checking after these changes; all passed. A separate keyless server on port 3002 successfully served status and source-backed research through the new loader.

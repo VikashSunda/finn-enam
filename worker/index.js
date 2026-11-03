@@ -168,7 +168,7 @@ export default {
       if(url.pathname==='/')return new Response(page,{headers:{'content-type':'text/html; charset=utf-8','x-content-type-options':'nosniff','referrer-policy':'strict-origin-when-cross-origin','content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'self'; frame-ancestors 'self' https://chatgpt.com"}});
       if(url.pathname==='/styles.css')return new Response(styles,{headers:{'content-type':'text/css; charset=utf-8'}});
       if(url.pathname==='/app.js')return new Response(client,{headers:{'content-type':'text/javascript; charset=utf-8'}});
-      if(url.pathname==='/api/status')return json({ok:true,companies,aiConfigured:!!(env.GEMINI_API_KEY||env.OPENAI_API_KEY),snapshotAt:snapshot.generatedAt,researchTickers:Object.entries(seedResearch).filter(([,v])=>v.documents?.some(d=>d.pages?.length)).map(([k])=>k),version:'0.1.0'});
+      if(url.pathname==='/api/status')return json({ok:true,companies,aiConfigured:!!(env.GEMINI_API_KEY||env.OPENAI_API_KEY),aiProvider:env.GEMINI_API_KEY?'gemini':env.OPENAI_API_KEY?'openai':null,aiModel:env.GEMINI_API_KEY?(env.GEMINI_MODEL||'gemini-3.1-flash-lite'):env.OPENAI_API_KEY?(env.OPENAI_MODEL||'gpt-4.1-mini'):null,snapshotAt:snapshot.generatedAt,researchTickers:Object.entries(seedResearch).filter(([,v])=>v.documents?.some(d=>d.pages?.length)).map(([k])=>k),version:'0.1.0'});
       if(url.pathname==='/api/portfolio' && request.method==='GET'){
         const tickers=[...new Set((url.searchParams.get('tickers')||companies.map(c=>c.ticker).join(',')).split(',').map(normaliseTicker))];
         if(tickers.length>25)return json({error:'A prototype portfolio supports up to 25 symbols.'},400);

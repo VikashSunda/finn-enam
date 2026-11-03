@@ -17,6 +17,14 @@ test('malformed JSON and non-object research payloads return a clear client erro
   }
 });
 
+test('status reports the selected model without exposing provider credentials',async()=>{
+  const env={GEMINI_API_KEY:'mock-secret-gemini',OPENAI_API_KEY:'mock-secret-openai',GEMINI_MODEL:'gemini-3.1-flash-lite'};
+  const response=await worker.fetch(req('/api/status'),env);
+  const text=await response.text(),status=JSON.parse(text);
+  assert.equal(status.aiProvider,'gemini');assert.equal(status.aiModel,env.GEMINI_MODEL);
+  assert.ok(!text.includes(env.GEMINI_API_KEY));assert.ok(!text.includes(env.OPENAI_API_KEY));
+});
+
 test('provider quota failure preserves evidence and explicitly falls back',async t=>{
   t.mock.method(globalThis,'fetch',async()=>new Response('{}',{status:429}));
   const response=await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify({ticker:'INFY',topic:'cash',question:'quota failure regression'})}),{GEMINI_API_KEY:'mock-only'});
