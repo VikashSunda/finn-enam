@@ -211,3 +211,15 @@ html[data-theme=dark] :is(.main-shell .topbar,.mobile-nav){background-image:line
 @media(prefers-reduced-transparency:reduce){body .mobile-nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:#f8f9fb}html[data-theme=dark] body .mobile-nav{background:#201c29}}
 
 .guidance-entry{margin:18px 0}.guidance-entry button{min-height:44px;font-size:13px}.guidance-panel{padding:24px;margin-bottom:24px}.guidance-panel>h2{font-size:23px;margin:8px 0 16px}.guidance-panel h3{font-size:15px;margin:24px 0 12px}.guidance-result{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:22px 0}.guidance-result>div{padding:18px;border:1px solid var(--edge);border-radius:10px}.guidance-result b{display:block;font-size:25px;margin:10px 0}.guidance-result small,.guidance-result p{font-size:11px;color:var(--quiet)}.guidance-result a,.guidance-panel td a{font-size:11px;line-height:1.8}.guidance-panel details{font-size:12px;line-height:1.8}.guidance-panel summary{cursor:pointer;min-height:40px}.guidance-panel blockquote{border-left:2px solid var(--accent);padding:12px;background:var(--surface-raised);margin:10px 0}@media(max-width:720px){.guidance-result{grid-template-columns:1fr;gap:10px}.guidance-result>div{padding:14px}.guidance-panel{padding:18px}}
+.trend-plot{position:relative;cursor:crosshair;isolation:isolate;outline-offset:4px}
+.trend-plot:focus-visible{outline:2px solid var(--accent,#9352d8);border-radius:8px}
+.trend-hint{font-size:11px;color:var(--quiet,#637083);margin:12px 0 2px}
+.trend-tooltip{position:absolute;z-index:2;pointer-events:none;width:245px;max-width:calc(100% - 8px);padding:12px 14px;background:var(--surface-raised,#fff);color:var(--ink,#20232b);border:1px solid var(--edge,#dce2e8);border-radius:10px;box-shadow:0 10px 28px #0003;font-size:12px;line-height:1.6;box-sizing:border-box;font-variant-numeric:tabular-nums}
+.trend-tooltip[hidden]{display:none}
+.trend-tooltip strong{display:flex;justify-content:space-between;gap:10px;margin-bottom:7px;font-size:12px}
+.trend-tooltip strong span,.trend-tooltip small{color:var(--quiet,#637083);font-weight:400}
+.trend-tooltip div{display:flex;justify-content:space-between;gap:10px}
+.trend-tooltip small{display:block;font-size:10px;margin-top:7px}
+.trend-cursor{pointer-events:none}.trend-cursor line{stroke:var(--quiet,#637083);stroke-width:1;stroke-dasharray:4 4}.trend-cursor circle{fill:var(--accent,#9352d8);stroke:var(--ink,#20232b);stroke-width:2}
+.trend-plot svg .trend-bar.is-inspected{fill:var(--accent,#9352d8);stroke:var(--ink,#20232b);stroke-width:1}
+@media(max-width:720px){.trend-tooltip{position:relative;left:auto!important;top:auto!important;width:100%;max-width:100%;margin:8px 0;box-shadow:0 4px 14px #0002}.trend-hint{font-size:10px}}

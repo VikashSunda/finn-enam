@@ -11,6 +11,7 @@
     if(!rows.some(row=>row.ticker===selected))selected=rows[0].ticker;
     const row=rows.find(row=>row.ticker===selected),summary=row.price.summary;
     const bars=summary.history.filter(bar=>Number.isFinite(bar[metric]));
+    if(!bars.length){host.innerHTML='<div class="trend-empty">No completed observations for this metric.</div>';return;}
     const values=bars.map(bar=>bar[metric]),low=Math.min(...values),high=Math.max(...values);
     const floor=metric==='volume'?0:low-(high-low||low*.01)*.12;
     const ceiling=high+(high-floor||1)*.12,range=ceiling-floor||1;
@@ -23,6 +24,34 @@
     host.innerHTML='<div class="trend-header"><div><p class="eyebrow">THE SESSION VIEW</p><h2>Follow the movement</h2><p class="small muted">'+esc(bars.length)+' available completed sessions · '+esc(row.price.mode.replaceAll('_',' '))+'</p></div><label class="trend-select">Company<select aria-label="Chart company">'+rows.map(r=>'<option value="'+esc(r.ticker)+'" '+(r.ticker===selected?'selected':'')+'>'+esc(r.ticker)+'</option>').join('')+'</select></label></div><div class="trend-controls"><div><b>'+esc(format(last[metric]))+'</b><span>'+esc(label)+' · '+esc(last.date)+'</span></div><div class="trend-metrics" role="group" aria-label="Chart metric"><button type="button" data-metric="close" aria-pressed="'+(metric==='close')+'">Price</button><button type="button" data-metric="volume" aria-pressed="'+(metric==='volume')+'">Volume</button></div></div><div class="trend-plot"><svg viewBox="0 0 750 220" role="img" aria-label="'+esc(label+' for '+selected+', '+first.date+' to '+last.date+'. Minimum '+format(low)+', maximum '+format(high))+ '"><title>'+esc(label+' · '+selected)+'</title>'+[0,.5,1].map(t=>{const value=floor+range*t,pos=y(value);return '<line class="trend-grid" x1="62" x2="716" y1="'+pos+'" y2="'+pos+'"/><text x="52" y="'+(pos+4)+'" text-anchor="end">'+esc(metric==='volume'?number(value/1000000,1)+'m':number(value,0))+'</text>';}).join('')+series+'<text x="62" y="210">'+esc(first.date)+'</text><text x="716" y="210" text-anchor="end">'+esc(last.date)+'</text></svg></div><details class="trend-data"><summary>Inspect the session values</summary><div class="table-scroll"><table><caption class="sr-only">'+esc(selected+' '+label)+'</caption><thead><tr><th scope="col">Session</th><th scope="col">'+esc(label)+'</th></tr></thead><tbody>'+bars.map(bar=>'<tr><td>'+esc(bar.date)+'</td><td>'+esc(format(bar[metric]))+'</td></tr>').join('')+'</tbody></table></div></details><p class="trend-source">Completed daily observations, not an intraday feed. '+(row.price.source?'<a class="source-link" target="_blank" rel="noopener noreferrer" href="'+safeURL(row.price.source)+'">Verify price source ↗</a>':'Source link unavailable.')+'</p>';
     host.querySelector('select').addEventListener('change',event=>{selected=event.target.value;draw();});
     host.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{metric=button.dataset.metric;draw();}));
+    const plot=host.querySelector('.trend-plot'),svg=plot.querySelector('svg');
+    plot.tabIndex=0;plot.setAttribute('role','group');plot.setAttribute('aria-label',label+' interactive chart. Hover or tap to inspect a session. Use Left and Right arrow keys, Home or End. Escape dismisses details.');
+    const hint=document.createElement('p');hint.className='trend-hint';hint.textContent='Hover or tap a session for details · Arrow keys to explore';plot.before(hint);
+    const tip=document.createElement('div');tip.className='trend-tooltip';tip.hidden=true;tip.setAttribute('role','status');tip.setAttribute('aria-live','off');plot.append(tip);
+    const ns='http://www.w3.org/2000/svg',cursor=document.createElementNS(ns,'g');cursor.setAttribute('class','trend-cursor');cursor.setAttribute('aria-hidden','true');cursor.style.display='none';
+    const guide=document.createElementNS(ns,'line');guide.setAttribute('y1','26');guide.setAttribute('y2','180');
+    const dot=document.createElementNS(ns,'circle');dot.setAttribute('r','5');cursor.append(guide,dot);svg.append(cursor);
+    let active=bars.length-1,pinned=false;
+    function hide(){tip.hidden=true;cursor.style.display='none';host.querySelectorAll('.trend-bar.is-inspected').forEach(b=>b.classList.remove('is-inspected'));}
+    function inspect(index,keyboard=false){
+      active=Math.max(0,Math.min(bars.length-1,index));const bar=bars[active],previous=bars[active-1];
+      const change=previous?.close>0&&Number.isFinite(bar.close)?(bar.close/previous.close-1)*100:null;
+      tip.setAttribute('aria-live',keyboard?'polite':'off');
+      tip.innerHTML='<strong>'+esc(selected)+' <span>'+esc(bar.date)+'</span></strong><div>Closing price <b>'+esc(Number.isFinite(bar.close)?'₹'+number(bar.close):'Unavailable')+'</b></div><div>Traded volume <b>'+esc(Number.isFinite(bar.volume)?number(bar.volume,0)+' shares':'Unavailable')+'</b></div><div>Price change <b class="'+(change===null?'':change>=0?'positive':'negative')+'">'+(change===null?'Not available':esc(pct(change)))+'</b></div><small>'+(change===null?'No preceding displayed session.':'Compared with '+esc(previous.date)+'.')+' Completed EOD session.</small>';
+      cursor.style.display='';guide.setAttribute('x1',x(active));guide.setAttribute('x2',x(active));dot.setAttribute('cx',x(active));dot.setAttribute('cy',y(bar[metric]));
+      host.querySelectorAll('.trend-bar').forEach((b,i)=>b.classList.toggle('is-inspected',i===active));tip.hidden=false;
+      const point=svg.createSVGPoint();point.x=x(active);point.y=y(bar[metric]);const matrix=svg.getScreenCTM();if(!matrix)return;
+      const screen=point.matrixTransform(matrix),rect=plot.getBoundingClientRect(),width=tip.offsetWidth;
+      const left=screen.x-rect.left,top=screen.y-rect.top;
+      tip.style.left=Math.max(4,Math.min(rect.width-width-4,left>rect.width/2?left-width-14:left+14))+'px';
+      tip.style.top=Math.max(4,Math.min(rect.height-tip.offsetHeight-4,top-50))+'px';
+    }
+    function indexAt(event){const matrix=svg.getScreenCTM();if(!matrix)return null;const point=svg.createSVGPoint();point.x=event.clientX;point.y=event.clientY;const p=point.matrixTransform(matrix.inverse());if(p.x<52||p.x>726||p.y<20||p.y>190)return null;return Math.round((p.x-62)/654*(bars.length-1));}
+    plot.addEventListener('pointermove',event=>{if(pinned||event.pointerType==='touch')return;const index=indexAt(event);if(index===null)hide();else inspect(index);});
+    plot.addEventListener('pointerleave',()=>{if(!pinned)hide();});
+    plot.addEventListener('click',event=>{const index=indexAt(event);if(index===null){pinned=false;hide();return;}if(pinned&&index===active){pinned=false;hide();}else{pinned=true;inspect(index);}});
+    plot.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(event.key))return;event.preventDefault();if(event.key==='Escape'){pinned=false;hide();return;}pinned=true;inspect(event.key==='Home'?0:event.key==='End'?bars.length-1:active+(event.key==='ArrowLeft'?-1:1),true);});
+    plot.addEventListener('blur',()=>{pinned=false;hide();});
   }
   new MutationObserver(draw).observe(document.querySelector('#portfolio-table'),{childList:true});
   draw();
