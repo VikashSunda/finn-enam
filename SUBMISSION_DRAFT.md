@@ -13,11 +13,11 @@ I used a small HTML/CSS/JavaScript frontend and one bundled Worker, source adapt
 
 I prioritised a working investor workflow and honest evidence states over broad unverified financial extraction. Deliberate omissions include OCR, mobile push, brokerage integration and fully automated cross-company financial/guidance scorecards. Generic research remains available beyond the curated guidance example. Earlier projects informed architectural ideas and are attributed in the repository.
 
-Validation includes 70 passing tests, fresh 18-company feed checks, desktop/mobile walkthroughs, interactive chart checks, sampled live Gemini/source checks and user-confirmed visible Windows notification delivery. A production Node adapter and Render blueprint support deploying the same app. These are prototype checks, not a claim that every future model answer is correct.
+Validation includes 71 passing tests, live hosted checks of all 18 portfolio feeds, desktop/mobile walkthroughs, interactive chart checks, sampled Gemini/source checks and user-confirmed visible local Windows notification delivery. Render testing also confirmed a primary-model 503 successfully fell back to another Gemini model. These are prototype checks, not a claim that every future model answer is correct. The free hosted service can take time to wake after inactivity.
 
 Next I would add durable hosted ingestion/scheduling, stronger source coverage and evaluated structured financial extraction.
 
-Prototype: [insert reviewed, reviewer-accessible deployed version]
+Prototype: https://finn-enam-yid1.onrender.com
 GitHub repository: https://github.com/VikashSunda/finn-enam
 Actual AI build conversation: [attach/export this Codex conversation; user confirms it is the only build session]
 Earlier user-supplied conversation: https://chatgpt.com/share/6ae933fa-b760-83e8-bae7-3feb55f11340

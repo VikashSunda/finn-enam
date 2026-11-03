@@ -14,7 +14,7 @@ Checked against the original four-page Main challenge PDF, the companion referen
 | Mobile-first interactive product | Implemented responsive screens, saved themes, profile/settings, Alerts, research/evidence, interactive price and volume charts. Browser widths 360/390 and desktop checked; no physical-device certification. |
 | Financial / guidance depth | Reviewed Infosys annual financial and guidance comparisons, four-quarter outlook history. Generic automatic quarterly tables and four-quarter delivery scoring are not claimed. |
 | Management enrichment | Leadership primary-document topic implemented; automatic incoming-person biographies and external profile enrichment are not implemented. This is an illustrative feature, not a core requirement. |
-| Public working prototype link | PENDING: Render production adapter and blueprint are ready; no deployment/access test yet. |
+| Public working prototype link | LIVE: https://finn-enam-yid1.onrender.com — public health/status, all 18 feeds, filing analysis, Gemini fallback, unfamiliar-company research and mobile layouts checked. See HOSTED_VERIFICATION.md. |
 | GitHub repository | COMPLETE: https://github.com/VikashSunda/finn-enam — public, `main` pushed and remote revision matched. Anonymous `git ls-remote` succeeded with credential helpers disabled. Original projects remain untouched. |
 | Actual AI build history | INCOMPLETE: user confirms this Codex chat is the only build session. Its actual share/export is still needed. Earlier user-provided ChatGPT share URL remains recorded but its content/completeness/reviewer access is unverified. Decision logs are not substitutes. |
 | Short covering writeup | DRAFT ready in SUBMISSION_DRAFT.md; final prototype/repository/history links must be inserted. |
@@ -22,10 +22,10 @@ Checked against the original four-page Main challenge PDF, the companion referen
 
 ## Final verification
 
-- 70 automated tests pass, including production HTTP routing, health check, body limit, HEAD requests, non-leaking errors and hosted desktop-control isolation.
+- 71 automated tests pass, including independent NSE discovery when Screener fails, production HTTP routing, health check, body limit, HEAD requests, non-leaking errors and hosted desktop-control isolation.
 - Build, artifact validation and browser-script syntax checks pass.
 - Previous manual checks and sampled live Gemini outcomes are recorded under `reports/`; the Windows notification was explicitly confirmed by the user.
 - Latest feed report: `PORTFOLIO_FRESHNESS.json`. Local data success does not establish hosted coverage.
 - Credential-pattern scan of tracked history and publishable working files found no matching Google/OpenAI keys or private-key headers. Ignored caches, environment files and node_modules are excluded from publication.
 
-The audited source is now public on GitHub and ready for Render deployment/testing. The entire submission is NOT complete until the public app link, actual conversation history and final covering note are verified. OCR, hosted/mobile push and fully automatic financial extraction remain deliberate limitations.
+The source is public on GitHub and the app is live on Render. The entire submission is NOT complete until the actual conversation history and final covering note are verified and the user sends the submission. OCR, hosted/mobile push and fully automatic financial extraction remain deliberate limitations.

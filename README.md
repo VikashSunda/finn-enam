@@ -2,6 +2,8 @@
 
 A mobile-first portfolio brief and primary-source company research prototype for the ENAM AI Engineer Build Challenge.
 
+**Live demo:** https://finn-enam-yid1.onrender.com · Free Render hosting can take time to wake after inactivity. Hosted verification and known limits: [reports/HOSTED_VERIFICATION.md](reports/HOSTED_VERIFICATION.md).
+
 **Current state:** Working EOD monitoring, a prioritised exchange-filing digest, configurable browser-local rules, and primary-document search with PDF page attribution. AI synthesis is implemented but requires a server-side Gemini or OpenAI API key. Without a key, the app explicitly shows source excerpts and never pretends those are model-generated analysis.
 
 ## Run

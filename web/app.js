@@ -113,7 +113,13 @@ async function saveDelivery(){
  }catch(error){$('#delivery-status').textContent=error.message;}finally{button.disabled=false;}
 }
 $('#save-delivery').addEventListener('click',saveDelivery);
-api('/api/alert-delivery').then(result=>{if(result.available){deliveryAvailable=true;$('#desktop-delivery').checked=result.config.enabled;$('#delivery-status').textContent=result.config.enabled?'Local delivery enabled. Checks every 15 minutes while the monitor runs.':'Local monitor connected. Desktop delivery is off.';}}).catch(()=>{$('#delivery-status').textContent='Start the local portfolio monitor to configure desktop delivery.';});
+const localDeliveryHost=['localhost','127.0.0.1'].includes(location.hostname);
+if(!localDeliveryHost){
+ $('.delivery-preferences').hidden=true;
+ $('#alerts-form > p.muted').textContent='Rules apply to your watchlist when sources are checked. Prices use completed EOD sessions.';
+ $('.alert-method').textContent='Alerts are checked while this app is open or refreshed, using completed EOD sessions. Background phone notifications are not available.';
+}
+if(localDeliveryHost)api('/api/alert-delivery').then(result=>{if(result.available){deliveryAvailable=true;$('#desktop-delivery').checked=result.config.enabled;$('#delivery-status').textContent=result.config.enabled?'Local delivery enabled. Checks every 15 minutes while the monitor runs.':'Local monitor connected. Desktop delivery is off.';}}).catch(()=>{$('#delivery-status').textContent='Start the local portfolio monitor to configure desktop delivery.';});
 
 $('#test-delivery').addEventListener('click',async()=>{const button=$('#test-delivery');button.disabled=true;try{const result=await api('/api/alert-delivery',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'test'})});$('#delivery-status').textContent=result.note;}catch(error){$('#delivery-status').textContent=error.message;}finally{button.disabled=false;}});
 
