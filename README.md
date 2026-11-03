@@ -80,7 +80,7 @@ Browser UI → Worker API → source adapters / cached corpus → evidence retri
 - Online parsing is capped at 14 MB per document. Scanned/image PDFs may require OCR, which is not implemented.
 - Financial websites can block hosted requests even if local requests work. Missing annual reports and blocked transcripts are visible.
 - Research checks validate source IDs, copied supporting quotes and numeric presence. These do not establish semantic correctness, metric/period alignment or every inference; human review remains necessary. Model-written limitation text is replaced by a fixed statement scoped to retrieved passages. See reports/AI_VERIFICATION.md for live outcomes and remaining limits.
-- A full four-quarter **guidance versus actuals** scorecard is deliberately not implemented. Guidance excerpts are labelled as management statements, not demonstrated delivery. This requires verified period/metric/currency/reporting-basis alignment.
+- A manually reviewed Infosys guidance-versus-delivery example is available in Research without a model call, including four reporting quarters of outlook history and one aligned FY26 annual comparison. It is explicitly curated, not automated for every ticker. The comparator rejects period/metric/unit/basis mismatches; FY27 annual delivery remains pending.
 - No automatic Revenue/EBITDA/PBT/PAT table is claimed. These metrics require verified filing extraction; EBITDA should not be fabricated where unreported or unsuitable for a sector.
 - Public sharing for interviewers and a live LLM-provider check remain submission steps.
 
@@ -113,3 +113,7 @@ From a brief item, choose Inspect filing → Read & analyse filing. FINN reads t
 ## Local desktop alert delivery
 
 Alerts contains an opt-in Windows desktop-delivery checkbox and Save desktop delivery settings action. The monitor must run with the local FINN server. The first scheduled check establishes a baseline without replaying historical alerts; subsequent new price/volume crossings and selected non-routine filings are grouped into a Windows notification every 15-minute check. Saved rules and watchlist changes sync while the local control is connected. Delivery is off by default. Windows notification settings may suppress display. This is local Windows delivery, not mobile web push, email, instant alerts, or a shutdown-resilient service.
+
+## Reviewed guidance comparison
+
+Research → Explore guidance vs delivery opens a reviewed Infosys example without calling an AI provider. It links the annual guidance/result and four quarters of outlook history to source pages, with explicit comparison-basis safeguards. This curated case is separate from the generic research engine. Current validation and remaining submission actions are in reports/FINAL_READINESS.md.

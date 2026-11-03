@@ -108,3 +108,7 @@ Deadline: 3 November 2026, 11:59 pm IST.
 The inherited CODEX_HANDOFF.md describes an earlier workflow in the old repository.
 The user's standalone-local instructions supersede it. BUILD_HISTORY.md is a
 historical decision log, not a conversation export or proof of current checks.
+
+## Final readiness pass
+
+Added a reviewed INFY guidance-versus-delivery example and comparator, with four-quarter outlook history and one aligned annual result. Three final live Gemini checks succeeded after fixing a real build-reload gap with atomic Worker output replacement. User confirmed visible Windows test delivery. Final two-width five-screen mobile walkthrough passed and themes persisted. All 57 tests pass. See reports/FINAL_READINESS.md and FINAL_AI_CHECKS.json. Submission draft updated; actual current conversation export and authorised publication/reviewer access remain outstanding. No push/deploy/email.

@@ -1,0 +1,111 @@
+{
+  "ticker": "INFY",
+  "label": "Infosys · guidance versus delivery",
+  "curation": "Manually reviewed example drawn from the stored primary-document corpus. Not automatic extraction for every company.",
+  "guidance": {
+    "period": "FY26",
+    "metric": "Revenue growth YoY",
+    "unit": "percent",
+    "basis": "constant currency",
+    "low": 3,
+    "high": 3.5,
+    "source": {
+      "label": "Earnings call · 2026-01-19",
+      "page": 4,
+      "url": "https://nsearchives.nseindia.com/corporate/Infosys_19012026222220_SEfiling_Earningscalltranscript_19012026.pdf",
+      "quote": "The new revenue growth guidance for this financial year is 3% to 3.5% growth in constant currency."
+    }
+  },
+  "actual": {
+    "period": "FY26",
+    "metric": "Revenue growth YoY",
+    "unit": "percent",
+    "basis": "constant currency",
+    "value": 3.1,
+    "source": {
+      "label": "Earnings call · 2026-04-27",
+      "page": 4,
+      "url": "https://nsearchives.nseindia.com/corporate/Infosys_27042026203405_Transcript_April232026_Q4.pdf",
+      "quote": "We had growth of 3.1% for the full year in constant currency terms."
+    }
+  },
+  "history": [
+    {
+      "quarter": "Q3 FY26",
+      "quarterGrowth": 1.7,
+      "targetPeriod": "FY26",
+      "low": 3,
+      "high": 3.5,
+      "source": {
+        "label": "Earnings call · 2026-01-19",
+        "page": 4,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_19012026222220_SEfiling_Earningscalltranscript_19012026.pdf",
+        "quote": "The new revenue growth guidance for this financial year is 3% to 3.5% growth in constant currency."
+      },
+      "actualSource": {
+        "label": "Earnings call · 2026-01-19",
+        "page": 3,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_19012026222220_SEfiling_Earningscalltranscript_19012026.pdf",
+        "quote": "Our revenue grew 0.6% sequentially and 1.7% year-on- year in constant currency terms."
+      }
+    },
+    {
+      "quarter": "Q4 FY26",
+      "quarterGrowth": 4.1,
+      "targetPeriod": "FY27",
+      "low": 1.5,
+      "high": 3.5,
+      "source": {
+        "label": "Earnings call · 2026-04-27",
+        "page": 4,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_27042026203405_Transcript_April232026_Q4.pdf",
+        "quote": "Our revenue growth guidance for the financial year 2027 is 1.5% to 3.5% growth year-on-year in constant currency terms."
+      },
+      "actualSource": {
+        "label": "Earnings call · 2026-04-27",
+        "page": 4,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_27042026203405_Transcript_April232026_Q4.pdf",
+        "quote": "On Q4, our growth year-on-year was 4.1% in constant currency terms."
+      }
+    },
+    {
+      "quarter": "Q1 FY27",
+      "quarterGrowth": 2.4,
+      "targetPeriod": "FY27",
+      "low": 1.5,
+      "high": 3,
+      "source": {
+        "label": "Earnings call · 2026-07-28",
+        "page": 6,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_28072026202438_SE_filing_Earnings_call_transcript.pdf",
+        "quote": "we are changing our revenue growth guidance to 1.5% to 3% Y-on-Y growth in constant currency terms."
+      },
+      "actualSource": {
+        "label": "Earnings call · 2026-07-28",
+        "page": 5,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_28072026202438_SE_filing_Earnings_call_transcript.pdf",
+        "quote": "Our revenue growth for Q1 was at 2.4% Y-on-Y and 1% Q-on-Q in constant currency terms."
+      }
+    },
+    {
+      "quarter": "Q2 FY27",
+      "quarterGrowth": 1.5,
+      "targetPeriod": "FY27",
+      "low": 1,
+      "high": 2,
+      "source": {
+        "label": "Earnings call · 2026-10-28",
+        "page": 4,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_28102026173824_SE_filing_Earnings_call_transcript.pdf",
+        "quote": "our revenue growth guidance is 1% to 2% YoY.in constant currency terms."
+      },
+      "actualSource": {
+        "label": "Earnings call · 2026-10-28",
+        "page": 4,
+        "url": "https://nsearchives.nseindia.com/corporate/Infosys_28102026173824_SE_filing_Earnings_call_transcript.pdf",
+        "quote": "Our revenue growth for Q2 was 1.5% YoY and 1.2% sequentially in constant currency terms."
+      }
+    }
+  ],
+  "note": "Quarterly growth is YoY in constant currency. Annual guidance is not a promise for an individual quarter. FY27 annual delivery is pending; no FY27 success/failure score is assigned. Guidance history dates are filing dates, not call dates."
+}

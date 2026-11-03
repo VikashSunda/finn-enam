@@ -1,3 +1,5 @@
+import guidanceExample from '../data/guidance-example.json';
+import {compareGuidance} from './comparison.js';
 import companies from '../data/companies.json';
 import seedResearch from '../data/research.json';
 import snapshot from '../data/snapshot.json';
@@ -190,6 +192,7 @@ export default {
         const raw=request.method==='POST'?await request.text():null;if(raw&&raw.length>5000)return json({error:'Too large'},413);
         try{const result=await fetch('http://127.0.0.1:3003/config',{method:request.method,headers:{'content-type':'application/json','x-finn-local':'1'},...(raw?{body:raw}:{}),signal:AbortSignal.timeout(15000)});return json(await result.json(),result.status);}catch{return json({available:false,error:'Start the local portfolio monitor to enable desktop delivery.'},503);}
       }
+      if(url.pathname==='/api/guidance'){const ticker=normaliseTicker(url.searchParams.get('ticker'));return ticker==='INFY'?json({...guidanceExample,comparison:compareGuidance(guidanceExample.guidance,guidanceExample.actual)}):json({error:'No reviewed guidance comparison is available for this company. Research remains available.'},404);}
       if(url.pathname==='/api/status')return json({ok:true,companies,aiConfigured:!!(env.GEMINI_API_KEY||env.OPENAI_API_KEY),aiProvider:env.GEMINI_API_KEY?'gemini':env.OPENAI_API_KEY?'openai':null,aiModels:env.GEMINI_API_KEY?geminiModels(env):[],aiModel:env.GEMINI_API_KEY?(env.GEMINI_MODEL||'gemini-3.1-flash-lite'):env.OPENAI_API_KEY?(env.OPENAI_MODEL||'gpt-4.1-mini'):null,snapshotAt:snapshot.generatedAt,researchTickers:Object.entries(seedResearch).filter(([,v])=>v.documents?.some(d=>d.pages?.length)).map(([k])=>k),version:'0.1.0'});
       if(url.pathname==='/api/portfolio' && request.method==='GET'){
         const tickers=[...new Set((url.searchParams.get('tickers')||companies.map(c=>c.ticker).join(',')).split(',').map(normaliseTicker))];

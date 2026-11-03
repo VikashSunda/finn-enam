@@ -1,0 +1,222 @@
+{
+  "checkedAt": "2026-11-03T11:55:36.431Z",
+  "cases": [
+    {
+      "id": "infy-periods",
+      "ticker": "INFY",
+      "topic": "cash",
+      "question": "Compare Q1 and Q2 FY27 free cash flow and its conversion to net profit. Label the quarters and units separately.",
+      "status": 200,
+      "elapsedMs": 2508,
+      "mode": "ai",
+      "claims": [
+        {
+          "text": "In Q1 FY27, Infosys reported free cash flow of $955 million, which represented 116.5% of net profit.",
+          "kind": "fact",
+          "sources": [
+            "a40e5ce5364fe1509900-31-0"
+          ],
+          "support": [
+            {
+              "sourceId": "a40e5ce5364fe1509900-31-0",
+              "quote": "Free cash flow was strong at $955 mn at 116.5% of net profit."
+            }
+          ],
+          "verification": "quotes_and_numbers_checked"
+        },
+        {
+          "text": "In Q2 FY27, Infosys reported free cash flow of $928 million, which represented 113% of net profit.",
+          "kind": "fact",
+          "sources": [
+            "1001952edbb5975b9224-28-0"
+          ],
+          "support": [
+            {
+              "sourceId": "1001952edbb5975b9224-28-0",
+              "quote": "Free cash flow generation was strong at $928 mn at 113% of net profit."
+            }
+          ],
+          "verification": "quotes_and_numbers_checked"
+        }
+      ],
+      "note": "Analysis is limited to retrieved primary-source passages. Supporting quotes and numeric presence were checked; this does not independently establish every claim’s meaning or inference.",
+      "error": null,
+      "citationIdsResolve": true,
+      "validation": {
+        "supportedClaimCount": 2,
+        "scopeOnlyClaimCount": 0,
+        "requiredQuoteAndNumberChecksPassed": true,
+        "semanticEntailment": "not_automatically_established"
+      },
+      "documents": [
+        {
+          "label": "Annual Report 2026",
+          "status": "parsed",
+          "parsedPages": 381
+        },
+        {
+          "label": "Earnings call · 2026-10-28",
+          "status": "parsed",
+          "parsedPages": 48
+        },
+        {
+          "label": "Earnings call · 2026-07-28",
+          "status": "parsed",
+          "parsedPages": 47
+        },
+        {
+          "label": "Earnings call · 2026-04-27",
+          "status": "parsed",
+          "parsedPages": 46
+        },
+        {
+          "label": "Earnings call · 2026-01-19",
+          "status": "parsed",
+          "parsedPages": 39
+        }
+      ]
+    },
+    {
+      "id": "tcs-guidance",
+      "ticker": "TCS",
+      "topic": "guidance",
+      "question": "What explicit forward guidance is established by the evidence? Distinguish management statements from reported outcomes and do not invent numeric guidance.",
+      "status": 200,
+      "elapsedMs": 28628,
+      "mode": "ai",
+      "claims": [
+        {
+          "text": "Management explicitly states that the company does not provide specific revenue or earnings guidance.",
+          "kind": "fact",
+          "sources": [
+            "4ae0274b91546dfadfb9-3-0"
+          ],
+          "support": [
+            {
+              "sourceId": "4ae0274b91546dfadfb9-3-0",
+              "quote": "As you are aware, we don't provide any speciﬁc revenue or earnings guidance"
+            }
+          ],
+          "verification": "quotes_and_numbers_checked"
+        },
+        {
+          "text": "Regarding margin targets, management noted an expectation to work towards inching margins higher from where they are while balancing investment priorities.",
+          "kind": "inference",
+          "sources": [
+            "4ae0274b91546dfadfb9-21-0"
+          ],
+          "support": [
+            {
+              "sourceId": "4ae0274b91546dfadfb9-21-0",
+              "quote": "on an overall basis, we will balance our investment priorities and our disciplined execution, and we will work towards inching margins higher from here."
+            }
+          ],
+          "verification": "quotes_and_numbers_checked"
+        },
+        {
+          "text": "The retrieved passages do not establish the requested answer.",
+          "kind": "limitation",
+          "sources": [
+            "4ae0274b91546dfadfb9-3-0"
+          ],
+          "support": [],
+          "verification": "scope_only"
+        }
+      ],
+      "note": "Analysis is limited to retrieved primary-source passages. Supporting quotes and numeric presence were checked; this does not independently establish every claim’s meaning or inference.",
+      "error": null,
+      "citationIdsResolve": true,
+      "validation": {
+        "supportedClaimCount": 2,
+        "scopeOnlyClaimCount": 1,
+        "requiredQuoteAndNumberChecksPassed": true,
+        "semanticEntailment": "not_automatically_established"
+      },
+      "documents": [
+        {
+          "label": "Annual Report 2026",
+          "status": "unavailable",
+          "parsedPages": 0
+        },
+        {
+          "label": "Earnings call · 2026-10-14",
+          "status": "parsed",
+          "parsedPages": 29
+        },
+        {
+          "label": "Earnings call · 2026-07-15",
+          "status": "parsed",
+          "parsedPages": 25
+        },
+        {
+          "label": "Earnings call · 2026-04-14",
+          "status": "parsed",
+          "parsedPages": 35
+        },
+        {
+          "label": "Earnings call · 2026-01-16",
+          "status": "parsed",
+          "parsedPages": 33
+        }
+      ]
+    },
+    {
+      "id": "hdfc-sector",
+      "ticker": "HDFCBANK",
+      "topic": "financials",
+      "question": "What EBITDA and EBITDA margin are established for the bank by the cited evidence? Do not substitute net interest margin or manufacture EBITDA.",
+      "status": 200,
+      "elapsedMs": 4621,
+      "mode": "ai",
+      "claims": [
+        {
+          "text": "The retrieved passages do not establish the requested answer.",
+          "kind": "limitation",
+          "sources": [
+            "5fb3112203c2866118c2-11-0"
+          ],
+          "support": [],
+          "verification": "scope_only"
+        }
+      ],
+      "note": "The retrieved passages do not establish the requested answer. Broader company-document coverage has not been assessed.",
+      "error": null,
+      "citationIdsResolve": true,
+      "validation": {
+        "supportedClaimCount": 0,
+        "scopeOnlyClaimCount": 1,
+        "requiredQuoteAndNumberChecksPassed": true,
+        "semanticEntailment": "not_automatically_established"
+      },
+      "documents": [
+        {
+          "label": "Annual Report 2026",
+          "status": "unavailable",
+          "parsedPages": 0
+        },
+        {
+          "label": "Earnings call · 2026-10-23",
+          "status": "parsed",
+          "parsedPages": 17
+        },
+        {
+          "label": "Earnings call · 2026-07-24",
+          "status": "parsed",
+          "parsedPages": 17
+        },
+        {
+          "label": "Earnings call · 2026-04-24",
+          "status": "parsed",
+          "parsedPages": 16
+        },
+        {
+          "label": "Earnings call · 2026-03-19",
+          "status": "parsed",
+          "parsedPages": 14
+        }
+      ]
+    }
+  ],
+  "review": "INFY period-separated cash values match the earlier publisher-text audit. TCS quotes were read in context: no numeric revenue/earnings guidance and directional margin commentary, not proof of achieving a numeric margin target. HDFCBANK correctly returns a scoped limitation for unsupported EBITDA. Sampled review only, not universal answer correctness.",
+  "initialFailures": "Two requests hit a local rebuild gap before the atomic-build fix; retried successfully afterward."
+}

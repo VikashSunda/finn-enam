@@ -9,3 +9,7 @@ The monitor is running. UI saving disabled delivery and the test-action opt-in g
 The server, monitor and Windows computer must remain running. This supports a closed browser tab, not computer shutdown, mobile push, email or hosted background delivery. No OS startup task was installed. Configuration is local to this computer rather than a multi-user account service.
 
 52 tests passed covering rule filtering, baseline/dedup selection, stale suppression, validation, hosted-origin rejection and cross-origin write rejection alongside existing tests. Build and artifact validation passed. No push/deployment.
+
+## User-visible verification update
+
+The user explicitly confirmed that the FINN test notification appeared on their Windows computer during the final verification pass. This confirms the manual visible delivery test; it does not by itself prove every future scheduled notification or mobile delivery.

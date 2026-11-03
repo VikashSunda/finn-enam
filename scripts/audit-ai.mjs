@@ -11,7 +11,7 @@ const cases=[
 ];
 const dir=process.env.AI_AUDIT_DIR||'.cache/ai-audit';await mkdir(dir,{recursive:true});
 const run={startedAt:new Date().toISOString(),revision:execFileSync('git',['-c','safe.directory='+process.cwd().replaceAll('\\','/'),'rev-parse','HEAD'],{encoding:'utf8'}).trim(),cases:[]};
-for(const item of cases){
+for(const item of cases.filter(c=>!process.env.FINN_AI_CASES||process.env.FINN_AI_CASES.split(',').includes(c.id))){
  console.log('Checking '+item.id);
  const started=Date.now();
  try{

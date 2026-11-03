@@ -156,3 +156,5 @@ test('filing synthesis accepts copied support and rejects invented quotations',a
 
 test('desktop delivery control is not exposed by hosted origins',async()=>{const r=await worker.fetch(req('/api/alert-delivery'),{});assert.equal(r.status,404);});
 test('local desktop delivery changes reject cross-origin callers',async()=>{const r=await worker.fetch(new Request('http://localhost:3002/api/alert-delivery',{method:'POST',headers:{origin:'https://attacker.example','content-type':'application/json'},body:'{}'}),{});assert.equal(r.status,403);});
+
+test('reviewed guidance exposes sources and does not pretend every ticker has a scorecard',async()=>{const r=await worker.fetch(req('/api/guidance?ticker=INFY'),{});const data=await r.json();assert.equal(r.status,200);assert.equal(data.comparison.status,'within_range');assert.equal(data.history.length,4);assert.ok(data.guidance.source.url.startsWith('https://'));assert.ok(data.note.includes('FY27 annual delivery is pending'));const missing=await worker.fetch(req('/api/guidance?ticker=TCS'),{});assert.equal(missing.status,404);});

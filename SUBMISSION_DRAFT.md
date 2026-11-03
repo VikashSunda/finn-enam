@@ -1,35 +1,29 @@
-# Submission preparation — not ready to send
+# Covering email draft — final links still required
 
-Recipient: assessment@enam.com — verify against original assignment PDF.
-Subject: ENAM - IIT screening - 2027 — verify against original assignment PDF.
+To: assessment@enam.com
+Subject: ENAM - IIT screening - 2027
 
 Hello ENAM team,
 
-I built FINN, a mobile-first investor research prototype connecting a prioritised
-portfolio filing brief with primary-document company research. It supports
-configurable EOD price/volume rules, original filing links, and evidence passages
-with PDF page references. Source excerpts remain available without a model key.
+I built FINN, a mobile-first investor intelligence prototype with two linked workflows: a prioritised portfolio brief and primary-source company research.
 
-I chose a small browser interface and server-side Worker, explicit coverage and
-failure states, and bounded caching. Research uses company reports and transcripts;
-third-party financial summaries are excluded from evidence. Earlier monitoring
-and ingestion projects informed the design and are attributed in the repository.
+The brief monitors a diversified 18-company mock portfolio using completed daily prices, volume baselines and exchange filings. Users choose their digest window and alert rules, inspect original disclosures, and request analysis of the actual filing PDF. Research retrieves annual reports and earnings-call transcripts for demo and unfamiliar NSE tickers, with source-page evidence and clear coverage limits. A reviewed Infosys example compares aligned annual guidance with delivery and shows four quarters of outlook history.
 
-Deliberate omissions include brokerage integration, background push notifications,
-OCR, automatic financial tables and a verified guidance-versus-actuals scorecard.
-Next steps include durable ingestion/caching and broader source/citation evaluation.
+I used a small HTML/CSS/JavaScript frontend and one bundled Worker, source adapters, bounded caching and inexpensive Gemini model fallback. Source IDs, supporting quotations and numeric presence are checked before accepting AI claims. Provider or document failures fall back to attributed excerpts. A local monitor supports opt-in Windows notifications with baseline and duplicate suppression.
 
-Prototype: [confirm reviewer-accessible deployed revision]
-Repository: [create only after authorization]
-AI build conversation supplied by user: https://chatgpt.com/share/6ae933fa-b760-83e8-bae7-3feb55f11340
-Current Codex continuation: [attach export/share link before submission]
+I prioritised a working investor workflow and honest evidence states over broad unverified financial extraction. Deliberate omissions include OCR, mobile push, brokerage integration and fully automated cross-company financial/guidance scorecards. Generic research remains available beyond the curated guidance example. Earlier projects informed architectural ideas and are attributed in the repository.
 
-The supplied share link has been recorded, but automated retrieval returned a cache miss. Its contents, completeness and reviewer access have not been verified. Test it in a signed-out browser before sending.
+Validation includes 57 passing tests, fresh 18-company feed checks, desktop/mobile walkthroughs, sampled live Gemini/source checks and user-confirmed visible Windows notification delivery. These are prototype checks, not a claim that every future model answer is correct.
 
-[Add final live AI and mobile verification results before sending.]
+Next I would add durable hosted ingestion/scheduling, stronger source coverage and evaluated structured financial extraction.
+
+Prototype: [insert reviewed, reviewer-accessible deployed version]
+GitHub repository: [insert repository after publication is authorised]
+Actual AI build conversations: [attach/export current Codex conversation and earlier sessions]
+Earlier user-supplied conversation: https://chatgpt.com/share/6ae933fa-b760-83e8-bae7-3feb55f11340
 
 Regards,
 Vikash Sunda
 
-No email has been sent. The existing hosted URL is not proof of current reviewer
-access or deployment alignment. Do not replace actual conversations with decision logs.
+---
+Not sent. Test all links signed out before sending. The earlier share link has not been verified for completeness or access. Local desktop scheduling is not a hosted/mobile push service. The actual conversation history must accompany the submission; generated decision logs cannot replace it.

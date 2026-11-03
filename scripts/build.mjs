@@ -1,8 +1,10 @@
 import {build} from 'esbuild';
-import {mkdir,rm,copyFile} from 'node:fs/promises';
-await rm('dist',{recursive:true,force:true});
+import {mkdir,writeFile,rename,copyFile} from 'node:fs/promises';
 await mkdir('dist/server',{recursive:true});
 await mkdir('dist/.openai',{recursive:true});
-await build({entryPoints:['worker/index.js'],outfile:'dist/server/index.js',bundle:true,format:'esm',platform:'browser',target:'es2022',minify:true,loader:{'.html':'text','.css':'text'},plugins:[{name:'client-as-text',setup(b){b.onLoad({filter:/web[\\/](app|charts|theme)\.js$/},async args=>({contents:await(await import('node:fs/promises')).readFile(args.path,'utf8'),loader:'text'}));}}]});
+const result=await build({write:false,entryPoints:['worker/index.js'],outfile:'dist/server/index.js',bundle:true,format:'esm',platform:'browser',target:'es2022',minify:true,loader:{'.html':'text','.css':'text'},plugins:[{name:'client-as-text',setup(b){b.onLoad({filter:/web[\\/](app|charts|theme)\.js$/},async args=>({contents:await(await import('node:fs/promises')).readFile(args.path,'utf8'),loader:'text'}));}}]});
+const temporary='dist/server/index.'+process.pid+'.tmp';
+await writeFile(temporary,result.outputFiles[0].contents);
+await rename(temporary,'dist/server/index.js');
 await copyFile('.openai/hosting.json','dist/.openai/hosting.json');
 console.log('Built FINN worker.');
