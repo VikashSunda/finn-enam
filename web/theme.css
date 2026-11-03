@@ -1,4 +1,5 @@
 /* Theme layer, loaded last. Both themes retain source and movement semantics. */
+html[data-theme=dark] .document-row .document-health{background:#302a20;color:#efd3a2}
 .main-shell .topbar{position:sticky;top:68px;z-index:35}.top-actions{gap:12px}.theme-toggle{flex-shrink:0}.is-scrolled body .sidebar{box-shadow:0 6px 22px #080f2638;background:#101a2d}.is-scrolled .sidebar .brand{transform:scale(.95);transform-origin:left center}.is-scrolled .main-shell .topbar{box-shadow:0 3px 12px #1723370c;border-bottom-color:#c5d2e4}
 @media(prefers-reduced-motion:no-preference){body .sidebar,.main-shell .topbar{transition:background-color .2s,box-shadow .2s,border-color .2s}.sidebar .brand{transition:transform .2s ease-out}}
 html[data-theme=dark]{--ink:#e4ebf7;--muted:#a8b5ca;--line:#344158;--paper:#192337;--green:#89aaff;--red:#ff9a9a;color-scheme:dark}

@@ -70,7 +70,9 @@ export async function priceData(ticker, refresh=false) {
       const data=raw?.chart?.result?.[0];if(!data)throw error||new Error('Price source unavailable');
       const q=data.indicators.quote[0];
       const bars=data.timestamp.map((ts,i)=>({date:new Date(ts*1000).toISOString().slice(0,10),close:q.close[i],volume:q.volume[i]}));
-      return {ticker,summary:summariseBars(bars),source:url,fetchedAt:new Date().toISOString(),mode:'live'};
+      const summary=summariseBars(bars);
+      if(!summary)throw new Error('Price source returned no usable completed sessions');
+      return {ticker,summary,source:url,fetchedAt:new Date().toISOString(),mode:'live'};
     });
   }catch(e){return {ticker,...(seed?.bars?.length?{summary:summariseBars(seed.bars),source:seed.source,fetchedAt:seed.fetchedAt,mode:'stale_snapshot'}:{summary:null,mode:'unavailable'}),error:clean(e.message)};}
 }
@@ -117,7 +119,9 @@ async function loadResearch(ticker,refresh=false) {
   try{
     return await cached('research:'+ticker,6*3600_000,async()=>{
       const url='https://www.screener.in/company/'+encodeURIComponent(ticker)+'/consolidated/';
-      const html=await(await remote(url)).text();
+      let html;
+      try{html=await(await remote(url)).text();}
+      catch(error){if(/HTTP 404/.test(error.message))throw new Error('No company discovery page was returned. Check the NSE symbol; the source may also be unavailable.');throw error;}
       let docs=discoverDocuments(html,ticker);
       // Prefer NSE archive equivalents when BSE blocks document access.
       try{

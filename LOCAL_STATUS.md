@@ -2,6 +2,11 @@
 
 ## Later verification update
 
+- Completed the registered 18-company source audit: all price/filing requests returned live-mode data without source errors, 20-session volume baselines and 30-session price histories. Latest completed price session was 2 November 2026. Validated and promoted the refresh (231 filings); preserved the previous snapshot in Git and ignored audit backup. Corpus unchanged.
+- Tested AXISBANK, ASIANPAINT and COFORGE outside the preloaded corpus: each returned attributed evidence. Link-only transcript notices were excluded; ASIANPAINT's oversized annual report was disclosed. Invalid synthetic ticker returned a controlled missing-discovery response. See reports/RELIABILITY.md and its dated JSON metadata.
+- Added explicit research-card failure reasons. Verified TCS's stored 403 reason appears alongside its unavailable annual-report source in the UI. Added missing-discovery and empty-price fallback regressions; all 24 tests, build and validation pass.
+- Keyed COFORGE parsing returned ten passages, but Gemini returned 503 high demand and the app correctly disclosed extractive fallback. This does not erase prior successful INFY live synthesis or establish unfamiliar-company AI success.
+
 - Added persistent dark/light theme selection, using the OS preference until an explicit choice is saved. A same-origin early external script applies the preference before styles; no inline CSP exception is needed. Dark styling covers charts, tables, cards, settings, filings and evidence surfaces.
 - Added sticky subheader and a scroll state that subtly changes header depth/brand scale without changing layout height or hiding navigation. Reduced-motion preferences disable the transform/transition. Followed MDN color-scheme/reduced-motion guidance and web.dev animation guidance.
 - Browser checks verified theme persistence through reload, desktop header top positions after scrolling, and mobile portfolio/settings/filing/source/research flows at 360px and 390px viewport settings. No horizontal page overflow was measured in checked views. This is not a guarantee across all physical devices.

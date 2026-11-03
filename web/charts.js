@@ -50,3 +50,20 @@
   }
   new MutationObserver(update).observe(document.querySelector('#portfolio-table'),{childList:true});update();
 })();
+
+/* Preserve specific source failures alongside each discovered document. */
+(()=>{
+  const area=document.querySelector('#research-content');
+  new MutationObserver(()=>{
+    if(!state.research)return;
+    const rows=area.querySelectorAll('.document-row');
+    rows.forEach((row,i)=>{
+      const doc=state.research.documents[i];if(!doc||row.querySelector('.document-health'))return;
+      if(!doc.parsedPages){
+        const detail=document.createElement('p');detail.className='document-health';
+        detail.textContent=doc.status==='link_notice'?'Link-only notice — excluded from evidence.':doc.error||'No readable document text available.';
+        row.append(detail);
+      }
+    });
+  }).observe(area,{childList:true});
+})();

@@ -88,6 +88,21 @@ test('unfamiliar ticker retains discovered document URLs when every download is 
   assert.equal(result.documents[0].url,'https://company.example/annual.pdf');
   assert.match(result.documents[0].error,/403/);assert.deepEqual(result.evidence,[]);
 });
+
+test('missing company discovery pages return a useful error without invented research',async t=>{
+  t.mock.method(globalThis,'fetch',async()=>new Response('Not found',{status:404}));
+  const response=await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify({ticker:'NODISCOVER123'})}),{});
+  assert.equal(response.status,422);const result=await response.json();
+  assert.match(result.error,/Check the NSE symbol/);assert.equal(result.evidence,undefined);
+});
+
+test('empty fresh price responses retain the old usable snapshot rather than claiming live coverage',async t=>{
+  t.mock.method(globalThis,'fetch',async()=>Response.json({chart:{result:[{timestamp:[],indicators:{quote:[{close:[],volume:[]}]}}]}}));
+  const response=await worker.fetch(req('/api/portfolio?tickers=INFY&refresh=1'),{});
+  const {rows}=await response.json();assert.equal(response.status,200);
+  assert.equal(rows[0].price.mode,'stale_snapshot');assert.ok(rows[0].price.summary);
+  assert.match(rows[0].price.error,/no usable completed sessions/);
+});
 test('seeded research returns only attributed primary evidence without pretending to use AI',async()=>{
   const r=await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify({ticker:'INFY',topic:'cash'})}),{});
   assert.equal(r.status,200);const data=await r.json();
