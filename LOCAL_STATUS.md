@@ -2,6 +2,10 @@
 
 ## Later verification update
 
+- Implemented the briefing visual direction in `web/briefing.css`: navy/copper palette, horizontal desktop navigation, serif headline hierarchy, readable body/metadata sizes, simpler filing rows and stat strip, larger controls, visible keyboard focus and a single-column mobile settings form. Existing UI behavior is retained.
+- Inspected populated seven-day brief on desktop and mobile, mobile research navigation and settings. Mobile DOM measurements reported no page-width overflow. Preview screenshots are under ignored `.cache/qa/redesign-*.png`. Build, all 20 tests and artifact validation passed.
+- Read the existing Sites project through the connected service: active, owner access confirmed, saved version 1, access mode `custom`. No deployment, audience change, source push or secret transfer was performed. Reviewer access is still not established merely by this status.
+
 - After the user's restart, two live requests returned Gemini 503 high-demand errors. `/api/status` independently confirmed `aiProvider: gemini`, `aiModel: gemini-3.1-flash-lite`, and configured credentials. No successful live synthesis or claim verification is claimed.
 - Added non-secret provider/model status and regression coverage proving credential values are absent. The running authenticated server loaded the new status fields after a build without another restart, verifying local reload behavior. All 20 tests and artifact validation pass.
 
