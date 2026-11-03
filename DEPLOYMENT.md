@@ -23,7 +23,7 @@ Build first, then run `npm.cmd start` in PowerShell. Use `PORT` to choose an unu
 ## Hosted limits and post-deployment checks
 
 - A free Render web service sleeps after 15 minutes without incoming requests. The whole app can wait during its next startup. Never promise an always-on scheduler on this tier.
-- Current snapshots are included at build time. Online source checks use bounded memory caching, which is lost on restart. Hosted durable ingestion and background notification delivery are not implemented.
+- Current snapshots are included at build time. Online source checks use bounded memory caching, which is lost on restart. The approved daily GitHub Actions job now validates and commits refreshed snapshots and redeploys Render; its first complete manual run passed. Background hosted notification delivery is not implemented. See reports/LONG_TERM_OPERATIONS.md.
 - The local 15-minute monitor and Windows notifications remain local. The hosted app hides/unavailable-labels desktop-delivery controls.
 - Provider keys remain server-side. Free Gemini access depends on the user's project quota and model availability. Fallback cannot guarantee a response.
 - Source sites can block data-center traffic. After deploying, verify all portfolio feeds, one actual filing PDF, seeded and unfamiliar-ticker research, source links and AI synthesis from the hosted origin. Local success alone is insufficient.

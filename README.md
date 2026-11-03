@@ -84,6 +84,7 @@ Browser UI → Worker API → source adapters / cached corpus → evidence retri
 - Research checks validate source IDs, copied supporting quotes and numeric presence. These do not establish semantic correctness, metric/period alignment or every inference; human review remains necessary. Model-written limitation text is replaced by a fixed statement scoped to retrieved passages. See reports/AI_VERIFICATION.md for live outcomes and remaining limits.
 - A manually reviewed Infosys guidance-versus-delivery example is available in Research without a model call, including four reporting quarters of outlook history and one aligned FY26 annual comparison. It is explicitly curated, not automated for every ticker. The comparator rejects period/metric/unit/basis mismatches; FY27 annual delivery remains pending.
 - No automatic Revenue/EBITDA/PBT/PAT table is claimed. These metrics require verified filing extraction; EBITDA should not be fabricated where unreported or unsuitable for a sector.
+- Research corpus snapshots expire after seven days and rediscover company reports/transcripts on demand; failed rediscovery retains clearly labelled older evidence. Provider/source availability remains variable.
 - Public sharing for interviewers remains a submission step. Sampled live Gemini checks are recorded in reports/FINAL_AI_CHECKS.json; they do not guarantee future availability or correctness.
 
 ## Verification
@@ -127,3 +128,7 @@ The default 18-company portfolio is a demonstration watchlist selected for the c
 See [DEPLOYMENT.md](DEPLOYMENT.md). Build with `npm ci --include=dev && npm run build`; run with `npm start`. The production server uses Render's `PORT`, binds to `0.0.0.0`, exposes `/healthz`, and never exposes local Windows delivery controls. `render.yaml` defines a free web service with automatic deploys disabled. Gemini credentials must be entered as Render secrets, not committed.
 
 Current requirements mapping, tested scope and outstanding submission deliverables are in [reports/DELIVERABLE_AUDIT.md](reports/DELIVERABLE_AUDIT.md). Earlier status/handoff notes are historical; use the audit for current readiness.
+
+## Durable daily updates
+
+The approved [daily workflow](.github/workflows/daily-refresh.yml) runs at 22:47 IST, with manual dispatch available. It validates all 18 live feeds before committing a new snapshot, then deploys through a service-specific GitHub secret and verifies the exact public revision. No Gemini key is stored in GitHub. The first end-to-end run passed, including all 79 tests. Failed validation retains the previous deployed snapshot. Scheduling may be delayed, free Render instances can sleep, and external data/model services can fail; no indefinite uptime guarantee is implied. See [long-term operations and test evidence](reports/LONG_TERM_OPERATIONS.md).

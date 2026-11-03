@@ -24,6 +24,6 @@ The challenge presents research outputs as a menu, not a requirement to implemen
 1. Export/share this actual coding-agent conversation. The user confirmed it is the only build session. The earlier supplied ChatGPT share link is recorded but its contents/completeness/reviewer access are not verified. No full conversation-export tool was available; use the app's available sharing/export controls or preserve the original conversation file for review. Decision logs are not substitutes.
 2. Review SUBMISSION_DRAFT.md and insert the actual conversation link/attachment. Prototype and repository URLs are filled in. No email has been sent.
 
-Completed publication: https://github.com/VikashSunda/finn-enam is public; https://finn-enam-yid1.onrender.com is live on the free Render instance. Public HTTP requests and hosted data/AI behaviour were checked. Actual application revision: `4e088d4`; documentation may receive later commits.
+Completed publication: https://github.com/VikashSunda/finn-enam is public; https://finn-enam-yid1.onrender.com is live on free Render. Follow-up long-term checks passed: 79 tests, approved daily snapshot/deploy workflow, exact revision and persisted-snapshot verification, fresh document rediscovery and two additional grounded/limitation AI cases. Current tested application revision: `6d50c5d`; documentation may receive later commits. See LONG_TERM_OPERATIONS.md for the successful run link and operational limits.
 
 User's stated deadline: 3 November 2026, 11:59 pm IST.

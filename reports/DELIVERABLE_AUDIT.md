@@ -6,6 +6,7 @@ Checked against the original four-page Main challenge PDF, the companion referen
 | --- | --- |
 | Mock portfolio of 15–20 NSE/BSE companies | Implemented: 18 NSE companies across 10 sectors; explicitly a demo watchlist, not actual investments. |
 | EOD price and volume | Implemented: completed-session prices, previous-close changes, relative volume with baseline exclusion; source links and freshness states. |
+| Durable scheduled updates | Approved daily GitHub job at 22:47 IST, validated snapshots committed and Render redeployed; first full manual run passed with exact revision verification. Seven-day research snapshot expiry is implemented. See LONG_TERM_OPERATIONS.md for limits. |
 | Exchange announcements | Implemented: original NSE links, category/priority classification, selectable digest window, collapsed routine items. |
 | Configurable triggered alerts | Implemented in app; opt-in local Windows background delivery is user-confirmed. Hosted/mobile background delivery is not implemented. |
 | Primary-source fundamentals | Implemented: annual reports/transcripts; four seeded companies plus generic NSE document discovery. Blocked/unreadable data is disclosed. |
@@ -22,7 +23,7 @@ Checked against the original four-page Main challenge PDF, the companion referen
 
 ## Final verification
 
-- 71 automated tests pass, including independent NSE discovery when Screener fails, production HTTP routing, health check, body limit, HEAD requests, non-leaking errors and hosted desktop-control isolation.
+- 79 automated tests pass, including independent discovery, research expiry, durable snapshot validation, production HTTP routing and deployed-revision health checks. The same suite passed on the real GitHub runner.
 - Build, artifact validation and browser-script syntax checks pass.
 - Previous manual checks and sampled live Gemini outcomes are recorded under `reports/`; the Windows notification was explicitly confirmed by the user.
 - Latest feed report: `PORTFOLIO_FRESHNESS.json`. Local data success does not establish hosted coverage.

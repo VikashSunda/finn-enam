@@ -13,9 +13,9 @@ I used a small HTML/CSS/JavaScript frontend and one bundled Worker, source adapt
 
 I prioritised a working investor workflow and honest evidence states over broad unverified financial extraction. Deliberate omissions include OCR, mobile push, brokerage integration and fully automated cross-company financial/guidance scorecards. Generic research remains available beyond the curated guidance example. Earlier projects informed architectural ideas and are attributed in the repository.
 
-Validation includes 71 passing tests, live hosted checks of all 18 portfolio feeds, desktop/mobile walkthroughs, interactive chart checks, sampled Gemini/source checks and user-confirmed visible local Windows notification delivery. Render testing also confirmed a primary-model 503 successfully fell back to another Gemini model. These are prototype checks, not a claim that every future model answer is correct. The free hosted service can take time to wake after inactivity.
+Validation includes 79 passing tests, live hosted checks of all 18 portfolio feeds, desktop/mobile walkthroughs, interactive charts, sampled Gemini/source checks and user-confirmed local Windows notifications. A daily GitHub job validates and commits snapshots, redeploys Render and verifies the live commit; its full manual run passed. Hosted testing confirmed real Gemini fallback after 503, forced document rediscovery and refusal to invent unsupported bank EBITDA. These are prototype checks, not a claim that every future answer is correct. Free hosting can take time to wake and schedules may be delayed.
 
-Next I would add durable hosted ingestion/scheduling, stronger source coverage and evaluated structured financial extraction.
+Next I would strengthen source coverage and evaluated structured financial extraction, and add durable per-user hosted alert delivery.
 
 Prototype: https://finn-enam-yid1.onrender.com
 GitHub repository: https://github.com/VikashSunda/finn-enam
