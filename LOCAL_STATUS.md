@@ -2,6 +2,9 @@
 
 ## Later verification update
 
+- Replaced the report-like visual treatment with `web/workspace.css`: compact application headings, cool workspace background, individual metric/filing cards, blue interaction states, smaller source-table rows and distinct chart/research surfaces. Added a labelled desktop quick-research form with NSE-symbol validation.
+- Inspected the populated desktop brief and mobile portfolio, measured no horizontal page overflow, and verified invalid quick-search input produces a clear validation message. The quick search reuses the existing source-backed research path. All 20 tests, artifact validation, build and chart-script syntax check passed.
+
 - Refined the interface after web-reference research: compact wordmark, consistent SVG navigation, stronger sans-serif page headings, a six-company EOD watchlist strip linking to charts, and chart shading/latest-session markers. The strip preserves source dates and modes; it is not a live ticker.
 - Verified an INFY strip click opened its selected chart, checked the mobile chart for page overflow, and inspected the populated desktop brief. All 20 tests, script syntax checking, build and artifact validation passed. Design references are recorded in ATTRIBUTION.md; no external assets were copied.
 

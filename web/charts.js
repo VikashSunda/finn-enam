@@ -35,6 +35,10 @@
     const icon=button.querySelector('.nav-icon')||button.querySelector('span');
     if(icon&&icons[button.dataset.view])icon.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons[button.dataset.view]+'</svg>';
   });
+  const search=document.createElement('form');search.className='workspace-search';search.setAttribute('role','search');
+  search.innerHTML='<label class="sr-only" for="quick-company">Research an NSE company</label><input id="quick-company" placeholder="Research a company · INFY" maxlength="28" autocomplete="off" required><button type="submit" aria-label="Research selected company"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">'+icons.research+'</svg></button>';
+  document.querySelector('.top-actions').prepend(search);
+  search.addEventListener('submit',event=>{event.preventDefault();const ticker=search.querySelector('input').value.trim().toUpperCase();if(!/^[A-Z0-9][A-Z0-9&-]{0,24}$/.test(ticker))return message('Enter an NSE symbol such as INFY or M&M.','warning');switchView('research');research(ticker);});
   const tape=document.createElement('section');tape.className='session-tape';tape.setAttribute('aria-label','Selected watchlist closes');
   document.querySelector('#brief-view').prepend(tape);
   function update(){
