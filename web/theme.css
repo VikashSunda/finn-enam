@@ -183,3 +183,12 @@ html[data-theme=dark] :is(.session-tape,.brief-alert-link){box-shadow:0 10px 26p
 
 /* Ambient illumination remains behind the viewport throughout scrolling. */
 html[data-theme=dark] body{background-attachment:fixed}html[data-theme=dark] #brief-view:before{display:none}
+
+/* A restrained satin finish; reading surfaces retain their opaque base. */
+html[data-theme=dark] body{background-image:linear-gradient(115deg,#ffffff02,transparent 35%,#ad60ff03 65%,transparent),radial-gradient(ellipse 64% 540px at 50% 340px,#7933b51b,transparent 76%),radial-gradient(ellipse 33% 440px at 0 410px,#9438d414,transparent 80%),radial-gradient(ellipse 34% 480px at 100% 430px,#7135b51a,transparent 80%);background-attachment:fixed}
+html[data-theme=dark] :is(.panel,.panel.trend-panel,.panel.research-search,.brief-main .filing,.right-rail .rail-card,#brief-view .stat,.session-tape,.research-empty,.loading-card,.profile-menu,dialog,#filing-dialog,#evidence-dialog){background-image:linear-gradient(155deg,#ffffff04 0%,transparent 36%);box-shadow:inset 0 1px #ffffff09,0 10px 26px -17px #000a}
+html[data-theme=dark] :is(.brief-alert-link,.coverage-note,.drawer-cue,.research-invite,.source-summary span,.micro-label,.category-tag,.status-chip,.citation-button,.research-tabs button,.trend-metrics,.mobile-nav button.active){background-image:linear-gradient(180deg,#ffffff04,transparent 70%);box-shadow:inset 0 1px #ffffff08}
+html[data-theme=dark] :is(input,select,.workspace-search){background-image:linear-gradient(180deg,#ffffff02,transparent);box-shadow:inset 0 1px #ffffff06}
+html[data-theme=dark] :is(.primary-button,.question-form .primary-button,.research-input .primary-button,.alert-rules-panel .primary-button){background-image:linear-gradient(180deg,#ffffff0b,transparent 70%)!important;box-shadow:inset 0 1px #ffffff22,0 3px 12px #0002}
+html[data-theme=dark] :is(.main-shell .topbar,.mobile-nav){background-image:linear-gradient(180deg,#ffffff04,transparent 70%)}
+@media(max-width:720px){html[data-theme=dark] body{background-image:linear-gradient(115deg,#ffffff01,transparent 50%),radial-gradient(ellipse 100% 460px at 50% 310px,#7933b510,transparent 82%)}html[data-theme=dark] :is(.panel,.brief-main .filing,#brief-view .stat){background-image:linear-gradient(155deg,#ffffff03,transparent 38%)}}
