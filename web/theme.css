@@ -120,3 +120,19 @@ html[data-theme=dark] :focus-visible{outline-color:#c194ff}html[data-theme=dark]
 @media(prefers-reduced-motion:no-preference){.finn-cursor:before{transition:transform .14s,background-color .14s,border-color .14s}.view:not([hidden]){animation:workspace-slide .19s ease-out}.profile-menu:not([hidden]){animation:menu-slide .16s ease-out;transform-origin:top right}button:active{transform:translateY(1px)}@keyframes workspace-slide{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}@keyframes menu-slide{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}}
 @media(prefers-reduced-motion:reduce){.view,.profile-menu,.finn-cursor:before{animation:none!important;transition:none!important}}
 @media(forced-colors:active){.finn-cursor,.finn-cursor-dot{display:none!important}html.custom-pointer,html.custom-pointer *{cursor:auto!important}}
+
+/* On scroll, the existing navigation becomes a floating glass capsule. */
+@media(min-width:721px){
+ html.is-scrolled body .sidebar{left:16px;right:16px;top:12px;width:auto;max-width:1288px;margin-inline:auto;min-height:60px;padding:8px 22px;border:1px solid #dce1edb0;border-radius:14px;background:#f8f9fbe8;box-shadow:0 8px 30px #131a3020,inset 0 1px #fff9;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);gap:26px}
+ html.is-scrolled .sidebar .brand{color:#1c263a;transform:none}html.is-scrolled .sidebar .brand small{color:#617085}html.is-scrolled .navigation .nav-item{color:#52617b}html.is-scrolled .navigation .nav-item.active{color:#244783;background:#e1e8f7}
+ html.is-scrolled .main-shell .topbar{top:84px;background:#f7f9fbe8;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+ html[data-theme=dark].is-scrolled body .sidebar{background:linear-gradient(150deg,#ffffff05,transparent),#1a1722db;border-color:#ffffff1c;box-shadow:0 10px 32px #0005,inset 0 1px #ffffff0c}
+ html[data-theme=dark].is-scrolled .sidebar .brand{color:#f6f5fa}html[data-theme=dark].is-scrolled .sidebar .brand small{color:#aaa6b4}html[data-theme=dark].is-scrolled .navigation .nav-item{color:#c3bdce}html[data-theme=dark].is-scrolled .navigation .nav-item.active{background:#51326888;color:#f4eaff;box-shadow:inset 0 0 0 1px #c28cff30}
+ html[data-theme=dark].is-scrolled .main-shell .topbar{background:#121117df}
+}
+@media(max-width:720px){
+ html.is-scrolled .main-shell .topbar{top:8px;margin-inline:10px;width:calc(100% - 20px);height:calc(58px + env(safe-area-inset-top));border:1px solid #ffffff20;border-radius:13px;background:#182134e6;box-shadow:0 7px 22px #0003,inset 0 1px #ffffff0c;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+ html[data-theme=dark].is-scrolled .main-shell .topbar{background:#1a1722df;border-color:#ffffff1b}
+}
+@media(prefers-reduced-motion:no-preference){body .sidebar{transition:background-color .18s,box-shadow .18s,border-color .18s,border-radius .18s}.main-shell .topbar{transition:background-color .18s,box-shadow .18s,border-radius .18s}}
+@media(prefers-reduced-transparency:reduce){html.is-scrolled body .sidebar,html.is-scrolled .main-shell .topbar{backdrop-filter:none;-webkit-backdrop-filter:none;background:#f7f9fb}html[data-theme=dark].is-scrolled body .sidebar,html[data-theme=dark].is-scrolled .main-shell .topbar{background:#1a1722}}
