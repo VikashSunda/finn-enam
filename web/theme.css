@@ -1,0 +1,49 @@
+/* Theme layer, loaded last. Both themes retain source and movement semantics. */
+.main-shell .topbar{position:sticky;top:68px;z-index:35}.top-actions{gap:12px}.theme-toggle{flex-shrink:0}.is-scrolled body .sidebar{box-shadow:0 6px 22px #080f2638;background:#101a2d}.is-scrolled .sidebar .brand{transform:scale(.95);transform-origin:left center}.is-scrolled .main-shell .topbar{box-shadow:0 3px 12px #1723370c;border-bottom-color:#c5d2e4}
+@media(prefers-reduced-motion:no-preference){body .sidebar,.main-shell .topbar{transition:background-color .2s,box-shadow .2s,border-color .2s}.sidebar .brand{transition:transform .2s ease-out}}
+html[data-theme=dark]{--ink:#e4ebf7;--muted:#a8b5ca;--line:#344158;--paper:#192337;--green:#89aaff;--red:#ff9a9a;color-scheme:dark}
+html[data-theme=dark] body{background:#101827;color:#e4ebf7}
+html[data-theme=dark] .main-shell .topbar{background:#151f31;border-color:#344158}
+html[data-theme=dark] :is(.panel,.panel.trend-panel,.panel.research-search,.session-tape,.brief-main .filing,.brief-main .empty-state,.right-rail .rail-card,.research-empty,.loading-card,.brief-main .section-toolbar){background:#192337;border-color:#344158;color:#e4ebf7;box-shadow:0 3px 12px #0000000d}
+html[data-theme=dark] #brief-view .stat{background:#192337;border-color:#344158;color:#e4ebf7}
+html[data-theme=dark] :is(.subtitle,.page-heading .subtitle,.eyebrow,.page-heading .eyebrow,.muted,.small.muted,.stat-top,.stat-caption,.method-note,.breadcrumb,.market-pill,.topbar .market-pill,.topbar .breadcrumb,.filing-review,.filing-bottom,.drawer-meta,.drawer-fetch,.drawer-company>span,.drawer-research small,.trend-source,.trend-select,.trend-controls span,.trend-header .small,.tape-label small,.tape-date,.tape-symbol,.research-overview p,.document-row small,.source-intro p,.research-empty>p:not(.eyebrow),.watch-row small,.alert-entry p,.empty-alert,.feed-heading,footer,td small){color:#a8b5ca}
+html[data-theme=dark] #brief-view :is(.stat-top,.stat-caption){color:#a8b5ca}
+html[data-theme=dark] :is(.source-link,.link-button,.filing-open,.filing-title-button:hover,.citation-button,.research-invite button){color:#a7bfff}
+html[data-theme=dark] :is(input,select,.workspace-search,.panel .inline-form input,.trend-select select){background:#111b2c;border-color:#42516c;color:#e4ebf7}
+html[data-theme=dark] input::placeholder{color:#94a4bd;opacity:1}
+html[data-theme=dark] .workspace-search input{background:transparent}
+html[data-theme=dark] :is(.icon-button,.topbar .icon-button){background:#24334f;border-color:#42516c;color:#c2d2f6}
+html[data-theme=dark] :is(.filing .category-tag,.micro-label,.status-chip,.feature-tags span,.demo-tickers button,.source-summary span){background:#263751;border-color:#42516c;color:#b9cbed}
+html[data-theme=dark] :is(.brief-main .filing .priority-tag,.status-chip.warning){background:#473720;color:#f4cf8c}
+html[data-theme=dark] .status-chip.error{background:#4b2934;color:#ffb4b4}
+html[data-theme=dark] :is(.banner.warning){background:#302a20;border-color:#655236;color:#efd3a2}
+html[data-theme=dark] .banner.error{background:#3d2530;border-color:#744353;color:#ffb4b4}
+html[data-theme=dark] .banner:not(.warning):not(.error){background:#23334f;border-color:#42516c;color:#bfceec}
+html[data-theme=dark] :is(.brief-main .filing-description,.coverage-note,.drawer-cue,.drawer-research,.research-invite,.right-rail .research-invite){background:#202e47;border-color:#42516c;color:#bfceec}
+html[data-theme=dark] :is(.segmented button,.research-tabs button,.trend-metrics button){color:#b6c4dc}
+html[data-theme=dark] :is(.segmented button.selected,.research-tabs button.selected,.trend-metrics button[aria-pressed=true]){background:#355ba8;border-color:#547ac8;color:#fff}
+html[data-theme=dark] .trend-metrics{background:#111b2c}
+html[data-theme=dark] :is(.watch-row,.alert-entry,.document-row,.evidence-card,.claim,.trend-panel .trend-data,.demo-tickers,.tape-label,.tape-company,td,th,footer,.rail-card){border-color:#344158}
+html[data-theme=dark] .tape-company:hover{background:#22324d}
+html[data-theme=dark] th{background:#141e30;color:#b6c4dc}
+html[data-theme=dark] :is(.positive){color:#80dbb7!important}
+html[data-theme=dark] :is(.negative){color:#ff9a9a!important}
+html[data-theme=dark] :is(.trend-plot text){fill:#a8b5ca}
+html[data-theme=dark] .trend-plot svg .trend-grid{stroke:#344158}
+html[data-theme=dark] .trend-plot svg .trend-line{stroke:#91b3ff}
+html[data-theme=dark] .trend-end{fill:#91b3ff;stroke:#192337}
+html[data-theme=dark] .trend-bar{fill:#8ba8d5}
+html[data-theme=dark] :is(.source-intro h2,.research-empty h2,.research-invite h2,.empty-state h2,.trend-header h2,.drawer-cue h4,#filing-body h4){color:#e4ebf7}
+html[data-theme=dark] :is(dialog,#filing-dialog,#evidence-dialog,.filing-drawer-header,#evidence-dialog>.dialog-heading){background:#192337;color:#e4ebf7;border-color:#344158}
+html[data-theme=dark] :is(.drawer-original p,.drawer-cue p,.evidence-card blockquote,#evidence-body p,.checkbox-grid label){color:#bfcee4}
+html[data-theme=dark] #evidence-body blockquote{background:#111b2c;color:#d1ddef;border-color:#6488cc}
+html[data-theme=dark] .drawer-company>b{background:#2b4167;color:#b9ceff}
+html[data-theme=dark] .mobile-nav{background:#151f31;border-color:#344158}
+html[data-theme=dark] .mobile-nav button{color:#a8b5ca}
+html[data-theme=dark] .mobile-nav button.active{background:#2b4167;color:#c1d4ff}
+html[data-theme=dark] .brief-main .empty-symbol{background:#2b4167;color:#c1d4ff}
+html[data-theme=dark] :is(.claim-label,.document-label,.evidence-card .document-label,.trend-data){color:#a8b5ca}
+html[data-theme=dark].is-scrolled .main-shell .topbar{border-color:#42516c}
+html[data-theme=dark] :is(.filing-review>span,.research-invite .eyebrow,.footer-brand){color:#a8bde5}
+@media(max-width:720px){.main-shell .topbar{top:0;z-index:35}.top-actions{gap:8px}.theme-toggle,.topbar .icon-button{width:38px;height:38px}.is-scrolled .main-shell .topbar{box-shadow:0 6px 18px #080f2630}html[data-theme=dark] .main-shell .topbar{background:#131f35}.main-shell .topbar .market-pill{display:none}}
+@media(prefers-reduced-motion:reduce){.sidebar .brand{transform:none!important}body .sidebar,.main-shell .topbar,.sidebar .brand{transition:none!important}}

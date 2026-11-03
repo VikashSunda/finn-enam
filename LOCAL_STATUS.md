@@ -2,6 +2,11 @@
 
 ## Later verification update
 
+- Added persistent dark/light theme selection, using the OS preference until an explicit choice is saved. A same-origin early external script applies the preference before styles; no inline CSP exception is needed. Dark styling covers charts, tables, cards, settings, filings and evidence surfaces.
+- Added sticky subheader and a scroll state that subtly changes header depth/brand scale without changing layout height or hiding navigation. Reduced-motion preferences disable the transform/transition. Followed MDN color-scheme/reduced-motion guidance and web.dev animation guidance.
+- Browser checks verified theme persistence through reload, desktop header top positions after scrolling, and mobile portfolio/settings/filing/source/research flows at 360px and 390px viewport settings. No horizontal page overflow was measured in checked views. This is not a guarantee across all physical devices.
+- All 22 tests, build, artifact validation and theme-script syntax checking passed before the final minor contrast adjustment; final build/validation passed afterward. Screenshots are in ignored `.cache/qa/dark-*.png`.
+
 - The user restored a session-only Gemini key and started port 3001 with Gemini 3.1 Flash-Lite. Safe status confirmed provider/model without reading the credential.
 - Live outcome-pricing research preserved management's adoption caveat; live cash research kept Q1/Q2 FY27 separate. Sampled statements/figures were checked against publisher PDF text at the cited pages; see SOURCE_AUDIT.md.
 - The unsupported-future-profit test declined to invent a number but initially overgeneralised other claims/coverage. Tightened instructions and scoped limitation-only notes in server code. A final live retest returned one limitation and the scoped note. All 22 tests, build and artifact validation passed. This is sampled verification, not blanket factual correctness.
