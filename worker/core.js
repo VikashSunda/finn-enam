@@ -67,6 +67,7 @@ export function makeAlerts(prices, settings = {}) {
 }
 
 export const TOPICS = {
+  ownership: ['parent company','holding company','ultimate parent','promoter','shareholding','controlling shareholder','controlled by'],
   business: ['business overview','business model','our business','our offerings','our products','our services','products and services','customers','revenue mix','segments','consulting','digital services','clients'],
   financials: ['revenue','ebitda','profit','margin','earnings','tax'],
   cash: ['cash flow','cash conversion','working capital','receivable','free cash','operating cash'],
@@ -85,6 +86,7 @@ export function retrieve(documents, question = '', topic = 'business', limit = 1
     const sections=page.text.match(/.{1,1700}(?:\s|$)/g) || [page.text];
     for (let i=0;i<sections.length;i++) {
       const text=sections[i].trim(), lower=text.toLowerCase();
+      if(topic==='ownership'&&!/parent (?:company|entity)|holding company|ultimate parent|promoter|shareholding|controlling shareholder|controlled by|owned by/.test(lower))continue;
       const hits=terms.filter(term=>lower.includes(term));
       if (!hits.length || text.length < 100) continue;
       const queryHits=query.filter(w=>!stop.has(w)&&lower.includes(w));
