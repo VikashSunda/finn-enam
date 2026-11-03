@@ -2,6 +2,10 @@
 
 ## Later verification update
 
+- Implemented compact filing cards with deterministic boilerplate removal/truncation, labelled category-based review cues, Inspect/Source actions and related-filing counts. Full original headline/description and source links remain in a desktop side drawer/mobile bottom sheet.
+- Added drawer-to-company-research action using the existing primary-document research endpoint. Verified INFY opens research, retains the ticker and focuses its input. This navigation test does not establish live model synthesis success.
+- Verified a RELIANCE original disclosure/source and related metadata in the desktop drawer, BEL wording in the mobile sheet, and Escape dismissal returning focus to the original trigger. All 20 tests, final build, artifact validation and browser-script syntax check pass. Screenshots are in ignored `.cache/qa/filing-*.png`.
+
 - Replaced the report-like visual treatment with `web/workspace.css`: compact application headings, cool workspace background, individual metric/filing cards, blue interaction states, smaller source-table rows and distinct chart/research surfaces. Added a labelled desktop quick-research form with NSE-symbol validation.
 - Inspected the populated desktop brief and mobile portfolio, measured no horizontal page overflow, and verified invalid quick-search input produces a clear validation message. The quick search reuses the existing source-backed research path. All 20 tests, artifact validation, build and chart-script syntax check passed.
 
