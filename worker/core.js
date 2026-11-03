@@ -87,7 +87,13 @@ export function retrieve(documents, question = '', topic = 'business', limit = 1
       const text=sections[i].trim(), lower=text.toLowerCase();
       const hits=terms.filter(term=>lower.includes(term));
       if (!hits.length || text.length < 100) continue;
-      let score=hits.length*3 + (doc.type==='transcript'?Math.max(1,5-di):0) - (/table of contents|forward.looking statements|safe harbour/.test(lower)?10:0);
+      const queryHits=query.filter(w=>!stop.has(w)&&lower.includes(w));
+      let score=hits.length*3 + queryHits.length*5 + (doc.type==='transcript'?Math.max(1,5-di):0) - (/table of contents|forward.looking statements|safe harbour/.test(lower)?10:0);
+      if(/\b(?:growth|growing|trajectory|grew|yoy)\b/i.test(question)){
+        if(!/growth|grew|increase|decrease|year.on.year|yoy/.test(lower))continue;
+        if(/revenue|sales|ebitda|profit|earnings/.test(lower))score+=20;
+        if(/\d+(?:\.\d+)?\s*%|\b(?:fy\d|quarter|year ended)\b/.test(lower))score+=10;
+      }
       if(topic==='business'){
         if(/business overview|our business|segment.{0,35}revenue|revenue.{0,35}segment|our offerings/.test(lower))score+=8;
         if(doc.type==='annual_report' && /leading provider|business overview|our business|our offerings/.test(lower))score+=14;
