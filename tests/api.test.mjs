@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from '../dist/server/index.js';
 const req=(path,options)=>new Request('https://finn.test'+path,options);
+test('reviewed financials disclose annual scope, missing EBITDA and unsupported companies',async()=>{const response=await worker.fetch(req('/api/reviewed-financials?ticker=INFY'),{}),data=await response.json();assert.equal(response.status,200);assert.match(data.curation,/not automatic/);assert.ok(data.rows[0].yoy.value>9);assert.equal(data.rows[0].qoq.value,null);assert.equal(data.rows.find(r=>r.metric==='EBITDA').current,null);assert.equal((await worker.fetch(req('/api/reviewed-financials?ticker=TCS'),{})).status,404);});
 test('homepage and assets are served; status discloses missing model key',async()=>{
   const home=await worker.fetch(req('/'),{});assert.equal(home.status,200);assert.match(await home.text(),/Welcome back, Vikash/);
   const status=await(await worker.fetch(req('/api/status'),{})).json();

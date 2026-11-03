@@ -67,6 +67,7 @@ export const TOPICS = {
   cash: ['cash flow','cash conversion','working capital','receivable','free cash','operating cash'],
   balance: ['debt','borrowings','liabilities','leverage','balance sheet'],
   guidance: ['guidance','expect','outlook','forecast','fiscal','target'],
+  management: ['director profile','professional experience','chief executive','appointment','qualifications','leadership','biography','succession','areas of expertise','read full profile','executive committee'],
   risk: ['risk','uncertainty','headwind','challenge','competition','decline'],
 };
 
@@ -88,6 +89,14 @@ export function retrieve(documents, question = '', topic = 'business', limit = 1
         if(/awards|manufactured capital|natural capital|share in profit|remuneration|certificate/.test(lower))score-=12;
       }
       if(topic==='guidance' && /guidance|outlook/.test(lower))score+=6;
+      if(topic==='management'){
+        if(!/experience|qualifications|biography|profile|expertise|succession|appoint|resign|previously|prior to joining/.test(lower))continue;
+        if(/experience|qualifications|biography|director profile|previously|prior to joining/.test(lower))score+=12;
+        if(/read full profile|areas of expertise|executive committee/.test(lower))score+=40;
+        if(/nomination and remuneration|policy on directors|selection and appointment/.test(lower)&&! /read full profile|areas of expertise/.test(lower))score-=24;
+        if(doc.type==='annual_report')score+=4;
+        if(/remuneration|attendance|sitting fees|shareholding pattern/.test(lower)&&! /experience|qualifications|biography/.test(lower))score-=12;
+      }
       if(topic==='cash' && /cash flows? from operat|free cash flow|cash conversion/.test(lower))score+=6;
       if(score<=0)continue;
       // Short transcript pages often separate an analyst question from the

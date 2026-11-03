@@ -1,0 +1,100 @@
+{
+  "ticker": "INFY",
+  "label": "Infosys · audited annual financial comparison",
+  "periodLabel": "FY26 vs FY25 · historical annual figures",
+  "curation": "Reviewed example, not automatic financial extraction for every ticker. INR crore; consolidated Ind AS; reported values including exceptional items. PAT includes non-controlling interests and differs from profit attributable to owners.",
+  "rows": [
+    {
+      "metric": "Revenue from operations",
+      "current": {
+        "metric": "Revenue from operations",
+        "currency": "INR",
+        "unit": "crore",
+        "basis": "Consolidated Ind AS, reported",
+        "periodType": "annual",
+        "value": 178650,
+        "periodEnd": "2026-03-31"
+      },
+      "previous": {
+        "metric": "Revenue from operations",
+        "currency": "INR",
+        "unit": "crore",
+        "basis": "Consolidated Ind AS, reported",
+        "periodType": "annual",
+        "value": 162990,
+        "periodEnd": "2025-03-31"
+      },
+      "source": {
+        "label": "FY26 consolidated annual financial statements",
+        "url": "https://www.infosys.com/investors/reports-filings/annual-report/annual/documents/infosys-ar-26.pdf",
+        "page": 287,
+        "quote": "Revenue from operations 2.18 1,78,650 1,62,990"
+      }
+    },
+    {
+      "metric": "PBT",
+      "current": {
+        "metric": "PBT",
+        "currency": "INR",
+        "unit": "crore",
+        "basis": "Consolidated Ind AS, reported",
+        "periodType": "annual",
+        "value": 39995,
+        "periodEnd": "2026-03-31"
+      },
+      "previous": {
+        "metric": "PBT",
+        "currency": "INR",
+        "unit": "crore",
+        "basis": "Consolidated Ind AS, reported",
+        "periodType": "annual",
+        "value": 37608,
+        "periodEnd": "2025-03-31"
+      },
+      "source": {
+        "label": "FY26 consolidated annual financial statements",
+        "url": "https://www.infosys.com/investors/reports-filings/annual-report/annual/documents/infosys-ar-26.pdf",
+        "page": 287,
+        "quote": "Profit before tax 39,995 37,608"
+      }
+    },
+    {
+      "metric": "PAT (including non-controlling interests)",
+      "current": {
+        "metric": "PAT (including non-controlling interests)",
+        "currency": "INR",
+        "unit": "crore",
+        "basis": "Consolidated Ind AS, reported",
+        "periodType": "annual",
+        "value": 29474,
+        "periodEnd": "2026-03-31"
+      },
+      "previous": {
+        "metric": "PAT (including non-controlling interests)",
+        "currency": "INR",
+        "unit": "crore",
+        "basis": "Consolidated Ind AS, reported",
+        "periodType": "annual",
+        "value": 26750,
+        "periodEnd": "2025-03-31"
+      },
+      "source": {
+        "label": "FY26 consolidated annual financial statements",
+        "url": "https://www.infosys.com/investors/reports-filings/annual-report/annual/documents/infosys-ar-26.pdf",
+        "page": 287,
+        "quote": "Profit for the year 29,474 26,750"
+      }
+    },
+    {
+      "metric": "EBITDA",
+      "current": null,
+      "previous": null,
+      "source": {
+        "label": "FY26 consolidated annual financial statements",
+        "url": "https://www.infosys.com/investors/reports-filings/annual-report/annual/documents/infosys-ar-26.pdf",
+        "page": 287
+      },
+      "unavailable": "No explicit EBITDA line is established by this reviewed P&L page. Operating profit is not substituted."
+    }
+  ]
+}

@@ -8,7 +8,8 @@
 - Fixed a real local outage caused by scheduled builds deleting the live Worker bundle. Builds now write a temporary output and rename it into place. Thirty API status requests during a concurrent build completed without failure.
 - User explicitly confirmed the Windows test notification appeared. Scheduled event delivery still depends on fresh data, enabled delivery, server/monitor uptime and Windows settings; no mobile push or shutdown-resilient delivery is claimed.
 - Final five-screen phone walkthrough at requested 390x844 and 360x800 settings passed without measured page overflow (embedded inner widths 375 and 346). Header remained visible and bottom navigation kept its gap. Light/Dark persisted through reload; original Dark preference restored. Existing System tests pass. No physical-device certification is claimed.
-- All 57 tests passed; build, artifact validation and browser-script syntax checks passed.
+- Added a reviewed annual financial comparison with source-page quotes, explicit reporting basis, safe YoY calculation and honest missing EBITDA/QoQ states. Added Leadership research retrieval from company disclosures. See FINANCIAL_COMPARISON.md for scope and manual checks.
+- All 66 tests passed; build and artifact validation passed.
 
 ## Core prototype coverage
 
@@ -16,7 +17,7 @@
 
 ## Deliberate limits
 
-The challenge presents research outputs as a menu, not a requirement to implement all of them. OCR, generic automatic Revenue/EBITDA/PBT/PAT comparisons, leadership-background enrichment, mobile web push, brokerage holdings and fully automatic cross-company guidance scoring remain unimplemented. Blocking/oversized/link-only PDFs remain explicitly disclosed. Evidence selection and matching quotes cannot prove every inference. Local schedules stop when their process or computer stops.
+The challenge presents research outputs as a menu, not a requirement to implement all of them. OCR, generic automatic Revenue/EBITDA/PBT/PAT comparisons, external leadership-background enrichment, mobile web push, brokerage holdings and fully automatic cross-company guidance scoring remain unimplemented. The reviewed Infosys financial example and primary-document Leadership topic do not establish those broader capabilities. Blocking/oversized/link-only PDFs remain explicitly disclosed. Evidence selection and matching quotes cannot prove every inference. Local schedules stop when their process or computer stops.
 
 ## Still required before submitting
 
