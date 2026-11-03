@@ -17,7 +17,9 @@ Render service: `srv-dbku1gtbedkc73eilfp0`, Node 24.14.1, Free ($0/month), Virgi
 
 ## Final UI correction
 
-Manual testing exposed Windows-only delivery controls on the hosted Alerts screen. These are now hidden on non-local origins, with accurate in-app-alert wording; local Windows functionality and server-side hosted isolation remain intact. This correction requires the final redeployment and browser recheck recorded in the deployment continuation.
+Manual testing exposed Windows-only delivery controls on the hosted Alerts screen. These are now hidden on non-local origins, with accurate in-app-alert wording; local Windows functionality and server-side hosted isolation remain intact.
+
+Final application revision `4e088d4af980d4b6af288f246e852d8d0e4e3d7c` deployed successfully in 36.8 seconds (Render deployment `dep-dbku6n59fdbs73cbum10`, started 7:06 pm IST). After reloading the public site, Windows-only controls were absent. Changed the price rule from 4% to 5%, saved and reloaded, and confirmed the input remained 5%; restored 4%. Reviewed guidance loaded with its four-quarter history and original PDF-page links. Public HTML, CSS and browser scripts returned HTTP 200 and contained no matching Google/OpenAI credential patterns. Final desktop/mobile screenshots are stored locally in `.cache/qa/hosted-desktop.png` and `hosted-mobile.png`. Subsequent documentation-only commits do not change the deployed application.
 
 ## Checks and limits
 
