@@ -99,3 +99,9 @@ Tests cover EOD boundaries, baseline exclusion, insufficient data, timestamp zon
 See `ATTRIBUTION.md`, `BUILD_HISTORY.md` and `LOCAL_STATUS.md`. This standalone repository contains only the original `finn/` application, copied without upstream Git history. It follows review of Sector Intelligence Monitor and Nifty Market Breadth Intelligence, reusing architectural ideas (source adapters, page-level chunks, explicit data-integrity states) with a Worker implementation. Both original repositories remain untouched. No GitHub remote or push is configured.
 
 The actual coding-agent conversation export/share link must be included with the submission. `BUILD_HISTORY.md` is a decision log, not a substitute or a fabricated transcript.
+
+## Automatic portfolio refresh
+
+The open app checks sources on startup and every 15 minutes while visible and online. Returning to the tab or reconnecting triggers a check if due. Requests do not overlap; existing rows remain visible on failure.
+
+For unattended local checks while the app tab is closed, keep the FINN server running and run `npm.cmd run monitor:portfolio` from this folder. This process refreshes all 18 registered companies every 15 minutes, validates complete live feeds before replacing the fallback snapshot, and rebuilds the Worker. Stop with Ctrl+C. It does not survive computer shutdown and is not an OS-installed task. `npm.cmd run refresh:portfolio` runs once. Current outcomes are in reports/PORTFOLIO_FRESHNESS.json. Failed or partial refreshes retain the snapshot.

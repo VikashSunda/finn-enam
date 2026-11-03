@@ -1,1 +1,20 @@
-{"name":"finn-investor-intelligence","private":true,"version":"0.1.0","type":"module","scripts":{"dev":"node scripts/dev.mjs","build":"node scripts/build.mjs","test":"node --test tests/*.test.mjs","validate":"node scripts/validate-artifact.mjs"},"dependencies":{"unpdf":"1.6.2"},"devDependencies":{"esbuild":"0.25.12"}}
+{
+  "name": "finn-investor-intelligence",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node scripts/validate-artifact.mjs",
+    "monitor:portfolio": "node scripts/monitor-portfolio.mjs",
+    "refresh:portfolio": "node scripts/monitor-portfolio.mjs --once"
+  },
+  "dependencies": {
+    "unpdf": "1.6.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}
