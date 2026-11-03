@@ -41,6 +41,7 @@ test('valid Gemini output retains claim kind and exact source attribution',async
     assert.match(String(url),/generateContent$/);
     assert.equal(options.headers['x-goog-api-key'],'mock-only');
     const prompt=JSON.parse(options.body).contents[0].parts[0].text;
+    assert.equal(JSON.parse(options.body).generationConfig.thinkingConfig.thinkingLevel,'minimal');
     assert.ok(prompt.includes(id));
     return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'Management reported the figure in the cited passage.',kind:'fact',sources:[id]}],note:'Period limited to the excerpt.'})}]}}]});
   });

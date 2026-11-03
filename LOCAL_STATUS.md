@@ -2,6 +2,10 @@
 
 ## Later verification update
 
+- A live request with explicitly selected Gemini 3.1 Flash-Lite also hit the inherited 25-second timeout. Increased the Gemini bound to 60 seconds and explicitly selected minimal thinking only for that supported model. Changed its default/example away from 2.5 Flash, which had rejected this new account. Live success is still pending.
+- Local development now checks the built Worker's modification time on requests and loads rebuilt versions without restarting the server. One restart is required to enable this loader in an already-running old server. This does not write or expose credentials.
+- Rebuilt and reran all 19 tests, artifact validation and development-script syntax checking after these changes; all passed. A separate keyless server on port 3002 successfully served status and source-backed research through the new loader.
+
 - Latest build, artifact validation and all 19 tests pass. Added valid provider-output contract coverage and a business-overview retrieval regression; annual-report business descriptions now receive preference over incidental transcript mentions.
 - Direct mobile research loaded excerpts after a 503 response and its source dialog showed the passage plus the correct `#page=10` link. Desktop portfolio was visually inspected at 1440 x 1000. A mobile evidence screenshot is stored in ignored `.cache/qa/mobile-evidence.png`.
 - Independent re-download of an Infosys transcript did not complete and was stopped. Original PDF page verification remains unfinished; checking the UI link alone does not establish content support.

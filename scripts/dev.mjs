@@ -1,9 +1,18 @@
 import {createServer} from 'node:http';
-import {readFile} from 'node:fs/promises';
+import {stat} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 // Run the same bundled Worker under Node; no alternate application backend.
 await import('./build.mjs');
-const {default:worker}=await import(pathToFileURL(process.cwd()+'/dist/server/index.js'));
+const workerURL=pathToFileURL(process.cwd()+'/dist/server/index.js');
+let worker,workerRevision;
+async function currentWorker(){
+  const revision=(await stat(workerURL)).mtimeMs;
+  if(revision!==workerRevision){
+    const module=await import(workerURL.href+'?revision='+revision);
+    worker=module.default;workerRevision=revision;
+  }
+  return worker;
+}
 const portArg=process.argv.indexOf('--port');
 const port=Number(portArg>=0?process.argv[portArg+1]:(process.env.PORT||3000));
 createServer(async(req,res)=>{
@@ -15,7 +24,7 @@ createServer(async(req,res)=>{
     }
     const bytes=[];for await(const chunk of req)bytes.push(chunk);
     const request=new Request('http://localhost:'+port+req.url,{method:req.method,headers:req.headers,...(['GET','HEAD'].includes(req.method)?{}:{body:Buffer.concat(bytes)})});
-    const response=await worker.fetch(request,process.env,{});
+    const response=await (await currentWorker()).fetch(request,process.env,{});
     res.writeHead(response.status,Object.fromEntries(response.headers));
     res.end(Buffer.from(await response.arrayBuffer()));
   }catch(e){res.writeHead(500);res.end('Development server error');console.error(e.message);}
