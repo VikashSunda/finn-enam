@@ -1,4 +1,4 @@
-# Covering email draft — final links still required
+# Covering email draft 
 
 To: assessment@enam.com
 Subject: ENAM - IIT screening - 2027
@@ -19,8 +19,7 @@ Next I would strengthen source coverage and evaluated structured financial extra
 
 Prototype: https://finn-enam-yid1.onrender.com
 GitHub repository: https://github.com/VikashSunda/finn-enam
-Actual AI build conversation: [attach/export this Codex conversation; user confirms it is the only build session]
-Earlier user-supplied conversation: https://chatgpt.com/share/6ae933fa-b760-83e8-bae7-3feb55f11340
+Actual AI build conversation: (https://chatgpt.com/s/cx_6aea179d949481918480cbe2d2ff7e14)
 
 Regards,
 Vikash Sunda
