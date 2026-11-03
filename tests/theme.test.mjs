@@ -15,7 +15,7 @@ test('System mode follows later device changes while explicit theme stays fixed'
  const following=boot('system',false);assert.equal(following.root.dataset.theme,'light');following.system.matches=true;following.system.changed();assert.equal(following.root.dataset.theme,'dark');
  const fixed=boot('light',false);fixed.system.matches=true;fixed.system.changed();assert.equal(fixed.root.dataset.theme,'light');
 });
-test('missing or invalid stored theme uses System and cross-tab changes update appearance',()=>{
- for(const saved of [null,'invalid'])assert.equal(boot(saved,true).root.dataset.themePreference,'system');
+test('missing or invalid stored theme defaults to Dark and cross-tab changes update appearance',()=>{
+ for(const saved of [null,'invalid']){const {root}=boot(saved,false);assert.equal(root.dataset.themePreference,'dark');assert.equal(root.dataset.theme,'dark');}
  const session=boot('dark',true);session.listeners.storage({key:'finn-theme',newValue:'light'});assert.equal(session.root.dataset.theme,'light');session.listeners.storage({key:'finn-theme',newValue:'system'});assert.equal(session.root.dataset.theme,'dark');
 });

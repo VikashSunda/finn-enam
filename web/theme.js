@@ -1,8 +1,8 @@
 /* Apply saved appearance before CSS paints; all preferences stay on this device. */
 (()=>{
  const root=document.documentElement,system=matchMedia('(prefers-color-scheme: dark)');
- const valid=value=>['dark','light','system'].includes(value)?value:'system';
- let preference='system';try{preference=valid(localStorage.getItem('finn-theme'));}catch{}
+ const valid=value=>['dark','light','system'].includes(value)?value:'dark';
+ let preference='dark';try{preference=valid(localStorage.getItem('finn-theme'));}catch{}
  function apply(){
   const mode=preference==='system'?(system.matches?'dark':'light'):preference;
   root.dataset.theme=mode;root.dataset.themePreference=preference;root.style.colorScheme=mode;
