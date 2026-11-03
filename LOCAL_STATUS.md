@@ -2,6 +2,9 @@
 
 ## Later verification update
 
+- Refined the interface after web-reference research: compact wordmark, consistent SVG navigation, stronger sans-serif page headings, a six-company EOD watchlist strip linking to charts, and chart shading/latest-session markers. The strip preserves source dates and modes; it is not a live ticker.
+- Verified an INFY strip click opened its selected chart, checked the mobile chart for page overflow, and inspected the populated desktop brief. All 20 tests, script syntax checking, build and artifact validation passed. Design references are recorded in ATTRIBUTION.md; no external assets were copied.
+
 - Added an interactive portfolio history chart using the same completed-session series as the watchlist. Company selection, daily price line, volume bars, source/mode/date labels and expandable exact-value table are available. It is not an intraday or portfolio-return chart.
 - Added brief view transitions, a price-line reveal and restrained button feedback only when reduced motion is not requested. No external chart dependency or fabricated data was added.
 - Browser checks switched RELIANCE to INFY and toggled volume/price; the volume view rendered 30 bars and the latest reported session value. All 20 tests passed; final build and artifact validation passed. Live AI synthesis is still a separate unresolved provider issue.

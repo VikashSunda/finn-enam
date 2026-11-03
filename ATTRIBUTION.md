@@ -13,5 +13,11 @@ assert ownership of upstream work or grant rights to third-party source data.
 No upstream LICENSE file was present in either repository's inspected default-branch file tree; do not assign an invented upstream license.
 
 Runtime dependencies `unpdf` and `esbuild` retain their respective package licenses.
+
+Visual research during the local refinement reviewed
+[Quartr's product presentation](https://quartr.com/products) for hierarchy and
+[Koyfin's functionality documentation](https://www.koyfin.com/help/topic/functionality/)
+for chart/data workflow context. These were design references, not copied source,
+branding, screenshots or commercial datasets. FINN's icons are locally authored SVGs.
 Original company reports, exchange filings and price data remain attributable to
 their linked publishers; collection does not transfer ownership.
