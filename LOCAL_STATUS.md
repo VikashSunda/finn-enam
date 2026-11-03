@@ -1,5 +1,21 @@
 # Local continuation — 3 November 2026, IST
 
+## Later verification update
+
+- Latest build, artifact validation and all 19 tests pass. Added valid provider-output contract coverage and a business-overview retrieval regression; annual-report business descriptions now receive preference over incidental transcript mentions.
+- Direct mobile research loaded excerpts after a 503 response and its source dialog showed the passage plus the correct `#page=10` link. Desktop portfolio was visually inspected at 1440 x 1000. A mobile evidence screenshot is stored in ignored `.cache/qa/mobile-evidence.png`.
+- Independent re-download of an Infosys transcript did not complete and was stopped. Original PDF page verification remains unfinished; checking the UI link alone does not establish content support.
+
+- The user configured a Gemini key in their own PowerShell process. It is not stored in this repository. The running server reports AI configured.
+- Gemini 2.5 Flash returned a provider explanation that it is unavailable to new users despite being listed by the models API. Explicit Gemini 3.8 Flash requests returned 503 high demand and later timed out. No successful live AI answer is claimed yet.
+- Added redacted provider-error diagnostics and regression coverage; 17 checks passed before the additional valid-provider contract test.
+- Live unfamiliar-ticker HAL research returned five attributed passages. All five discovered sources parsed: an annual report (386 text-bearing pages) and four transcripts (19, 19, 18, 18 pages). These are current-session local results, not hosted verification.
+- Explicit fresh requests for INFY and HAL returned live price/filing modes without errors. Prices still reported 30 October as the latest completed session. Filing counts were 16 and 3 respectively at request time. Stored snapshots were not overwritten.
+- At a direct 390 x 844 browser viewport, brief/research navigation and alert settings were inspected. Saving a 3% price threshold changed threshold alerts from two to three. Browser-local preferences were used only in the QA browser.
+- Both original assignment PDFs were read; the supplied actual conversation link is recorded in ASSIGNMENT_SOURCES.md and SUBMISSION_DRAFT.md. Signed-out link access remains unverified.
+
+The original baseline record below is preserved chronologically. This update supersedes its earlier statements about credentials and missing assignment PDFs.
+
 Deadline: 3 November 2026, 11:59 pm IST.
 
 ## Implemented in this continuation

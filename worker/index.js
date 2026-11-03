@@ -14,7 +14,20 @@ const UA={'User-Agent':'Mozilla/5.0','Accept':'application/json,text/html,applic
 
 async function remote(url, options={}, timeout=12000) {
   const response=await fetch(url,{...options,headers:{...UA,...options.headers},signal:AbortSignal.timeout(timeout),redirect:'follow'});
-  if(!response.ok)throw new Error('Source returned HTTP '+response.status);
+  if(!response.ok){
+    let detail='';
+    if(new URL(url).hostname==='generativelanguage.googleapis.com'){
+      try{
+        const data=await response.json();
+        detail=String(data.error?.message||'');
+        for(const value of Object.values(options.headers||{})){
+          if(typeof value==='string'&&value.length>12)detail=detail.split(value).join('[redacted]');
+        }
+        detail=clean(detail).replace(/AIza[A-Za-z0-9_-]+/g,'[redacted]').slice(0,450);
+      }catch{}
+    }
+    throw new Error('Source returned HTTP '+response.status+(detail?': '+detail:''));
+  }
   return response;
 }
 

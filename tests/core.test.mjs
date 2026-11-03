@@ -42,6 +42,15 @@ test('retrieval preserves source/page attribution and handles absent evidence',(
   assert.equal(evidence[0].documentId,'doc1');
   assert.deepEqual(retrieve([],'cash','cash'),[]);
 });
+
+test('business overview prioritises an annual-report description over incidental call mentions',()=>{
+  const documents=[
+    {id:'call',type:'transcript',pages:[{page:10,text:'Our digital services clients discussed consulting and our business opportunities in cyber security. '.repeat(4)}]},
+    {id:'annual',type:'annual_report',pages:[{page:75,text:'Business overview. We are a leading provider of technology consulting and digital services to enterprise clients. '.repeat(4)}]},
+  ];
+  const evidence=retrieve(documents,'','business');
+  assert.equal(evidence[0].documentId,'annual');assert.equal(evidence[0].page,75);
+});
 test('discovery uses raw transcript links and never third-party AI summaries',()=>{
   const html='<h3>Annual reports</h3><ul><li><a href="https://company.com/ar.pdf">Annual Report 2026</a></li></ul><li><div>Oct 2026</div><a href="https://company.com/call.pdf" title="Raw Transcript">Transcript</a><button data-url="/summary/1">AI Summary</button></li>';
   const docs=discoverDocuments(html,'INFY');

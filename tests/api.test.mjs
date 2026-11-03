@@ -25,6 +25,30 @@ test('provider quota failure preserves evidence and explicitly falls back',async
   assert.match(result.analysis.note,/429/);assert.ok(result.evidence.length);
 });
 
+test('Gemini errors explain model failures without reflecting credentials',async t=>{
+  const secret='mock-private-provider-credential';
+  t.mock.method(globalThis,'fetch',async()=>Response.json({error:{message:'Model not available. Received '+secret}},{status:404}));
+  const result=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify({ticker:'INFY',topic:'cash',question:'safe provider diagnostics'})}),{GEMINI_API_KEY:secret})).json();
+  assert.equal(result.analysis.mode,'extractive');assert.match(result.analysis.note,/Model not available/);
+  assert.ok(!JSON.stringify(result).includes(secret));assert.match(result.analysis.note,/redacted/);
+});
+
+test('valid Gemini output retains claim kind and exact source attribution',async t=>{
+  const payload={ticker:'INFY',topic:'cash',question:'valid provider contract regression'};
+  const baseline=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{})).json();
+  const id=baseline.evidence[0].id;
+  t.mock.method(globalThis,'fetch',async(url,options)=>{
+    assert.match(String(url),/generateContent$/);
+    assert.equal(options.headers['x-goog-api-key'],'mock-only');
+    const prompt=JSON.parse(options.body).contents[0].parts[0].text;
+    assert.ok(prompt.includes(id));
+    return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'Management reported the figure in the cited passage.',kind:'fact',sources:[id]}],note:'Period limited to the excerpt.'})}]}}]});
+  });
+  const result=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{GEMINI_API_KEY:'mock-only',GEMINI_MODEL:'gemini-3.1-flash-lite'})).json();
+  assert.equal(result.analysis.mode,'ai');assert.equal(result.analysis.model,'gemini-3.1-flash-lite');
+  assert.deepEqual(result.analysis.claims[0].sources,[id]);assert.equal(result.analysis.claims[0].kind,'fact');
+});
+
 test('one invalid citation rejects the whole answer instead of silently omitting claims',async t=>{
   const payload={ticker:'INFY',topic:'cash',question:'citation rejection regression'};
   const baseline=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{})).json();

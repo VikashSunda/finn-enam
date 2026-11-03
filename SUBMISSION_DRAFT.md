@@ -21,7 +21,10 @@ Next steps include durable ingestion/caching and broader source/citation evaluat
 
 Prototype: [confirm reviewer-accessible deployed revision]
 Repository: [create only after authorization]
-AI build conversations: [attach actual exports/share links]
+AI build conversation supplied by user: https://chatgpt.com/share/6ae933fa-b760-83e8-bae7-3feb55f11340
+Current Codex continuation: [attach export/share link before submission]
+
+The supplied share link has been recorded, but automated retrieval returned a cache miss. Its contents, completeness and reviewer access have not been verified. Test it in a signed-out browser before sending.
 
 [Add final live AI and mobile verification results before sending.]
 

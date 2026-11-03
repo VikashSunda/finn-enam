@@ -84,6 +84,7 @@ export function retrieve(documents, question = '', topic = 'business', limit = 1
       let score=hits.length*3 + (doc.type==='transcript'?Math.max(1,5-di):0) - (/table of contents|forward.looking statements|safe harbour/.test(lower)?10:0);
       if(topic==='business'){
         if(/business overview|our business|segment.{0,35}revenue|revenue.{0,35}segment|our offerings/.test(lower))score+=8;
+        if(doc.type==='annual_report' && /leading provider|business overview|our business|our offerings/.test(lower))score+=14;
         if(/awards|manufactured capital|natural capital|share in profit|remuneration|certificate/.test(lower))score-=12;
       }
       if(topic==='guidance' && /guidance|outlook/.test(lower))score+=6;
