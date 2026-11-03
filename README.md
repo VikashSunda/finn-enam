@@ -38,7 +38,8 @@ Google documents HTTP 503 as temporary provider unavailability: https://ai.googl
 
 - **Daily brief:** 24-hour default, 7-day and 30-day windows; important categories first; routine filings expandable; direct exchange links.
 - **Portfolio:** 18 diversified mock holdings, add/remove NSE symbols, daily close, percentage move, previous-session volume comparison and recent price history.
-- **Alerts:** Configurable absolute price and relative-volume thresholds plus announcement-category preferences. Checked on refresh, not background phone notifications. Preferences remain in the browser.
+- **Appearance & profile:** Profile avatar V opens Vikash’s menu and Settings. Choose Light, Dark or System; the saved choice applies before initial paint and follows device changes in System mode. The brief greets Vikash using device-local time. No account or login actions are implied.
+- **Alerts:** A dedicated navigation section contains triggered alerts and existing rules. The brief keeps a compact linked alert summary. Configurable absolute price and relative-volume thresholds plus announcement-category preferences. Checked on refresh, not background phone notifications. Preferences remain in the browser.
 - **Research:** Four preloaded companies (INFY, TCS, RELIANCE, HDFCBANK); generic NSE ticker discovery and PDF extraction where accessible. Business, financials, cash quality, balance sheet, guidance and risk evidence search. Questions use the same primary corpus.
 - **Evidence:** Document links and PDF page numbers; facts/inferences separated in optional AI outputs. Unknown citation IDs, unmatched supporting quotes and numbers absent from cited evidence are rejected. Matched quotes can be expanded in the research view.
 - **Source health:** Fresh fetch, snapshot, stale fallback and unavailable states; missing data is never replaced by generated numbers.

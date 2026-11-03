@@ -30,7 +30,7 @@
 
 /* A short, source-labelled entry point into company charts. */
 (()=>{
-  const icons={brief:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 3v18m4-12h5m-5 4h5"/>',portfolio:'<path d="M4 20V10m5 10V4m6 16v-8m5 8V7"/>',research:'<circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/>',sources:'<path d="M7 3h8l4 4v14H5V3h2m8 0v5h4M9 12h6m-6 4h6"/>'};
+  const icons={alerts:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>',brief:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 3v18m4-12h5m-5 4h5"/>',portfolio:'<path d="M4 20V10m5 10V4m6 16v-8m5 8V7"/>',research:'<circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/>',sources:'<path d="M7 3h8l4 4v14H5V3h2m8 0v5h4M9 12h6m-6 4h6"/>'};
   document.querySelectorAll('[data-view]').forEach(button=>{
     const icon=button.querySelector('.nav-icon')||button.querySelector('span');
     if(icon&&icons[button.dataset.view])icon.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons[button.dataset.view]+'</svg>';
@@ -40,7 +40,7 @@
   document.querySelector('.top-actions').prepend(search);
   search.addEventListener('submit',event=>{event.preventDefault();const ticker=search.querySelector('input').value.trim().toUpperCase();if(!/^[A-Z0-9][A-Z0-9&-]{0,24}$/.test(ticker))return message('Enter an NSE symbol such as INFY or M&M.','warning');switchView('research');research(ticker);});
   const tape=document.createElement('section');tape.className='session-tape';tape.setAttribute('aria-label','Selected watchlist closes');
-  document.querySelector('#brief-view').prepend(tape);
+  document.querySelector('#brief-alert-link').after(tape);
   function update(){
     const rows=state.rows.filter(row=>row.price.summary).slice(0,6);
     tape.innerHTML='<div class="tape-label"><span class="tape-dot"></span><b>Watchlist closes</b><small>Available EOD sessions</small></div><div class="tape-scroll">'+rows.map(row=>{const s=row.price.summary;return '<button type="button" class="tape-company" data-chart="'+esc(row.ticker)+'" aria-label="Open '+esc(row.ticker)+' chart"><span class="tape-symbol">'+esc(row.ticker)+'</span><span class="tape-quote">₹'+number(s.close)+' <small class="'+(s.changePct>=0?'positive':'negative')+'">'+pct(s.changePct)+'</small></span><span class="tape-date">'+esc(s.date)+' · '+esc(row.price.mode.replaceAll('_',' '))+'</span></button>';}).join('')+'</div>';

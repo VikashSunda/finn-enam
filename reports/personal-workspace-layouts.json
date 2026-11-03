@@ -1,0 +1,107 @@
+{
+  "testedAt": "2026-11-03T10:21:36.820Z",
+  "checks": [
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "portfolio",
+      "width": 1385
+    },
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "sources",
+      "width": 1385
+    },
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "research",
+      "width": 1385
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "brief",
+      "width": 1385
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "portfolio",
+      "width": 1385
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "alerts",
+      "width": 1385
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "sources",
+      "width": 1385
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "portfolio",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "research",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "alerts",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "sources",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "light",
+      "view": "brief",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "portfolio",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "research",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "alerts",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "sources",
+      "width": 346
+    },
+    {
+      "overflow": false,
+      "theme": "dark",
+      "view": "brief",
+      "width": 346
+    }
+  ]
+}

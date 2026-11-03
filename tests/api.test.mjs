@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import worker from '../dist/server/index.js';
 const req=(path,options)=>new Request('https://finn.test'+path,options);
 test('homepage and assets are served; status discloses missing model key',async()=>{
-  const home=await worker.fetch(req('/'),{});assert.equal(home.status,200);assert.match(await home.text(),/Your portfolio, in focus/);
+  const home=await worker.fetch(req('/'),{});assert.equal(home.status,200);assert.match(await home.text(),/Welcome back, Vikash/);
   const status=await(await worker.fetch(req('/api/status'),{})).json();
   assert.equal(status.companies.length,18);assert.equal(status.aiConfigured,false);assert.ok(status.researchTickers.includes('INFY'));
   const css=await worker.fetch(req('/styles.css'),{});assert.match(css.headers.get('content-type'),/text\/css/);

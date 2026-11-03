@@ -2,6 +2,11 @@
 
 ## Later verification update
 
+- Personal workspace UI: Light/Dark/System selection now lives in Settings, persists before paint and responds to device changes in System mode. Restrained dark gradients/glass/borders and clean light surfaces apply across views and dialogs. Top-right V profile menu shows Vikash and Settings; no auth actions added. Home greeting uses device-local time, including Welcome back before 5 am.
+- Alert thresholds/categories moved from Settings into a dedicated Alerts navigation view. The original alerts() calculation and browser storage remain in use. Brief summary links to Alerts; mobile Edit alert rules jumps directly to the form. Source/session labels and original source links remain present.
+- All 42 tests, build, artifact validation and browser-script syntax checks passed. Browser checks covered light/dark persistence, System restoration, profile Escape/Tab/outside dismissal, Settings-to-Alerts, desktop/mobile views, rule saving/category filtering/reload and original-rule restoration. No horizontal page overflow measured in recorded views. See reports/PERSONAL_WORKSPACE_QA.md for evidence and limits. No push or deployment.
+
+
 - Added a bounded Gemini model chain: configured primary (default 3.1 Flash-Lite), 3.5 Flash-Lite, then 3.8 Flash. Sequential increasing delays, 25-second per-attempt timeouts, max three attempts; stop on quota/auth/bad request and enforce the same source validation for every responder. Actual response model/attempt diagnostics are returned and successful UI answers name the model.
 - Final live chain: primary 503, 3.5 timeout, 3.8 503; source excerpts retained. Earlier 2.5 candidates returned 404 and were removed. A native timeout diagnostic mutation bug found in testing was fixed. All 39 tests, build and artifact validation pass. See reports/GEMINI_FALLBACK.md. No successful live backup synthesis is claimed; provider capacity remains unresolved.
 
