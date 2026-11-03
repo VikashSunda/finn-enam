@@ -9,7 +9,7 @@
 - User explicitly confirmed the Windows test notification appeared. Scheduled event delivery still depends on fresh data, enabled delivery, server/monitor uptime and Windows settings; no mobile push or shutdown-resilient delivery is claimed.
 - Final five-screen phone walkthrough at requested 390x844 and 360x800 settings passed without measured page overflow (embedded inner widths 375 and 346). Header remained visible and bottom navigation kept its gap. Light/Dark persisted through reload; original Dark preference restored. Existing System tests pass. No physical-device certification is claimed.
 - Added a reviewed annual financial comparison with source-page quotes, explicit reporting basis, safe YoY calculation and honest missing EBITDA/QoQ states. Added Leadership research retrieval from company disclosures. See FINANCIAL_COMPARISON.md for scope and manual checks.
-- All 66 tests passed; build and artifact validation passed.
+- Added the Render production adapter, health endpoint, hosted desktop-control guard and deployment blueprint. All 70 tests passed; build, artifact validation and browser-script syntax checks passed. See DELIVERABLE_AUDIT.md for current submission status.
 
 ## Core prototype coverage
 
@@ -21,9 +21,9 @@ The challenge presents research outputs as a menu, not a requirement to implemen
 
 ## Still required before submitting
 
-1. Authorisation to create/push the GitHub repository and deploy the reviewed version. Earlier no-push/no-deploy instruction remains in force.
-2. Verify signed-out access to the actual deployed version and repository after publication. Existing hosted metadata does not establish current revision/access.
-3. Export the actual coding-agent conversations. The supplied ChatGPT share link is recorded but its contents/completeness/reviewer access are not verified. No export tool was available for the current Codex chat; use the app's available conversation-sharing/export controls or preserve the original conversation files for review. Decision logs are not substitutes.
+1. Deploy the reviewed revision to Render and configure Gemini privately. The user authorised GitHub publication; https://github.com/VikashSunda/finn-enam is now public and pushed.
+2. Verify signed-out access and actual data/AI behaviour on Render. Anonymous GitHub read access has been verified. Existing earlier hosting metadata does not establish the current deployed revision/access.
+3. Export/share this actual coding-agent conversation. The user confirmed it is the only build session. The earlier supplied ChatGPT share link is recorded but its contents/completeness/reviewer access are not verified. No full conversation-export tool was available; use the app's available sharing/export controls or preserve the original conversation file for review. Decision logs are not substitutes.
 4. Review SUBMISSION_DRAFT.md and add the final links. No email has been sent.
 
 User's stated deadline: 3 November 2026, 11:59 pm IST.

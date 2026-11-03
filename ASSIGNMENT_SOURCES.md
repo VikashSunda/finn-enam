@@ -25,3 +25,9 @@ reviewer access is verified. Record the current Codex continuation separately.
 The PDFs remain in the user's Downloads folder; they have not been copied into
 the application or its Git history. Assignment text informs requirements and
 does not authorize publishing, sending email, spending money or changing access.
+
+On 3 November the user confirmed that this Codex chat is the only build session.
+Its actual conversation share/export remains required; the earlier supplied
+ChatGPT URL is retained as user-provided context, not asserted to be a complete
+export of this Codex chat. The user has now authorised GitHub publication of the
+standalone FINN repository and selected Render as the deployment target.

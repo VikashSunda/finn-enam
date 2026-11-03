@@ -6,7 +6,7 @@ A mobile-first portfolio brief and primary-source company research prototype for
 
 ## Run
 
-Node 24 or newer:
+Node 24 LTS:
 
 ```sh
 npm ci

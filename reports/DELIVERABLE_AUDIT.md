@@ -15,8 +15,8 @@ Checked against the original four-page Main challenge PDF, the companion referen
 | Financial / guidance depth | Reviewed Infosys annual financial and guidance comparisons, four-quarter outlook history. Generic automatic quarterly tables and four-quarter delivery scoring are not claimed. |
 | Management enrichment | Leadership primary-document topic implemented; automatic incoming-person biographies and external profile enrichment are not implemented. This is an illustrative feature, not a core requirement. |
 | Public working prototype link | PENDING: Render production adapter and blueprint are ready; no deployment/access test yet. |
-| GitHub repository | PENDING publication in this audit pass. User authorised a separate FINN repository and push; original projects remain untouched. |
-| Actual AI build history | INCOMPLETE: earlier user-provided share URL recorded in ASSIGNMENT_SOURCES.md; its content/completeness/reviewer access is unverified. Current and other actual build conversations still need export/share links. Decision logs are not substitutes. |
+| GitHub repository | COMPLETE: https://github.com/VikashSunda/finn-enam — public, `main` pushed and remote revision matched. Anonymous `git ls-remote` succeeded with credential helpers disabled. Original projects remain untouched. |
+| Actual AI build history | INCOMPLETE: user confirms this Codex chat is the only build session. Its actual share/export is still needed. Earlier user-provided ChatGPT share URL remains recorded but its content/completeness/reviewer access is unverified. Decision logs are not substitutes. |
 | Short covering writeup | DRAFT ready in SUBMISSION_DRAFT.md; final prototype/repository/history links must be inserted. |
 | Submission email | NOT SENT. Recipient and subject are recorded in the draft; sending requires the user's instruction. |
 
@@ -28,4 +28,4 @@ Checked against the original four-page Main challenge PDF, the companion referen
 - Latest feed report: `PORTFOLIO_FRESHNESS.json`. Local data success does not establish hosted coverage.
 - Credential-pattern scan of tracked history and publishable working files found no matching Google/OpenAI keys or private-key headers. Ignored caches, environment files and node_modules are excluded from publication.
 
-The core local prototype is ready to publish for hosted testing. The entire submission is NOT complete until the public app/repository links, actual conversation history and final covering note are verified. OCR, hosted/mobile push and fully automatic financial extraction remain deliberate limitations.
+The audited source is now public on GitHub and ready for Render deployment/testing. The entire submission is NOT complete until the public app link, actual conversation history and final covering note are verified. OCR, hosted/mobile push and fully automatic financial extraction remain deliberate limitations.
