@@ -67,7 +67,7 @@ export function makeAlerts(prices, settings = {}) {
 }
 
 export const TOPICS = {
-  business: ['business overview','our business','our offerings','revenue mix','segments','consulting','digital services','clients'],
+  business: ['business overview','business model','our business','our offerings','our products','our services','products and services','customers','revenue mix','segments','consulting','digital services','clients'],
   financials: ['revenue','ebitda','profit','margin','earnings','tax'],
   cash: ['cash flow','cash conversion','working capital','receivable','free cash','operating cash'],
   balance: ['debt','borrowings','liabilities','leverage','balance sheet'],

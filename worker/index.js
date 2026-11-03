@@ -2,6 +2,7 @@ import financialExample from '../data/financial-example.json';
 import {financialChange} from './financials.js';
 import guidanceExample from '../data/guidance-example.json';
 import {compareGuidance} from './comparison.js';
+import {researchIntent} from './question-intent.js';
 import companies from '../data/companies.json';
 import seedResearch from '../data/research.json';
 import snapshot from '../data/snapshot.json';
@@ -152,7 +153,7 @@ async function loadResearch(ticker,refresh=false) {
 }
 
 const answerSchema={type:'object',properties:{claims:{type:'array',minItems:1,maxItems:5,items:{type:'object',properties:{text:{type:'string'},kind:{type:'string',enum:['fact','inference','limitation']},sources:{type:'array',minItems:1,maxItems:3,items:{type:'string'}},support:{type:'array',maxItems:3,items:{type:'object',properties:{sourceId:{type:'string'},quote:{type:'string'}},required:['sourceId','quote']}}},required:['text','kind','sources','support']}}},required:['claims']};
-async function synthesise(evidence,question,topic,ticker,env) {
+async function synthesise(evidence,question,topic,ticker,env,intent='topic') {
   if(!env.GEMINI_API_KEY&&!env.OPENAI_API_KEY)return {mode:'extractive',claims:[],note:'Source excerpts are available. AI synthesis requires a server-side model key.'};
   const provider=env.GEMINI_API_KEY?'gemini':'openai';
   let model=provider==='gemini'?(env.GEMINI_MODEL||'gemini-3.1-flash-lite'):(env.OPENAI_MODEL||'gpt-4.1-mini');
@@ -161,10 +162,12 @@ async function synthesise(evidence,question,topic,ticker,env) {
   const groundingRules=' Additional grounding rules: preserve negations, caveats and uncertainty from management. A discussion or client interest is not proof of adoption or a business-model shift. For every number and trend, identify its reporting period; never combine different quarters into a current snapshot. Do not claim the latest position unless the newest relevant excerpt supports it. Attribute management estimates as management statements, not independent facts. If an excerpt cuts off before a qualification, state that the evidence is incomplete rather than completing the thought.';
   const quoteRules=' Every fact or inference MUST also include support: [{sourceId:"exact cited evidence ID",quote:"exact contiguous quotation copied from that excerpt"}]. Provide one 24–600 character quote for EVERY cited source. Preserve the relevant qualifier in the quote. Never invent, paraphrase or stitch together a quote. Numeric values in claims must appear in the cited passages; do not calculate new values. Limitation claims must use an empty support array.';
   const numericRules=' Copy reported numeric values without rounding, currency conversion or unit scaling. Do not derive growth rates, differences or ratios. When comparing periods, present the reported values side by side with their original units and periods. An unreported calculation must not be presented as a cited source fact.';
-  const requestPrompt=prompt+groundingRules+quoteRules+numericRules+' If the requested answer is not established by the evidence, return only concise limitation claims. Do not pad the answer with nearby unrelated facts or extrapolate a speaker statement about one metric into a universal policy. Scope missing evidence to the retrieved excerpts, not every company document. Do not infer a corpus-wide latest reporting period from one excerpt.';
+  const taskRules=intent==='overview'?' This is a simple company introduction. Answer directly in at most TWO short claims, together no more than 80 words. Explain core products/services, customers and how the company earns money in everyday language. Avoid jargon, unrelated AI initiatives, guidance and recent developments unless essential to its core business. If the evidence supports the core explanation, do not append a generic limitation claiming the whole question is unanswered. State only genuine missing requested details.':'';
+  const requestPrompt=prompt+groundingRules+quoteRules+numericRules+taskRules+' If the requested answer is not established by the evidence, return only concise limitation claims. Do not pad the answer with nearby unrelated facts or extrapolate a speaker statement about one metric into a universal policy. Scope missing evidence to the retrieved excerpts, not every company document. Do not infer a corpus-wide latest reporting period from one excerpt.';
+  const responseSchema=intent==='overview'?{...answerSchema,properties:{...answerSchema.properties,claims:{...answerSchema.properties.claims,maxItems:2}}}:answerSchema;
   let text,attempts=[];
   if(provider==='gemini'){
-    const result=await generateGemini({env,prompt:requestPrompt,schema:answerSchema,remote});
+    const result=await generateGemini({env,prompt:requestPrompt,schema:responseSchema,remote});
     text=result.text;model=result.model;attempts=result.attempts;
   }else{
     const res=await remote('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({model,input:requestPrompt,max_output_tokens:2400,text:{format:{type:'json_object'}}})},25000);
@@ -231,15 +234,17 @@ export default {
         let body;try{body=JSON.parse(raw);}catch{return json({error:'Send a valid JSON object.'},400);}
         if(!body||typeof body!=='object'||Array.isArray(body))return json({error:'Send a valid JSON object.'},400);
         const ticker=normaliseTicker(body.ticker);
-        const question=String(body.question||'').slice(0,500),topic=String(body.topic||'business');
+        const originalQuestion=String(body.question||'').slice(0,500),intent=researchIntent(originalQuestion,String(body.topic||'business'),ticker);
+        const {question,topic}=intent;
+        if(intent.kind==='greeting')return json({ticker,topic,mode:'conversation',documents:[],evidence:[],analysis:{mode:'guide',message:'Hi! I can help you research '+ticker+' using company reports and earnings calls. Ask what it does, how it earns money, or a specific financial question.'}});
         const research=await loadResearch(ticker,body.refresh===true);
         const evidence=retrieve(research.documents,question,topic,10);
         let analysis={mode:'extractive',claims:[],note:'No matching passages found. Try a different question.'};
         if(evidence.length)try{
           const key='answer:'+ticker+':'+topic+':'+question+':'+research.fetchedAt+':'+(env.GEMINI_API_KEY?'gemini':env.OPENAI_API_KEY?'openai':'extractive')+':'+(env.GEMINI_MODEL||env.OPENAI_MODEL||'default')+':'+(env.GEMINI_API_KEY?geminiModels(env).join(','):'');
-          analysis=await cached(key,6*3600_000,()=>synthesise(evidence,question,topic,ticker,env));
+          analysis=await cached(key+':'+intent.kind,6*3600_000,()=>synthesise(evidence,question,topic,ticker,env,intent.kind));
         }catch(e){analysis={mode:'extractive',claims:[],attempts:e.attempts||[],note:'AI synthesis unavailable: '+clean(e.message)+'. Showing primary-source excerpts.'};}
-        return json({ticker,mode:research.mode,fetchedAt:research.fetchedAt,documents:research.documents.map(({pages,...d})=>({...d,parsedPages:pages?.length||0})),evidence,analysis,error:research.error||null});
+        return json({ticker,topic,intent:intent.kind,interpretedQuestion:question!==originalQuestion?question:null,mode:research.mode,fetchedAt:research.fetchedAt,documents:research.documents.map(({pages,...d})=>({...d,parsedPages:pages?.length||0})),evidence,analysis,error:research.error||null});
       }
       return json({error:'Not found'},404);
     }catch(e){return json({error:clean(e.message)},['/api/research','/api/filing-analysis'].includes(url.pathname)?422:400);}
