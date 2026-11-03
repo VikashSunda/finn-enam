@@ -2,6 +2,9 @@
 
 ## Later verification update
 
+- Added a bounded Gemini model chain: configured primary (default 3.1 Flash-Lite), 3.5 Flash-Lite, then 3.8 Flash. Sequential increasing delays, 25-second per-attempt timeouts, max three attempts; stop on quota/auth/bad request and enforce the same source validation for every responder. Actual response model/attempt diagnostics are returned and successful UI answers name the model.
+- Final live chain: primary 503, 3.5 timeout, 3.8 503; source excerpts retained. Earlier 2.5 candidates returned 404 and were removed. A native timeout diagnostic mutation bug found in testing was fixed. All 39 tests, build and artifact validation pass. See reports/GEMINI_FALLBACK.md. No successful live backup synthesis is claimed; provider capacity remains unresolved.
+
 - AI support hardening: required Gemini JSON Schema with per-source copied quotes; reject fabricated quotes, missing support and numeric literals absent from cited evidence. Limitation bodies/notes use fixed retrieved-scope language to prevent a classification bypass. Matched quotes expand in the research UI.
 - Build, artifact validation and all 32 tests pass. One live INFY cash fact passed schema/support checks and manual sampled review. A seven-case follow-up hit six Gemini 503 errors; its successful limitation exposed wording corrected afterward. The final live retry hit 503. Broader live content review remains incomplete; reports/AI_VERIFICATION.md records both failures and successes. No OpenAI key created, billing changed, repository pushed or site published.
 

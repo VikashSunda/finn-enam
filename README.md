@@ -24,6 +24,16 @@ npm run dev
 
 Never commit keys. Hosted secrets belong in the hosting provider's runtime environment. Supported names are documented in `.env.example`. API usage is separate from a ChatGPT subscription and may incur provider charges.
 
+## Gemini availability
+
+FINN tries the configured Gemini model first (default `gemini-3.1-flash-lite`), then `gemini-3.5-flash-lite` and `gemini-3.8-flash`. The response and UI identify the actual responder. All models use the same required quote schema and server-side source checks.
+
+The chain runs sequentially, with short increasing jittered delays, a 25-second timeout per attempt, and at most three attempts. Capacity/server errors, timeouts and unavailable models can advance the chain. Bad requests, credentials and quota errors stop immediately; invalid generated content is rejected without trying to find a more permissive answer. If none answers, attributed excerpts remain available.
+
+Override the ordered backups with `GEMINI_FALLBACK_MODELS` (comma-separated); an empty value disables fallback. Configure this in the server environment, since dev does not load env files. Changing the configured chain requires restarting the server; this default implementation was loaded by the running server through the existing development reload.
+
+Google documents HTTP 503 as temporary provider unavailability: https://ai.google.dev/gemini-api/docs/troubleshooting. These default text models have free-tier entries in https://ai.google.dev/gemini-api/docs/pricing; project-specific eligibility and quota still apply. FINN does not enable billing or change account tier. Model-list visibility alone does not prove inference access: live tests found the older 2.5 models return 404 for this account.
+
 ## Product
 
 - **Daily brief:** 24-hour default, 7-day and 30-day windows; important categories first; routine filings expandable; direct exchange links.

@@ -116,3 +116,10 @@ test('invalid research input and unbounded portfolios are rejected',async()=>{
   const invalid=await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify({ticker:'../../etc'})}),{});assert.equal(invalid.status,422);
   const many=await worker.fetch(req('/api/portfolio?tickers='+Array.from({length:26},(_,i)=>'T'+i).join(',')),{});assert.equal(many.status,400);
 });
+
+test('fallback model output must pass the same quote and citation checks',async t=>{
+ const payload={ticker:'INFY',topic:'cash',question:'Fallback evidence guard regression'};let calls=0;
+ t.mock.method(globalThis,'fetch',async()=>{if(++calls===1)return Response.json({error:{message:'High demand'}},{status:503});return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'A fabricated return.',kind:'fact',sources:['fake-id'],support:[]}]})}]}}]});});
+ const result=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{GEMINI_API_KEY:'mock-only'})).json();
+ assert.equal(calls,2);assert.equal(result.analysis.mode,'extractive');assert.match(result.analysis.note,/evidence validation/);assert.ok(result.evidence.length);
+});

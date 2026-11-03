@@ -1,0 +1,32 @@
+{
+  "testedAt": "2026-11-03T10:04:10.233Z",
+  "configuredModels": [
+    "gemini-3.1-flash-lite",
+    "gemini-3.5-flash-lite",
+    "gemini-3.8-flash"
+  ],
+  "request": {
+    "ticker": "INFY",
+    "topic": "business",
+    "question": ""
+  },
+  "analysis": {
+    "mode": "extractive",
+    "claims": [],
+    "attempts": [
+      {
+        "model": "gemini-3.1-flash-lite",
+        "status": 503
+      },
+      {
+        "model": "gemini-3.5-flash-lite",
+        "status": "timeout"
+      },
+      {
+        "model": "gemini-3.8-flash",
+        "status": 503
+      }
+    ],
+    "note": "AI synthesis unavailable: Gemini could not answer after 3 model attempts. Source returned HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.. Showing primary-source excerpts."
+  }
+}
