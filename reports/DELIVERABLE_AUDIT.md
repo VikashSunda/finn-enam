@@ -23,7 +23,7 @@ Checked against the original four-page Main challenge PDF, the companion referen
 
 ## Final verification
 
-- 79 automated tests pass, including independent discovery, research expiry, durable snapshot validation, production HTTP routing and deployed-revision health checks. The same suite passed on the real GitHub runner.
+- 89 local automated tests pass after the conversational-research fixes. Earlier 79- and 84-test revisions also passed on the real GitHub runner. Tests include independent discovery, research expiry, snapshot validation, hosted isolation, greeting/business/growth intent and financial-period checks. See PAYTM_RESEARCH_FIX.md for current live samples and remaining coverage limits.
 - Build, artifact validation and browser-script syntax checks pass.
 - Previous manual checks and sampled live Gemini outcomes are recorded under `reports/`; the Windows notification was explicitly confirmed by the user.
 - Latest feed report: `PORTFOLIO_FRESHNESS.json`. Local data success does not establish hosted coverage.
