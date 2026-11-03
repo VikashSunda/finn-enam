@@ -188,7 +188,7 @@ export default {
       if(url.pathname==='/app.js')return new Response(client,{headers:{'content-type':'text/javascript; charset=utf-8'}});
       if(url.pathname==='/charts.js')return new Response(charts,{headers:{'content-type':'text/javascript; charset=utf-8'}});
       if(url.pathname==='/api/alert-delivery'){
-        if(!['localhost','127.0.0.1'].includes(url.hostname))return json({available:false,error:'Local monitor delivery is only available on this computer.'},404);
+        if(env.FINN_HOSTED==='1'||!['localhost','127.0.0.1'].includes(url.hostname))return json({available:false,error:'Local monitor delivery is only available on this computer.'},404);
         if(!['GET','POST'].includes(request.method))return json({error:'Method not allowed'},405);
         if(request.method==='POST'&&(request.headers.get('origin')!==url.origin||!request.headers.get('content-type')?.includes('application/json')))return json({error:'Same-origin JSON request required'},403);
         const raw=request.method==='POST'?await request.text():null;if(raw&&raw.length>5000)return json({error:'Too large'},413);

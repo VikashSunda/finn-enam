@@ -37,10 +37,10 @@ Google documents HTTP 503 as temporary provider unavailability: https://ai.googl
 ## Product
 
 - **Daily brief:** 24-hour default, 7-day and 30-day windows; important categories first; routine filings expandable; direct exchange links.
-- **Portfolio:** 18 diversified mock holdings, add/remove NSE symbols, daily close, percentage move, previous-session volume comparison and recent price history.
+- **Portfolio:** 18-company demonstration watchlist, add/remove NSE symbols, daily close, percentage move, relative volume against up to 20 preceding sessions and interactive price/volume history with session tooltips.
 - **Appearance & profile:** Profile avatar V opens Vikash’s menu and Settings. Choose Light, Dark or System; the saved choice applies before initial paint and follows device changes in System mode. The brief greets Vikash using device-local time. No account or login actions are implied.
 - **Alerts:** A dedicated navigation section contains triggered alerts and existing rules. The brief keeps a compact linked alert summary. Configurable absolute price and relative-volume thresholds plus announcement-category preferences. Checked on refresh, not background phone notifications. Preferences remain in the browser.
-- **Research:** Four preloaded companies (INFY, TCS, RELIANCE, HDFCBANK); generic NSE ticker discovery and PDF extraction where accessible. Business, financials, cash quality, balance sheet, guidance and risk evidence search. Questions use the same primary corpus.
+- **Research:** Four preloaded companies (INFY, TCS, RELIANCE, HDFCBANK); generic NSE ticker discovery and PDF extraction where accessible. Business, financials, cash quality, balance sheet, guidance, leadership and risk evidence search. Questions use the same primary corpus.
 - **Evidence:** Document links and PDF page numbers; facts/inferences separated in optional AI outputs. Unknown citation IDs, unmatched supporting quotes and numbers absent from cited evidence are rejected. Matched quotes can be expanded in the research view.
 - **Source health:** Fresh fetch, snapshot, stale fallback and unavailable states; missing data is never replaced by generated numbers.
 
@@ -76,13 +76,13 @@ Browser UI → Worker API → source adapters / cached corpus → evidence retri
 ## Trade-offs and limitations
 
 - Prototype, not investment advice. Filing-category rules are explainable heuristics, not a comprehensive materiality model.
-- No brokerage integration, real holdings, real-time prices, background push service, or unattended daily ingestion.
+- No brokerage integration, real holdings, real-time prices or hosted/mobile background delivery. Unattended local checks and Windows delivery require the local server and monitor to remain running.
 - Online parsing is capped at 14 MB per document. Scanned/image PDFs may require OCR, which is not implemented.
 - Financial websites can block hosted requests even if local requests work. Missing annual reports and blocked transcripts are visible.
 - Research checks validate source IDs, copied supporting quotes and numeric presence. These do not establish semantic correctness, metric/period alignment or every inference; human review remains necessary. Model-written limitation text is replaced by a fixed statement scoped to retrieved passages. See reports/AI_VERIFICATION.md for live outcomes and remaining limits.
 - A manually reviewed Infosys guidance-versus-delivery example is available in Research without a model call, including four reporting quarters of outlook history and one aligned FY26 annual comparison. It is explicitly curated, not automated for every ticker. The comparator rejects period/metric/unit/basis mismatches; FY27 annual delivery remains pending.
 - No automatic Revenue/EBITDA/PBT/PAT table is claimed. These metrics require verified filing extraction; EBITDA should not be fabricated where unreported or unsuitable for a sector.
-- Public sharing for interviewers and a live LLM-provider check remain submission steps.
+- Public sharing for interviewers remains a submission step. Sampled live Gemini checks are recorded in reports/FINAL_AI_CHECKS.json; they do not guarantee future availability or correctness.
 
 ## Verification
 
@@ -96,7 +96,7 @@ Tests cover EOD boundaries, baseline exclusion, insufficient data, timestamp zon
 
 ## Build history and reuse
 
-See `ATTRIBUTION.md`, `BUILD_HISTORY.md` and `LOCAL_STATUS.md`. This standalone repository contains only the original `finn/` application, copied without upstream Git history. It follows review of Sector Intelligence Monitor and Nifty Market Breadth Intelligence, reusing architectural ideas (source adapters, page-level chunks, explicit data-integrity states) with a Worker implementation. Both original repositories remain untouched. No GitHub remote or push is configured.
+See `ATTRIBUTION.md`, `BUILD_HISTORY.md` and `LOCAL_STATUS.md`. This standalone repository started with only the original `finn/` application, copied without upstream Git history, and includes subsequent local improvements. It follows review of Sector Intelligence Monitor and Nifty Market Breadth Intelligence, reusing architectural ideas (source adapters, page-level chunks, explicit data-integrity states) with a Worker implementation. Both original repositories remain untouched.
 
 The actual coding-agent conversation export/share link must be included with the submission. `BUILD_HISTORY.md` is a decision log, not a substitute or a fabricated transcript.
 
@@ -119,3 +119,9 @@ Alerts contains an opt-in Windows desktop-delivery checkbox and Save desktop del
 Research → Explore guidance vs delivery opens a reviewed Infosys example without calling an AI provider. It links the annual guidance/result and four quarters of outlook history to source pages, with explicit comparison-basis safeguards. This curated case is separate from the generic research engine. Current validation and remaining submission actions are in reports/FINAL_READINESS.md.
 
 The default 18-company portfolio is a demonstration watchlist selected for the challenge, not the user’s actual investments. The brief and Portfolio screen label this explicitly.
+
+## Render deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md). Build with `npm ci --include=dev && npm run build`; run with `npm start`. The production server uses Render's `PORT`, binds to `0.0.0.0`, exposes `/healthz`, and never exposes local Windows delivery controls. `render.yaml` defines a free web service with automatic deploys disabled. Gemini credentials must be entered as Render secrets, not committed.
+
+Current requirements mapping, tested scope and outstanding submission deliverables are in [reports/DELIVERABLE_AUDIT.md](reports/DELIVERABLE_AUDIT.md). Earlier status/handoff notes are historical; use the audit for current readiness.
