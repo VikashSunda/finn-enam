@@ -33,7 +33,7 @@
    const greeting=Number.isFinite(hour)?hour<5?'Welcome back':hour<12?'Good morning':hour<17?'Good afternoon':'Good evening':'Welcome back';
    document.querySelector('#page-title').textContent=greeting+', Vikash';
    document.querySelector('#eyebrow').textContent='DAILY BRIEF';
-   document.querySelector('#page-subtitle').textContent='Your portfolio, at a glance.';
+   document.querySelector('#page-subtitle').textContent='Demo portfolio · Your daily market brief.';
   }
   greet();document.addEventListener('finn:viewchange',greet);document.addEventListener('visibilitychange',()=>{if(!document.hidden)greet();});setInterval(greet,60000);
   let queued=false;

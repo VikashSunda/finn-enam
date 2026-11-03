@@ -117,3 +117,5 @@ Alerts contains an opt-in Windows desktop-delivery checkbox and Save desktop del
 ## Reviewed guidance comparison
 
 Research → Explore guidance vs delivery opens a reviewed Infosys example without calling an AI provider. It links the annual guidance/result and four quarters of outlook history to source pages, with explicit comparison-basis safeguards. This curated case is separate from the generic research engine. Current validation and remaining submission actions are in reports/FINAL_READINESS.md.
+
+The default 18-company portfolio is a demonstration watchlist selected for the challenge, not the user’s actual investments. The brief and Portfolio screen label this explicitly.
