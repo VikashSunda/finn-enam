@@ -194,3 +194,9 @@ html[data-theme=dark] :is(.main-shell .topbar,.mobile-nav){background-image:line
 @media(max-width:720px){html[data-theme=dark] body{background-image:linear-gradient(115deg,#ffffff01,transparent 50%),radial-gradient(ellipse 100% 460px at 50% 310px,#7933b510,transparent 82%)}html[data-theme=dark] :is(.panel,.brief-main .filing,#brief-view .stat){background-image:linear-gradient(155deg,#ffffff03,transparent 38%)}}
 
 .delivery-preferences{border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);margin:22px 0;padding:20px 0}.delivery-preferences h3{font-size:14px;margin-bottom:8px}.delivery-preferences input{width:15px;height:15px;min-height:0;margin-right:7px}.delivery-preferences .field-label span{padding:0;line-height:1.8}
+
+/* Refresh uses a centred SVG rather than a font-dependent arrow glyph. */
+.page-heading #refresh{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 16px;line-height:1;flex-shrink:0}
+#refresh-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex:0 0 18px;line-height:0;transform-origin:center}
+#refresh-icon svg{display:block;width:18px;height:18px;flex-shrink:0}.page-heading #refresh .refresh-label{font-size:12px;line-height:1.2;white-space:nowrap}
+@media(max-width:720px){.page-heading #refresh{width:42px;height:42px;min-width:42px;min-height:42px;padding:0;gap:0;margin-top:0}.page-heading #refresh .refresh-label{display:none}}
