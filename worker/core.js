@@ -90,7 +90,10 @@ export function retrieve(documents, question = '', topic = 'business', limit = 1
       if(topic==='guidance' && /guidance|outlook/.test(lower))score+=6;
       if(topic==='cash' && /cash flows? from operat|free cash flow|cash conversion/.test(lower))score+=6;
       if(score<=0)continue;
-      found.push({id:doc.id+'-'+page.page+'-'+i,documentId:doc.id,page:page.page,label:doc.label,url:doc.url,type:doc.type,text,score});
+      // Short transcript pages often separate an analyst question from the
+      // management answer. Keep the page context instead of losing its caveat.
+      const context=page.text.length<=3200?page.text:text;
+      found.push({id:doc.id+'-'+page.page+'-'+i,documentId:doc.id,page:page.page,label:doc.label,url:doc.url,type:doc.type,text:context,score});
     }
   }
   found.sort((a,b)=>b.score-a.score);

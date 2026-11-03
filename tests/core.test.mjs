@@ -51,6 +51,14 @@ test('business overview prioritises an annual-report description over incidental
   const evidence=retrieve(documents,'','business');
   assert.equal(evidence[0].documentId,'annual');assert.equal(evidence[0].page,75);
 });
+
+test('short transcript pages retain the management qualification after a chunk boundary',()=>{
+  const text='Analyst: Does outcome pricing change our business? '+ 'Context without additional query terms. '.repeat(48)+' Management: Interest increased, but adoption is not a large part of activity.';
+  assert.ok(text.length>1700&&text.length<3200);
+  const evidence=retrieve([{id:'call',type:'transcript',pages:[{page:14,text}]}],'outcome pricing','business');
+  assert.ok(evidence.length);assert.equal(evidence[0].page,14);
+  assert.match(evidence[0].text,/not a large part of activity/);
+});
 test('discovery uses raw transcript links and never third-party AI summaries',()=>{
   const html='<h3>Annual reports</h3><ul><li><a href="https://company.com/ar.pdf">Annual Report 2026</a></li></ul><li><div>Oct 2026</div><a href="https://company.com/call.pdf" title="Raw Transcript">Transcript</a><button data-url="/summary/1">AI Summary</button></li>';
   const docs=discoverDocuments(html,'INFY');

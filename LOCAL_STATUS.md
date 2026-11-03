@@ -2,6 +2,11 @@
 
 ## Later verification update
 
+- Resumed with a clean working tree. The authenticated port-3001 server was offline; the user confirmed closing the key-bearing PowerShell session. The prior keyless port-3002 preview remains available. No key was recovered, printed or persisted.
+- Audited publisher PDF text against the first INFY answer. Confirmed sampled one-based page mappings and found an overstrong outcome-pricing inference plus a need to distinguish historical-quarter figures from the latest report. See SOURCE_AUDIT.md for evidence and limits; the entire answer is not marked verified.
+- Fixed retrieval to retain complete text for short pages (up to 3,200 characters), so a selected analyst question does not omit management's later caveat on that page. Added a regression crossing the old chunk boundary. Strengthened both-provider instructions on caveats, periods, attributed estimates and incomplete evidence.
+- Research evidence now uses a desktop drawer and mobile sheet; mobile topic tabs scroll horizontally. Verified source/page text, original-link presence, Escape close and return focus in keyless research. All 21 tests, build and artifact validation passed. Updated live synthesis awaits restoration of the user's server-side key.
+
 - First successful live model-backed response was observed during the INFY filing-to-research browser test: five claims (four facts and one inference), source/page buttons and coverage note rendered in AI mode. Earlier 503/timeouts are historical failures, not the latest universal state. Original-PDF claim support has not yet been independently verified.
 
 - Implemented compact filing cards with deterministic boilerplate removal/truncation, labelled category-based review cues, Inspect/Source actions and related-filing counts. Full original headline/description and source links remain in a desktop side drawer/mobile bottom sheet.
