@@ -178,3 +178,8 @@ html[data-theme=dark] :is(.panel,.brief-main .filing,.right-rail .rail-card){box
 html[data-theme=dark] :is(.session-tape,.brief-alert-link){box-shadow:0 10px 26px -16px #000a,inset 0 1px #c79bff13}
 @media(max-width:720px){html[data-theme=dark] body{background:radial-gradient(ellipse 100% 460px at 50% 310px,#7933b510,transparent 82%),#0e0f12}html[data-theme=dark] #brief-view:before{height:370px;opacity:.5}html[data-theme=dark] #brief-view .stat:first-child,html[data-theme=dark] #brief-view .stat:last-child{box-shadow:0 9px 24px -15px #0009,inset 0 1px #ffffff08}}
 @media(forced-colors:active){#brief-view:before{display:none}}
+
+.filing-analysis{margin-top:26px;padding-top:24px;border-top:1px solid var(--edge)}.filing-analysis>.primary-button{margin-top:14px;min-height:42px}.filing-analysis-claim{padding:18px 0;border-bottom:1px solid var(--edge)}.filing-analysis-claim p{font-size:14px;line-height:1.8}.filing-analysis-claim blockquote{margin:12px 0;padding:12px 14px;border-left:2px solid var(--accent);background:var(--surface-raised);font-size:12px;line-height:1.8;overflow-wrap:anywhere;max-height:240px;overflow:auto}.filing-analysis-claim a{display:inline-block;min-height:36px;font-size:12px}.filing-content-summary{font-size:13px;line-height:1.8;margin-top:14px}.filing-content-summary b{display:block;font-size:10px;color:var(--quiet)}
+
+/* Ambient illumination remains behind the viewport throughout scrolling. */
+html[data-theme=dark] body{background-attachment:fixed}html[data-theme=dark] #brief-view:before{display:none}

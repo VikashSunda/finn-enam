@@ -191,6 +191,27 @@ export default {
         const rows=await pool(tickers,async ticker=>{const [price,filings]=await Promise.all([priceData(ticker,refresh),filingData(ticker,refresh)]);return {ticker,price,filings:{...filings,items:filings.items.map(classify)}};},4);
         return json({rows,fetchedAt:new Date().toISOString(),snapshotAt:snapshot.generatedAt});
       }
+      if(url.pathname==='/api/filing-analysis' && request.method==='POST'){
+        const raw=await request.text();if(raw.length>5000)return json({error:'Request too large'},413);
+        let body;try{body=JSON.parse(raw);}catch{return json({error:'Send a valid JSON object.'},400);}
+        if(!body||typeof body!=='object'||Array.isArray(body))return json({error:'Send a valid JSON object.'},400);
+        const ticker=normaliseTicker(body.ticker),id=String(body.id||'');
+        if(!id||id.length>1000)return json({error:'Select an indexed filing.'},400);
+        const feed=await filingData(ticker);
+        const filing=feed.items.find(f=>f.id===id);
+        if(!filing)return json({error:'This filing is no longer in the indexed feed. Refresh sources and select it again.'},404);
+        const doc=await cached('filing-document:'+filing.url,24*3600_000,async()=>{
+          const parsed=await parseDocument({id:'filing-'+ticker+'-'+id,type:'filing',label:ticker+' exchange filing · '+filing.date,url:filing.url});
+          if(parsed.status!=='parsed')throw new Error(parsed.error||'No readable PDF text. Scanned documents require OCR, which is unavailable.');
+          return parsed;
+        });
+        const question='Explain the specific event disclosed in this filing, its stated terms, dates and conditions, and why it may matter to an investor. Preserve uncertainty and distinguish a proposed action from completion. Do not give buy/sell advice. For results identify reporting period and basis; do not calculate QoQ/YoY or invent absent metrics. For leadership changes state only the disclosed role, effective date and background. Use this filing only.';
+        const evidence=retrieve([doc],'revenue profit acquisition merger appointment resignation effective terms conditions', 'financials',10);
+        let analysis;
+        try{analysis=await cached('filing-answer:'+filing.url+':'+(env.GEMINI_API_KEY?'gemini':env.OPENAI_API_KEY?'openai':'none')+':'+(env.GEMINI_API_KEY?geminiModels(env).join(','):env.OPENAI_MODEL||''),6*3600_000,()=>synthesise(evidence,question,'filing',ticker,env));}
+        catch(error){analysis={mode:'extractive',claims:[],note:'AI filing analysis unavailable: '+clean(error.message)+'. Read the attributed filing passages.'};}
+        return json({filing,analysis,evidence,parsedPages:doc.pages.length,totalPages:doc.pageCount,coverage:'Analysis uses selected passages from this filing, not a complete financial extraction. Page numbers refer to the PDF file.',checkedAt:new Date().toISOString()});
+      }
       if(url.pathname==='/api/research' && request.method==='POST'){
         if(Number(request.headers.get('content-length'))>5000)return json({error:'Request too large'},413);
         const raw=await request.text();if(raw.length>5000)return json({error:'Request too large'},413);
@@ -208,6 +229,6 @@ export default {
         return json({ticker,mode:research.mode,fetchedAt:research.fetchedAt,documents:research.documents.map(({pages,...d})=>({...d,parsedPages:pages?.length||0})),evidence,analysis,error:research.error||null});
       }
       return json({error:'Not found'},404);
-    }catch(e){return json({error:clean(e.message)},url.pathname==='/api/research'?422:400);}
+    }catch(e){return json({error:clean(e.message)},['/api/research','/api/filing-analysis'].includes(url.pathname)?422:400);}
   }
 };

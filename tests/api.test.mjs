@@ -123,3 +123,33 @@ test('fallback model output must pass the same quote and citation checks',async 
  const result=await(await worker.fetch(req('/api/research',{method:'POST',body:JSON.stringify(payload)}),{GEMINI_API_KEY:'mock-only'})).json();
  assert.equal(calls,2);assert.equal(result.analysis.mode,'extractive');assert.match(result.analysis.note,/evidence validation/);assert.ok(result.evidence.length);
 });
+
+function filingPDF(){
+ const text='The board approved an acquisition subject to regulatory approval. The proposed transaction is not complete. Funding terms remain subject to the conditions described in this filing.';
+ const stream='BT /F1 12 Tf 40 700 Td ('+text+') Tj ET';
+ const objects=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R] /Count 1 >>','<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>','<< /Length '+stream.length+' >>\nstream\n'+stream+'\nendstream'];
+ let pdf='%PDF-1.4\n',offsets=[0];for(const [i,obj] of objects.entries()){offsets.push(pdf.length);pdf+=(i+1)+' 0 obj\n'+obj+'\nendobj\n';}const xref=pdf.length;pdf+='xref\n0 6\n0000000000 65535 f \n'+offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')+'trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF';return pdf;
+}
+test('filing analysis rejects unindexed IDs without fetching user URLs',async t=>{
+ let calls=0;t.mock.method(globalThis,'fetch',async()=>{calls++;throw new Error('Unexpected network');});
+ const response=await worker.fetch(req('/api/filing-analysis',{method:'POST',body:JSON.stringify({ticker:'ITC',id:'nonexistent',url:'https://attacker.example/file.pdf'})}),{});assert.equal(response.status,404);assert.equal(calls,0);
+});
+test('filing analysis reads actual PDF text with page attribution when AI is not configured',async t=>{
+ const feed=await(await worker.fetch(req('/api/portfolio?tickers=ITC'),{})).json();const filing=feed.rows[0].filings.items[0];
+ t.mock.method(globalThis,'fetch',async url=>{assert.equal(String(url),filing.url);return new Response(filingPDF(),{headers:{'content-type':'application/pdf'}});});
+ const response=await worker.fetch(req('/api/filing-analysis',{method:'POST',body:JSON.stringify({ticker:'ITC',id:filing.id})}),{});const result=await response.json();assert.equal(response.status,200);assert.equal(result.analysis.mode,'extractive');assert.ok(result.evidence.length);assert.match(result.evidence[0].text,/subject to regulatory approval/);assert.equal(result.evidence[0].page,1);assert.equal(result.evidence[0].url,filing.url);
+});
+test('blocked filing PDF reports a source failure without synthesising from the headline',async t=>{
+ const feed=await(await worker.fetch(req('/api/portfolio?tickers=TCS'),{})).json();const filing=feed.rows[0].filings.items[0];
+ t.mock.method(globalThis,'fetch',async()=>new Response('blocked',{status:403}));
+ const response=await worker.fetch(req('/api/filing-analysis',{method:'POST',body:JSON.stringify({ticker:'TCS',id:filing.id})}),{});const result=await response.json();assert.equal(response.status,422);assert.match(result.error,/403/);assert.equal(result.analysis,undefined);
+});
+
+test('filing synthesis accepts copied support and rejects invented quotations',async t=>{
+ const feed=await(await worker.fetch(req('/api/portfolio?tickers=ITC'),{})).json();const filing=feed.rows[0].filings.items[0],payload={ticker:'ITC',id:filing.id};
+ const baseline=await(await worker.fetch(req('/api/filing-analysis',{method:'POST',body:JSON.stringify(payload)}),{})).json();const e=baseline.evidence[0];
+ let invalid=false;t.mock.method(globalThis,'fetch',async()=>Response.json({candidates:[{content:{parts:[{text:JSON.stringify({claims:[{text:'The acquisition is subject to regulatory approval.',kind:'fact',sources:[e.id],support:[{sourceId:e.id,quote:invalid?'The company guarantees exceptional investment returns forever.':e.text.slice(0,150)}]}]})}]}}]}));
+ const call=async model=>(await(await worker.fetch(req('/api/filing-analysis',{method:'POST',body:JSON.stringify(payload)}),{GEMINI_API_KEY:'mock-only',GEMINI_MODEL:model})).json());
+ assert.equal((await call('gemini-test-filing-valid')).analysis.mode,'ai');invalid=true;
+ const rejected=await call('gemini-test-filing-invalid');assert.equal(rejected.analysis.mode,'extractive');assert.match(rejected.analysis.note,/does not match/);assert.ok(rejected.evidence.length);
+});

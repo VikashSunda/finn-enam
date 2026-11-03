@@ -105,3 +105,7 @@ The actual coding-agent conversation export/share link must be included with the
 The open app checks sources on startup and every 15 minutes while visible and online. Returning to the tab or reconnecting triggers a check if due. Requests do not overlap; existing rows remain visible on failure.
 
 For unattended local checks while the app tab is closed, keep the FINN server running and run `npm.cmd run monitor:portfolio` from this folder. This process refreshes all 18 registered companies every 15 minutes, validates complete live feeds before replacing the fallback snapshot, and rebuilds the Worker. Stop with Ctrl+C. It does not survive computer shutdown and is not an OS-installed task. `npm.cmd run refresh:portfolio` runs once. Current outcomes are in reports/PORTFOLIO_FRESHNESS.json. Failed or partial refreshes retain the snapshot.
+
+## Filing contents
+
+From a brief item, choose Inspect filing → Read & analyse filing. FINN reads the actual indexed PDF and shows page-attributed passages, or validated AI claims when a configured provider responds correctly. Category cues remain rules. Accepted factual AI summaries also appear in the brief during the current browser session. Parsing limits, selected-evidence coverage and provider failures remain visible; see reports/FILING_ANALYSIS.md.
