@@ -45,12 +45,11 @@
 /* Custom pointer is limited to precise mouse devices; native editing cursors remain. */
 addEventListener('DOMContentLoaded',()=>{
  const precise=matchMedia('(hover: hover) and (pointer: fine)');
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const cursor=document.createElement('div');cursor.className='finn-cursor';cursor.setAttribute('aria-hidden','true');cursor.innerHTML='<span></span>';document.body.append(cursor);
  let shown=false;
  function hide(){cursor.classList.remove('visible');document.documentElement.classList.remove('custom-pointer');shown=false;}
  document.addEventListener('pointermove',event=>{
-  if(!precise.matches||event.pointerType!=='mouse'||event.target.closest('input,textarea,select,[contenteditable=true],iframe')){hide();return;}
+  if(!precise.matches||event.pointerType!=='mouse'||event.target.closest('input,textarea,select,[contenteditable=true],iframe,dialog')){hide();return;}
   cursor.style.left=event.clientX+'px';cursor.style.top=event.clientY+'px';
   if(!shown){cursor.classList.add('visible');document.documentElement.classList.add('custom-pointer');shown=true;}
   cursor.classList.toggle('over-control',Boolean(event.target.closest('button,a,summary,[role=button]')));
