@@ -166,3 +166,15 @@ html[data-theme=dark] :focus-visible{outline-color:#c194ff}html[data-theme=dark]
 
 /* Use native system pointers on every device. */
 .finn-cursor,.finn-cursor-dot{display:none!important}html.custom-pointer,html.custom-pointer *{cursor:revert!important}
+
+/* Static ambient lighting lives behind content; no interactive overlay. */
+html[data-theme=dark] body{background:radial-gradient(ellipse 64% 540px at 50% 340px,#7933b51b 0,transparent 76%),radial-gradient(ellipse 33% 440px at 0 410px,#9438d414 0,transparent 80%),radial-gradient(ellipse 34% 480px at 100% 430px,#7135b51a 0,transparent 80%),#0e0f12}
+html[data-theme=dark] #brief-view{position:relative;isolation:isolate}
+html[data-theme=dark] #brief-view:before{content:'';position:absolute;z-index:-1;pointer-events:none;inset:-30px 0 auto;height:430px;border-radius:40%;background:radial-gradient(ellipse 42% 65% at 48% 44%,#a249e51d,transparent 80%),radial-gradient(ellipse 24% 58% at 3% 48%,#a249e51c,transparent 85%),radial-gradient(ellipse 24% 58% at 97% 48%,#8b44dc20,transparent 85%)}
+html[data-theme=dark] #brief-view .stat{background:linear-gradient(155deg,#ffffff04,transparent 58%),#18171e;box-shadow:0 12px 30px -13px #000a,inset 0 1px #ffffff09}
+html[data-theme=dark] #brief-view .stat:first-child{box-shadow:0 12px 30px -13px #000a,-12px 3px 34px -24px #b164ed99,inset 0 1px #ffffff09}
+html[data-theme=dark] #brief-view .stat:last-child{box-shadow:0 12px 30px -13px #000a,12px 3px 34px -24px #a258e699,inset 0 1px #ffffff09}
+html[data-theme=dark] :is(.panel,.brief-main .filing,.right-rail .rail-card){box-shadow:0 12px 32px -17px #000b,inset 0 1px #ffffff07}
+html[data-theme=dark] :is(.session-tape,.brief-alert-link){box-shadow:0 10px 26px -16px #000a,inset 0 1px #c79bff13}
+@media(max-width:720px){html[data-theme=dark] body{background:radial-gradient(ellipse 100% 460px at 50% 310px,#7933b510,transparent 82%),#0e0f12}html[data-theme=dark] #brief-view:before{height:370px;opacity:.5}html[data-theme=dark] #brief-view .stat:first-child,html[data-theme=dark] #brief-view .stat:last-child{box-shadow:0 9px 24px -15px #0009,inset 0 1px #ffffff08}}
+@media(forced-colors:active){#brief-view:before{display:none}}
