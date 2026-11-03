@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {validateClaims} from '../worker/claims.js';
 const evidence=[{id:'one',label:'Q1 FY27 call',text:'Management reported free cash flow of $955 million, at 116.5% of net profit. Client interest increased but adoption is not a large part of activity.'}];
 const claim={text:'In Q1 FY27 management reported $955 million of free cash flow.',kind:'fact',sources:['one'],support:[{sourceId:'one',quote:'Management reported free cash flow of $955 million, at 116.5% of net profit.'}]};
+test('a disclosure month cannot be turned into a financial quarter end',()=>{const e={id:'date',label:'Earnings call 2026-07-19',text:'Management reported revenue growth of 12% year on year in this business.'},c={kind:'fact',text:'Revenue grew 12% in the quarter ending July 2026.',sources:['date'],support:[{sourceId:'date',quote:e.text}]};assert.throws(()=>validateClaims({claims:[c]},[e]),/period end/);});
+test('an explicitly stated reporting period end remains valid',()=>{const e={id:'date',label:'Results',text:'For the quarter ended June 30, 2026, management reported revenue growth of 12%.'},c={kind:'fact',text:'Revenue grew 12% in the quarter ending June 2026.',sources:['date'],support:[{sourceId:'date',quote:e.text}]};assert.equal(validateClaims({claims:[c]},[e])[0].verification,'quotes_and_numbers_checked');});
 test('support validation accepts a copied passage and disclosed numbers',()=>{
  const result=validateClaims({claims:[claim]},evidence);assert.equal(result[0].verification,'quotes_and_numbers_checked');
 });

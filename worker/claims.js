@@ -18,6 +18,11 @@ export function validateClaims(result,evidence){
       if(sources.some(id=>!support.some(s=>s.sourceId===id)))throw new Error('Model citation lacks a supporting quote');
       const allowed=new Set(numbers(sources.map(id=>byId.get(id).text+' '+byId.get(id).label).join(' ')));
       if(numbers(claim.text).some(n=>!allowed.has(n)))throw new Error('Model numeric claim is absent from cited evidence');
+      // A filing/call date is not proof of the financial reporting-period end.
+      for(const period of claim.text.matchAll(/\b(?:quarter|year|(?:three|six|nine|twelve) months?)\s+(?:ended|ending)\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/gi)){
+        const explicit=new RegExp('(?:quarter|year|months)[\\s\\S]{0,45}(?:ended|ending)[\\s\\S]{0,15}'+period[1]+'[\\s\\S]{0,15}'+period[2],'i');
+        if(!sources.some(id=>explicit.test(byId.get(id).text)))throw new Error('A financial period end was inferred without explicit source support');
+      }
     }
     return {text:claim.kind==='limitation'?'The retrieved passages do not establish the requested answer.':claim.text,kind:claim.kind,sources,support,verification:claim.kind==='limitation'?'scope_only':'quotes_and_numbers_checked'};
   });
