@@ -1,168 +1,168 @@
 {
-  "checkedAt": "2026-11-26T01:00:37.938Z",
+  "checkedAt": "2026-11-27T01:02:14.519Z",
   "origin": "https://finn-enam-yid1.onrender.com",
   "feeds": [
     {
       "ticker": "RELIANCE",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:31.210Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:07.666Z",
       "filingMode": "live",
       "filings": 16,
-      "filingFetchedAt": "2026-11-26T01:00:32.711Z"
+      "filingFetchedAt": "2026-11-27T01:02:10.265Z"
     },
     {
       "ticker": "TCS",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:31.309Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:07.665Z",
       "filingMode": "live",
       "filings": 6,
-      "filingFetchedAt": "2026-11-26T01:00:33.710Z"
+      "filingFetchedAt": "2026-11-27T01:02:09.469Z"
     },
     {
       "ticker": "INFY",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:31.308Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:07.665Z",
       "filingMode": "live",
-      "filings": 13,
-      "filingFetchedAt": "2026-11-26T01:00:33.910Z"
+      "filings": 14,
+      "filingFetchedAt": "2026-11-27T01:02:09.865Z"
     },
     {
       "ticker": "HDFCBANK",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:31.408Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:07.579Z",
       "filingMode": "live",
       "filings": 12,
-      "filingFetchedAt": "2026-11-26T01:00:33.310Z"
+      "filingFetchedAt": "2026-11-27T01:02:09.164Z"
     },
     {
       "ticker": "ICICIBANK",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:32.811Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:09.565Z",
       "filingMode": "live",
       "filings": 12,
-      "filingFetchedAt": "2026-11-26T01:00:35.408Z"
+      "filingFetchedAt": "2026-11-27T01:02:11.369Z"
     },
     {
       "ticker": "ITC",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:33.410Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:09.965Z",
       "filingMode": "live",
       "filings": 6,
-      "filingFetchedAt": "2026-11-26T01:00:34.312Z"
+      "filingFetchedAt": "2026-11-27T01:02:10.469Z"
     },
     {
       "ticker": "HINDUNILVR",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:34.109Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:09.966Z",
       "filingMode": "live",
-      "filings": 17,
-      "filingFetchedAt": "2026-11-26T01:00:35.010Z"
+      "filings": 16,
+      "filingFetchedAt": "2026-11-27T01:02:10.773Z"
     },
     {
       "ticker": "MARUTI",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:34.109Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:10.365Z",
       "filingMode": "live",
       "filings": 15,
-      "filingFetchedAt": "2026-11-26T01:00:35.514Z"
+      "filingFetchedAt": "2026-11-27T01:02:11.867Z"
     },
     {
       "ticker": "M&M",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:34.507Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:10.664Z",
       "filingMode": "live",
       "filings": 28,
-      "filingFetchedAt": "2026-11-26T01:00:36.208Z"
+      "filingFetchedAt": "2026-11-27T01:02:13.168Z"
     },
     {
       "ticker": "SUNPHARMA",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:35.111Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:11.069Z",
       "filingMode": "live",
       "filings": 13,
-      "filingFetchedAt": "2026-11-26T01:00:36.414Z"
+      "filingFetchedAt": "2026-11-27T01:02:12.167Z"
     },
     {
       "ticker": "DRREDDY",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:35.608Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:11.472Z",
       "filingMode": "live",
       "filings": 10,
-      "filingFetchedAt": "2026-11-26T01:00:36.707Z"
+      "filingFetchedAt": "2026-11-27T01:02:12.473Z"
     },
     {
       "ticker": "LT",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:35.609Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:12.067Z",
       "filingMode": "live",
       "filings": 15,
-      "filingFetchedAt": "2026-11-26T01:00:37.007Z"
+      "filingFetchedAt": "2026-11-27T01:02:13.669Z"
     },
     {
       "ticker": "BEL",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:36.309Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:12.364Z",
       "filingMode": "live",
       "filings": 7,
-      "filingFetchedAt": "2026-11-26T01:00:37.209Z"
+      "filingFetchedAt": "2026-11-27T01:02:13.466Z"
     },
     {
       "ticker": "HAL",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:36.609Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:12.770Z",
       "filingMode": "live",
       "filings": 5,
-      "filingFetchedAt": "2026-11-26T01:00:37.218Z"
+      "filingFetchedAt": "2026-11-27T01:02:13.278Z"
     },
     {
       "ticker": "TITAN",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:36.811Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:13.371Z",
       "filingMode": "live",
-      "filings": 19,
-      "filingFetchedAt": "2026-11-26T01:00:37.548Z"
+      "filings": 21,
+      "filingFetchedAt": "2026-11-27T01:02:14.267Z"
     },
     {
       "ticker": "DIXON",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:37.213Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:13.376Z",
       "filingMode": "live",
-      "filings": 16,
-      "filingFetchedAt": "2026-11-26T01:00:37.809Z"
+      "filings": 17,
+      "filingFetchedAt": "2026-11-27T01:02:13.969Z"
     },
     {
       "ticker": "CDSL",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:37.308Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:13.672Z",
       "filingMode": "live",
       "filings": 17,
-      "filingFetchedAt": "2026-11-26T01:00:37.817Z"
+      "filingFetchedAt": "2026-11-27T01:02:14.466Z"
     },
     {
       "ticker": "KPITTECH",
       "priceMode": "live",
-      "session": "2026-11-23",
-      "priceFetchedAt": "2026-11-26T01:00:37.308Z",
+      "session": "2026-11-25",
+      "priceFetchedAt": "2026-11-27T01:02:13.867Z",
       "filingMode": "live",
       "filings": 18,
-      "filingFetchedAt": "2026-11-26T01:00:37.909Z"
+      "filingFetchedAt": "2026-11-27T01:02:14.471Z"
     }
   ]
 }
